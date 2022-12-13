@@ -29,6 +29,22 @@ const startGame = () => {
 }
 
 // * ADD EVENT LISTENERS
-startBtn.addEventListener("click", startGame);
+startBtn.addEventListener("click", startGame)
 restartBtn.addEventListener("click", startGame)
+
+window.addEventListener("keydown", (event) => {
+    if (event.code === "KeyA") {
+      gameObj.movement["left"] = true;
+    } else if (event.code === "KeyD") {
+      gameObj.movement["right"] = true;
+    }
+  });
+
+  window.addEventListener("keyup", (event) => {
+     if (event.code === "KeyA") {
+      gameObj.movement["left"] = false;
+    } else if (event.code === "KeyD") {
+      gameObj.movement["right"] = false;
+    }
+  });
 
