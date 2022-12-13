@@ -37,7 +37,9 @@ window.addEventListener("keydown", (event) => {
       gameObj.movement["left"] = true;
     } else if (event.code === "KeyD") {
       gameObj.movement["right"] = true;
-    }
+    } else if (event.code === "Space") {
+        gameObj.movement["isJumping"] = true;
+      }
   });
 
   window.addEventListener("keyup", (event) => {
@@ -45,6 +47,8 @@ window.addEventListener("keydown", (event) => {
       gameObj.movement["left"] = false;
     } else if (event.code === "KeyD") {
       gameObj.movement["right"] = false;
-    }
+    } else if (event.code === "Space") {
+        gameObj.movement["isJumping"] = false;
+      }
   });
 

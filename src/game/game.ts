@@ -10,7 +10,7 @@ class Game {
     w: number
     h: number
     direction: string
-    movement: {left: boolean, right: boolean}
+    movement: {left: boolean, right: boolean, isJumping: boolean}
     player: Ken
   
       constructor() {
@@ -32,7 +32,7 @@ class Game {
 
           this.direction = ""
 
-          this.movement = { left: false, right: false };
+          this.movement = { left: false, right: false, isJumping: false };
   
           this.score = 0
   
@@ -94,14 +94,14 @@ class Game {
   
       gameLoop = () => {
         this.frames = this.frames + 1
-        console.log(this.frames)
+        //console.log(this.frames)
     
         // 1. limpiar el canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     
         // 2. acciones y movimientos de los elementos
         this.moveBackground()
-        this.player.animateKen(this.frames, this.movement.right, this.movement.left)
+        this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.movement.isJumping)
         // 3. dibujado de los elementos
         this.drawFondo();
         this.drawScore()
