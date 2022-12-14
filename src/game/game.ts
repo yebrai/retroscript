@@ -72,14 +72,13 @@ class Game {
   };
 
     moveBackground = () => {
-      if (this.player.positionX > (canvas.width / 2)){
-        if (this.movement["right"]) {
-          this.moveRight();
-        } else if (this.movement["left"]) {
+      if ((this.player.positionX >= (canvas.width / 2)) && this.movement["right"]){
+                 this.moveRight();
+        } else if ((this.player.positionX <= 0) && this.movement["left"]) {
           this.moveLeft();
         }
       }
-  }
+  
   
   
   
