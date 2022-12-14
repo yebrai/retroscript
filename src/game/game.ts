@@ -72,11 +72,13 @@ class Game {
   };
 
     moveBackground = () => {
-    if (this.movement["right"]) {
-      this.moveRight();
-    } else if (this.movement["left"]) {
-      this.moveLeft();
-    }
+      if (this.player.positionX > (canvas.width / 2)){
+        if (this.movement["right"]) {
+          this.moveRight();
+        } else if (this.movement["left"]) {
+          this.moveLeft();
+        }
+      }
   }
   
   
@@ -102,6 +104,7 @@ class Game {
         // 2. acciones y movimientos de los elementos
         this.moveBackground()
         this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.movement.isJumping)
+        this.player.movingKen(this.movement["right"], this.movement["left"])
         // 3. dibujado de los elementos
         this.drawFondo();
         this.drawScore()
