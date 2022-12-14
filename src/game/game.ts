@@ -114,5 +114,7 @@ class Game {
         if (this.isGameOn === true) {
           requestAnimationFrame(this.gameLoop);
         }
+
+        //delete me
       };
     }
