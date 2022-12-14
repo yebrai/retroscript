@@ -42,7 +42,7 @@ class Game {
     };
 
     gravityFunct = () => {
-      if (this.player.positionY < 300){
+      if (this.player.positionY < 200){
         if (this.frames % 5 === 0) {
           this.fallSpeed += this.gravity
         }
