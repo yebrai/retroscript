@@ -1,4 +1,6 @@
 
+
+
 class Ken {
   imgWalk: HTMLImageElement
   walk: {
@@ -47,7 +49,7 @@ class Ken {
     }
 
     this.img = this.imgWalk
-    this.action = this.walk
+    this.action
     //sprite frame counter
     this.spriteFrame = 0
 
@@ -55,6 +57,7 @@ class Ken {
     this.positionX = 0
   }
 
+  
 
 
   drawKen = () => {
@@ -64,20 +67,28 @@ class Ken {
   animateKen = (frames: number, right: boolean, left: boolean, isJumping: boolean) => {
     if (isJumping) {
       this.animateKenJumping(frames, isJumping)
-    } else { this.animateKenWalking(frames, right, left) }
+    } else { 
+      this.walk = {
+        x: 0, // posición en eje x
+        y: 0, // posición en eje y
+        w: 49, // ancho
+        h: 87, // alto
+      }
+      this.animateKenWalking(frames, right, left) 
+    }
 
   }
 
+
   animateKenWalking = (frames: number, right: boolean, left: boolean) => {
     this.img = this.imgWalk
-    this.action = this.walk
-    this.action.w = this.walk.w //! WHHHHHYY???
+    this.action  = this.walk
     if (frames % 29 === 0 && (right || left)) {
       this.action.x = this.action.x + this.walk.w
-      console.log("walking x", this.action.x, "sumando", this.action.w)
+      console.log("walking", this.walk, "action", this.action)
     }
-    if (this.walk.x > 196) {
-      this.walk.x = 0
+    if (this.action.x > 196) {
+      this.action.x = 0
     }
   }
 
@@ -90,6 +101,7 @@ class Ken {
       this.action.w = this.jump.w[this.spriteFrame]
       this.spriteFrame = this.spriteFrame + 1
       console.log("this.spriteFrame", this.spriteFrame)
+
     } if (this.spriteFrame > 5) {
       this.spriteFrame = 0
     }
@@ -99,10 +111,11 @@ class Ken {
     if (right && (this.positionX < (canvas.width / 2))) {
       this.positionX = this.positionX + 1;
     } else if (left && (this.positionX > 0)) {
+
       this.positionX = this.positionX - 1;
     }
 
-    console.log("this.positionX", this.positionX)
+  
   }
   //delete me
 
