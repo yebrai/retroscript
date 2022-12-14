@@ -9,16 +9,25 @@ class Ken {
     }
     imgJump: HTMLImageElement
     jump: {
+        x: number[]
+        y: number
+        w: number[]
+        h: number
+    }
+
+    img: HTMLImageElement
+    action: {
         x: number
         y: number
         w: number
         h: number
     }
 
-    img: HTMLImageElement
+    spriteFrame: number
+    positionX: number
     
       constructor() {
-        // propiedades del pollo
+        //walking animation
         this.imgWalk = new Image(),
         this.imgWalk.src = "../../../images/kenWalking.png",
         this.walk = {
@@ -27,47 +36,72 @@ class Ken {
             w: 49, // ancho
             h: 87, // alto
         }
-
+        //jumping animation
         this.imgJump = new Image(),
         this.imgJump.src = "../../../images/kenJump.png"
         this.jump = {
-            x: 0,
+            x: [0, 46, 88, 154, 194, 274, 324],
             y: 0,
-            w: 60,
+            w: [46, 42, 64, 40, 80, 50, 40],
             h: 95
         }
         
         this.img = this.imgWalk
+        this.action=this.walk
+        //sprite frame counter
+        this.spriteFrame = 0
+
+        //position x
+        this.positionX = 0
       }
     
       
       
       drawKen = () => {
-        ctx.drawImage(this.img, this.walk.x, this.walk.y, this.walk.w, this.walk.h, 50, 200, 70, 100)
+        ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, 50, 200,  this.action.w, this.action.h)
       }
 
       animateKen = (frames: number, right: boolean, left: boolean, isJumping: boolean) => {
-        if (!isJumping) {
-            this.animateKenWalking(frames, right, left)
-        } else {this.animateKenJumping(frames, isJumping)}
+        if (isJumping) {
+            this.animateKenJumping(frames, isJumping)
+        } else {this.animateKenWalking(frames, right, left)}
 
       }
     
       animateKenWalking = (frames: number, right: boolean, left: boolean) => {
         this.img = this.imgWalk
+        this.action = this.walk
+        this.action.w = this.walk.w //! WHHHHHYY???
         if ( frames % 29 === 0 && ( right || left )) {
-            this.walk.x += 49
-        } if ( this.walk.x === 196) {
+          this.action.x = this.action.x + this.walk.w
+          console.log("walking x", this.action.x, "sumando", this.action.w )
+        }
+        if ( this.walk.x > 196) {
             this.walk.x = 0
         }
       }
 
       animateKenJumping = (frames: number, isJumping: boolean) => {
         this.img = this.imgJump
+        this.action.y = this.jump.y
+        this.action.h = this.jump.h
         if ( frames % 29 === 0) {
-            this.jump.x += 60
-        } if ( this.jump.x === 300) {
-            this.jump.x = 0
+            this.action.x = this.jump.x[this.spriteFrame]
+            this.action.w = this.jump.w[this.spriteFrame]
+            this.spriteFrame = this.spriteFrame + 1 
+            console.log("this.spriteFrame", this.spriteFrame)
+        } if ( this.spriteFrame > 5) {
+          this.spriteFrame = 0
+        }
+      }
+
+      movingKen = (right: boolean, left: boolean) => {
+        if (this.positionX < (canvas.width / 2)) {
+          if (right) {
+            this.positionX = this.positionX + 1;
+          } else if (left) {
+            this.positionX = this.positionX - 1;
+          }
         }
       }
 
