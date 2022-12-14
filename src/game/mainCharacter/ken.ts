@@ -23,6 +23,8 @@ class Ken {
   }
   spriteFrame: number
   positionX: number
+  positionY: number
+  jumpSpeed: number
 
   constructor() {
     //walking animation
@@ -49,9 +51,14 @@ class Ken {
     this.spriteFrame = 0
        //position x
        this.positionX = 0
+       //speed
+       this.positionY = 200
+
+       //jumpSpeed
+       this.jumpSpeed = 5
       }
       drawKen = () => {
-        ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.positionX, 200, this.action.w, this.action.h)
+        ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.positionX, this.positionY, this.action.w, this.action.h)
       }
     
       animateKen = (frames: number, right: boolean, left: boolean, isJumping: boolean) => {
@@ -60,7 +67,8 @@ class Ken {
         } else { this.animateKenWalking(frames, right, left) }
     
       }
-    
+
+
       animateKenWalking = (frames: number, right: boolean, left: boolean) => {
         this.img = this.imgWalk
         this.action = this.walk
@@ -85,6 +93,12 @@ class Ken {
           console.log("this.spriteFrame", this.spriteFrame)
         } if (this.spriteFrame > 5) {
           this.spriteFrame = 0
+        }
+      }
+
+      kenJumping = (isJumping: boolean) => {
+        if (isJumping) {
+          this.positionY = 100
         }
       }
     
