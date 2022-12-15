@@ -1,5 +1,5 @@
 
-const mappp: number[][][] = [
+const mapPrint: number[][][] = [
     [[0, 670], [280]],
     [[860, 920], [275]],
 ]

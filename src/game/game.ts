@@ -1,9 +1,3 @@
-const mapppp: number[][][] = [
-  [[0, 670], [280]],
-  [[860, 920], [275]],
-]
-
-
 class Game {
   fondo: HTMLImageElement
   frames: number
@@ -100,7 +94,7 @@ this.player.bgPositionX --
 }
 
 mapping = (movingElementPositionX: number, movingElementPositionY: number) : number => {
-  let platform = mapppp.filter((eachPlatfom)=> {
+  let platform = mapPrint.filter((eachPlatfom)=> {
       if (eachPlatfom[0][0] <= movingElementPositionX && movingElementPositionX <= eachPlatfom[0][1] && eachPlatfom[1][0] >= movingElementPositionY) {
         //console.log("platform is at",  eachPlatfom[1][0], "ken position", movingElementPositionX)
         return eachPlatfom[1][0]
@@ -108,7 +102,8 @@ mapping = (movingElementPositionX: number, movingElementPositionY: number) : num
         return this.ground
       }
   })
-  return platform[0][1][0] + this.player.action.h
+  console.log("plataforma",platform[0][1][0], "posicionY", this.player.bgPositionY )
+  return platform[0][1][0] - this.player.action.h
 }
 
 moving = ()=>{
@@ -139,7 +134,7 @@ moving = ()=>{
       // 2. acciones y movimientos de los elementos
       //this.moveBackground()
       this.moving()
-      this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.ground)
+      this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.ground, this.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY))
       //this.player.movingKen(this.movement["right"], this.movement["left"])
       //this.player.kenJumping(this.movement.isJumping, this.ground)
       this.gravityFunction()

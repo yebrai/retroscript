@@ -66,15 +66,15 @@ class Ken {
 
     //jumpSpeed
     this.speedY = 0
-    this.jumpPower = -2
+    this.jumpPower = -3
 
   }
   drawKen = () => {
     ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.positionX, this.positionY, this.action.w, this.action.h)
   }
 
-  animateKen = (frames: number, right: boolean, left: boolean, ground: number) => {
-    if (this.positionY < ground) {
+  animateKen = (frames: number, right: boolean, left: boolean, ground: number, platform: number) => {
+    if (this.positionY < ground || this.positionY < platform) {
       this.animateKenJumping(frames)
     } else {
       this.animateKenWalking(frames, right, left)
@@ -117,16 +117,22 @@ class Ken {
  
 
     if (this.bgPositionY < ground) {
+      if (this.bgPositionY < platform) {
       if (frames % 5 === 0) {
         this.speedY += gravity
+        console.log("platform gravity", platform, "ken position Y", this.bgPositionY,)
       }
-      //this.positionY += this.speedY
     } else {
-      this.positionY = ground
-      this.bgPositionY = ground
-    }
+      this.positionY = platform
+      this.bgPositionY = platform
+      //this.positionY += this.speedY
+    } 
   }
-
+  else {
+    this.positionY = ground
+    this.bgPositionY = ground
+  }
+  }
   kenJumping = () => {
 
     this.speedY = this.jumpPower
