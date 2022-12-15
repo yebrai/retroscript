@@ -42,7 +42,7 @@ window.addEventListener("keydown", (event) => {
     } else if (event.code === "KeyW") {
         gameObj.movement["isJumping"] = true;
       }else if (event.code === "KeyS") {
-        gameObj.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY)
+        console.log(gameObj.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY))
       }
   });
 

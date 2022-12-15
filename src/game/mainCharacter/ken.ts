@@ -111,12 +111,12 @@ class Ken {
     }
   }
 
-  gravity = (frames: number, gravity: number, ground: number) => { //,  platform: number
+  gravity = (frames: number, gravity: number, ground: number, platform: number) => { //
     this.positionY = this.positionY + this.speedY
     this.bgPositionY = this.bgPositionY + this.speedY
  
 
-    if (this.positionY < ground) {
+    if (this.bgPositionY < ground) {
       if (frames % 5 === 0) {
         this.speedY += gravity
       }

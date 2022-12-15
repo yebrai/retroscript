@@ -51,7 +51,7 @@ class Game {
     };
 
     gravityFunction = () => {
-      this.player.gravity(this.frames, this.gravity, this.ground ) //, this.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY)
+      this.player.gravity(this.frames, this.gravity, this.ground, this.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY) ) //
     }
 
     gravityFunct = () => {
@@ -108,8 +108,7 @@ mapping = (movingElementPositionX: number, movingElementPositionY: number) : num
         return this.ground
       }
   })
-  console.log("platform is at",  platform[0][0][0])
-  return platform[0][0][0]
+  return platform[0][1][0] + this.player.action.h
 }
 
 moving = ()=>{
