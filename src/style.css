@@ -1,0 +1,29 @@
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-image-title {
+   max-width: 90vw;
+   margin-top: 80px;
+}
+
+#splash-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 130px;
+    justify-content: center;
+    margin: 0 auto;
+    align-items: center;
+    background-image: url('../images/Canvas-Background.png');
+    background-repeat: no-repeat;
+    background-size: 4080px 550px;
+    background-position: left;
+    width: 800px;
+    height: 590px;
+}
+
+#my-canvas {
+ margin-top: 185px;
+}
