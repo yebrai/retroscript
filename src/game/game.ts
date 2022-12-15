@@ -13,6 +13,7 @@ class Game {
   player: Ken
   gravity: number
   fallSpeed: number
+  ground: number
 
     constructor() {
         // todas nuestras propiedades o elementos del juego
@@ -34,6 +35,8 @@ class Game {
         this.gravity = 0.1
         this.fallSpeed = 0
 
+        this.ground =300
+
     }
 
     drawFondo = () => {
@@ -41,8 +44,12 @@ class Game {
       ctx.drawImage(this.fondo, this.x, this.y +100, canvas.width, 336, 0, 0, canvas.width, canvas.height)
     };
 
+    gravityFunction = () => {
+      this.player.gravity(this.frames, this.gravity, this.ground)
+    }
+
     gravityFunct = () => {
-      if (this.player.positionY < 200){
+      if (this.player.positionY < this.ground){
         if (this.frames % 5 === 0) {
           this.fallSpeed += this.gravity
         }
@@ -103,10 +110,10 @@ this.moveLeft();
   
       // 2. acciones y movimientos de los elementos
       this.moveBackground()
-      this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.movement.isJumping)
+      this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.movement.isJumping, this.ground)
       this.player.movingKen(this.movement["right"], this.movement["left"])
-      this.gravityFunct()
-      this.player.kenJumping(this.movement.isJumping)
+      this.player.kenJumping(this.movement.isJumping, this.ground)
+      this.gravityFunction()
       // 3. dibujado de los elementos
       this.drawFondo();
       this.drawScore()
@@ -117,5 +124,6 @@ this.moveLeft();
         requestAnimationFrame(this.gameLoop);
       }
       //delete me
+      console.log("ground", this.ground, "positionY",this.player.positionY, "isJumping", this.movement.isJumping, "speedY", this.player.speedY)
     };
   }

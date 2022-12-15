@@ -24,7 +24,8 @@ class Ken {
   spriteFrame: number
   positionX: number
   positionY: number
-  jumpSpeed: number
+  speedY: number
+  jumpPower:number
 
   constructor() {
     //walking animation
@@ -55,15 +56,17 @@ class Ken {
        this.positionY = 200
 
        //jumpSpeed
-       this.jumpSpeed = 5
+       this.speedY = 0
+       this.jumpPower= -30
+
       }
       drawKen = () => {
         ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.positionX, this.positionY, this.action.w, this.action.h)
       }
     
-      animateKen = (frames: number, right: boolean, left: boolean, isJumping: boolean) => {
+      animateKen = (frames: number, right: boolean, left: boolean, isJumping: boolean, ground:number) => {
         if (isJumping) {
-          this.animateKenJumping(frames, isJumping)
+          this.animateKenJumping(frames, ground)
         } else { this.animateKenWalking(frames, right, left) }
     
       }
@@ -82,11 +85,11 @@ class Ken {
         }
       }
     
-      animateKenJumping = (frames: number, isJumping: boolean) => {
+      animateKenJumping = (frames: number, ground: number) => {
         this.img = this.imgJump
         this.action.y = this.jump.y
         this.action.h = this.jump.h
-        if (frames % 29 === 0) {
+        if (frames % 29 === 0 && (this.positionY<ground)) {
           this.action.x = this.jump.x[this.spriteFrame]
           this.action.w = this.jump.w[this.spriteFrame]
           this.spriteFrame = this.spriteFrame + 1
@@ -96,9 +99,21 @@ class Ken {
         }
       }
 
-      kenJumping = (isJumping: boolean) => {
-        if (isJumping) {
-          this.positionY = 100
+      gravity = (frames: number, gravity:number, ground:number) =>  {
+        if (this.positionY < ground){
+          if (frames % 5 === 0) {
+            this.speedY += gravity
+          }
+          this.positionY += this.speedY
+        } else {
+          this.speedY = 0
+        }
+      }
+
+      kenJumping = (isJumping: boolean, ground: number) => {
+        if (isJumping && this.positionY <= ground) {
+          this.speedY = this.jumpPower
+          console.log("JUMP!")
         }
       }
     
@@ -109,7 +124,7 @@ class Ken {
           this.positionX = this.positionX - 1;
         }
     
-        console.log("this.positionX", this.positionX)
+      
       }
       //delete me
     
