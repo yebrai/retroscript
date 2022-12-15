@@ -91,6 +91,13 @@ this.moveLeft();
 }
 }
 
+moving = ()=>{
+  this.moveBackground()
+  this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.ground)
+  //this.player.kenJumping(this.movement.isJumping, this.ground)
+}
+
+
       // * BONUS 
       drawScore = () => {
         ctx.font = "30px Arial"
@@ -109,10 +116,11 @@ this.moveLeft();
       ctx.clearRect(0, 0, canvas.width, canvas.height);
   
       // 2. acciones y movimientos de los elementos
-      this.moveBackground()
-      this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.movement.isJumping, this.ground)
-      this.player.movingKen(this.movement["right"], this.movement["left"])
-      this.player.kenJumping(this.movement.isJumping, this.ground)
+      //this.moveBackground()
+      this.moving()
+      this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.ground)
+      //this.player.movingKen(this.movement["right"], this.movement["left"])
+      //this.player.kenJumping(this.movement.isJumping, this.ground)
       this.gravityFunction()
       // 3. dibujado de los elementos
       this.drawFondo();
@@ -124,6 +132,6 @@ this.moveLeft();
         requestAnimationFrame(this.gameLoop);
       }
       //delete me
-      console.log("ground", this.ground, "positionY",this.player.positionY, "isJumping", this.movement.isJumping, "speedY", this.player.speedY)
+      //console.log("ground", this.ground, "positionY",this.player.positionY, "isJumping", this.movement.isJumping, "speedY", this.player.speedY)
     };
   }
