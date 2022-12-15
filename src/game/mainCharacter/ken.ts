@@ -23,6 +23,8 @@ class Ken {
   }
   spriteFrame: number
   positionX: number
+  bgPositionX: number
+  bgPositionY: number
   positionY: number
   speedY: number
   jumpPower: number
@@ -57,8 +59,10 @@ class Ken {
     this.spriteFrame = 0
     //position x
     this.positionX = 0
+    this.bgPositionX = 0
     //speed
     this.positionY = 200
+    this.bgPositionY = 200
 
     //jumpSpeed
     this.speedY = 0
@@ -72,12 +76,9 @@ class Ken {
   animateKen = (frames: number, right: boolean, left: boolean, ground: number) => {
     if (this.positionY < ground) {
       this.animateKenJumping(frames)
-      console.log("is jumping")
     } else {
       this.animateKenWalking(frames, right, left)
-      console.log("is walking")
     }
-
   }
 
 
@@ -91,7 +92,6 @@ class Ken {
     }
     if (frames % 29 === 0 && (right || left)) {
       this.action.x = this.action.x + this.walk.w[0]
-      console.log("action x",this.action.x)
       if (this.action.x > 196) {
         this.action.x = 0
       }
@@ -106,14 +106,16 @@ class Ken {
       this.action.x = this.jump.x[this.spriteFrame]
       this.action.w = this.jump.w[this.spriteFrame]
       this.spriteFrame = this.spriteFrame + 1
-      console.log("this.spriteFrame", this.spriteFrame)
     } if (this.spriteFrame > 5) {
       this.spriteFrame = 0
     }
   }
 
-  gravity = (frames: number, gravity: number, ground: number) => {
+  gravity = (frames: number, gravity: number, ground: number) => { //,  platform: number
     this.positionY = this.positionY + this.speedY
+    this.bgPositionY = this.bgPositionY + this.speedY
+ 
+
     if (this.positionY < ground) {
       if (frames % 5 === 0) {
         this.speedY += gravity
@@ -121,13 +123,13 @@ class Ken {
       //this.positionY += this.speedY
     } else {
       this.positionY = ground
+      this.bgPositionY = ground
     }
   }
 
   kenJumping = () => {
 
     this.speedY = this.jumpPower
-    console.log("JUMP!", this.speedY)
 
   }
 
@@ -135,12 +137,20 @@ class Ken {
   kenWalking = (right: boolean, left: boolean) => {
     if (right && (this.positionX < (canvas.width / 2))) {
       this.positionX = this.positionX + 1;
+      this.bgPositionX ++
     } else if (left && (this.positionX > 0)) {
       this.positionX = this.positionX - 1;
+      this.bgPositionX --
     }
   }
 
   movingKen = (right: boolean, left: boolean, isJumping: boolean, ground: number) => {
+    
+
+
+
+
+
     if (isJumping && this.positionY >= ground) {
       this.kenJumping()
     }

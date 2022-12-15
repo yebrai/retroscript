@@ -1,3 +1,9 @@
+const mapppp: number[][][] = [
+  [[0, 670], [280]],
+  [[860, 920], [275]],
+]
+
+
 class Game {
   fondo: HTMLImageElement
   frames: number
@@ -45,7 +51,7 @@ class Game {
     };
 
     gravityFunction = () => {
-      this.player.gravity(this.frames, this.gravity, this.ground)
+      this.player.gravity(this.frames, this.gravity, this.ground ) //, this.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY)
     }
 
     gravityFunct = () => {
@@ -86,15 +92,31 @@ moveRight = () => {
   moveBackground = () => {
     if ((this.player.positionX >= (canvas.width / 2)) && this.movement["right"]){
       this.moveRight();
+      this.player.bgPositionX ++
 } else if ((this.player.positionX <= 0) && this.movement["left"]) {
 this.moveLeft();
+this.player.bgPositionX --
 }
+}
+
+mapping = (movingElementPositionX: number, movingElementPositionY: number) : number => {
+  let platform = mapppp.filter((eachPlatfom)=> {
+      if (eachPlatfom[0][0] <= movingElementPositionX && movingElementPositionX <= eachPlatfom[0][1] && eachPlatfom[1][0] >= movingElementPositionY) {
+        //console.log("platform is at",  eachPlatfom[1][0], "ken position", movingElementPositionX)
+        return eachPlatfom[1][0]
+      } else {
+        return this.ground
+      }
+  })
+  console.log("platform is at",  platform[0][0][0])
+  return platform[0][0][0]
 }
 
 moving = ()=>{
   this.moveBackground()
   this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.ground)
   //this.player.kenJumping(this.movement.isJumping, this.ground)
+  
 }
 
 
