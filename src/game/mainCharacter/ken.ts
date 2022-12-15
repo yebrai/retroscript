@@ -72,8 +72,10 @@ class Ken {
   animateKen = (frames: number, right: boolean, left: boolean, ground: number) => {
     if (this.positionY < ground) {
       this.animateKenJumping(frames)
+      console.log("is jumping")
     } else {
       this.animateKenWalking(frames, right, left)
+      console.log("is walking")
     }
 
   }
@@ -84,8 +86,12 @@ class Ken {
     this.action.y = this.walk.y
     this.action.h = this.walk.h
     this.action.w = this.walk.w[0]
+    if (this.action.x % 49 !== 0) {
+      this.action.x = 0
+    }
     if (frames % 29 === 0 && (right || left)) {
       this.action.x = this.action.x + this.walk.w[0]
+      console.log("action x",this.action.x)
       if (this.action.x > 196) {
         this.action.x = 0
       }
