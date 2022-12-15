@@ -14,6 +14,7 @@ class Game {
   gravity: number
   fallSpeed: number
   ground: number
+  playerFace: KenFace
 
     constructor() {
         // todas nuestras propiedades o elementos del juego
@@ -21,6 +22,7 @@ class Game {
         this.fondo = new Image()
         this.fondo.src = "../../images/Canvas-Background.png"
         this.player = new Ken()
+        this.playerFace = new KenFace()
         this.x = 1; // posición en eje x
         this.y = 0; // posición en eje y
         this.w = 40; // ancho 
@@ -142,6 +144,9 @@ moving = ()=>{
       this.drawFondo();
       this.drawScore()
       this.player.drawKen()
+      this.playerFace.drawKenFace()
+      this.playerFace.drawEmptyLife()
+      this.playerFace.drawLife()
   
       // 4. control de la recursion
       if (this.isGameOn === true) {

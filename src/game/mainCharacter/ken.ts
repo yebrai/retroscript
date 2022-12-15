@@ -32,7 +32,7 @@ class Ken {
   constructor() {
     //walking animation
     this.imgWalk = new Image(),
-    this.imgWalk.src = "../../../images/kenWalking.png",
+    this.imgWalk.src = "../../../images/player/kenWalking.png",
     this.walk = {
       x: 0, // posición en eje x
       y: 0, // posición en eje y
@@ -41,7 +41,7 @@ class Ken {
     }
     //jumping animation
     this.imgJump = new Image(),
-    this.imgJump.src = "../../../images/kenJump.png"
+    this.imgJump.src = "../../../images/player/kenJump.png"
     this.jump = {
       x: [0, 46, 88, 154, 194, 274, 324],
       y: 0,
