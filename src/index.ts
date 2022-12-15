@@ -7,12 +7,13 @@ const restartBtn = document.querySelector("#restart-btn") as HTMLButtonElement
 
 let gameObj: Game | undefined
 
+gameOverScreen.style.display = "none"
+
 const startGame = () => {
     console.log("iniciando el juego")
     
     // ocultar la pantalla de inicio
     startScreen.style.display = "none"
-    gameOverScreen.style.display = "none"
     
     // mostrar el canvas
     canvas.style.display = "block"
