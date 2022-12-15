@@ -8,6 +8,7 @@ const restartBtn = document.querySelector("#restart-btn") as HTMLButtonElement
 let gameObj: Game | undefined
 
 gameOverScreen.style.display = "none"
+canvas.style.display = "none"
 
 const startGame = () => {
     console.log("iniciando el juego")
