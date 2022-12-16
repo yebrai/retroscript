@@ -107,8 +107,10 @@ class Game {
 
   mapping = (movingElementPositionX: number, movingElementPositionY: number): number => {
     let platform: number[][][] = mapPrint.filter((eachPlatfom) => {
-      if ((eachPlatfom[0][0] < movingElementPositionX && movingElementPositionX < eachPlatfom[0][1]) && (movingElementPositionY <= (eachPlatfom[1][0] * this.canvasBgRelation))) {
-        return eachPlatfom
+      if ((eachPlatfom[0][0] < movingElementPositionX && movingElementPositionX < eachPlatfom[0][1])) {
+        if ( Math.floor(eachPlatfom[1][0] ) >= movingElementPositionY) {
+          return eachPlatfom
+        }
     }})
     if (platform.length>1) {
       platform.sort((elem2: number[][], elem1: number[][]) : number=> {
@@ -121,10 +123,10 @@ class Game {
         }
       })
     }
-    if (platform === undefined) {
+    if (platform.length === 0) {
       return canvas.height
     } else {
-      return platform[0][1][0] 
+      return platform[0][1][0] * this.canvasBgRelation
     }
   }
 
