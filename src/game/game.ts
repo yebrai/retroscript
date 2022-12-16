@@ -37,7 +37,7 @@ class Game {
     this.movement = { left: false, right: false, isJumping: false };
 
     this.score = 0
-    this.gravity = 1
+    this.gravity = 0.1
     //this.fallSpeed = 0
     //background adjustment
     //this.ground = 300
