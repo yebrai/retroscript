@@ -66,14 +66,14 @@ class Ken {
     //speed
     this.positionY = 200
     this.groundFeetDistance = 30
-    this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance //player feet position
+    this.bgPositionY = this.positionY + 60//this.action.h - this.groundFeetDistance //player feet position
 
     //jumpSpeed
     this.speedY = 0
-    this.jumpPower = -3
+    this.jumpPower = -2
 
     //walk speed
-    this.walkSpeed = 4
+    this.walkSpeed = 1
 
     //this.mapRelationfactor = 1.65
 
@@ -122,10 +122,10 @@ class Ken {
   }
 
   gravity = (frames: number, gravity: number, ground: number) => { //
-    this.positionY = this.positionY + this.speedY
+    this.positionY = this.positionY + Math.floor(this.speedY)
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
-    if (this.bgPositionY < ground) {
-      if (frames % 5 === 0) {
+    if (Math.floor(this.bgPositionY) < ground) {
+      if (frames % 50 === 0) {
         this.speedY += gravity
       }
     } else {

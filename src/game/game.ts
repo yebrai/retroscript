@@ -37,7 +37,7 @@ class Game {
     this.movement = { left: false, right: false, isJumping: false };
 
     this.score = 0
-    this.gravity = 0.1
+    this.gravity = 1
     //this.fallSpeed = 0
     //background adjustment
     //this.ground = 300
@@ -108,7 +108,7 @@ class Game {
   mapping = (movingElementPositionX: number, movingElementPositionY: number): number => {
     let platform: number[][][] = mapPrint.filter((eachPlatfom) => {
       if ((eachPlatfom[0][0] < movingElementPositionX && movingElementPositionX < eachPlatfom[0][1])) {
-        if ( Math.floor(eachPlatfom[1][0] ) >= movingElementPositionY) {
+        if ( eachPlatfom[1][0] >= Math.floor(movingElementPositionY)) {
           return eachPlatfom
         }
     }})
@@ -126,7 +126,7 @@ class Game {
     if (platform.length === 0) {
       return canvas.height
     } else {
-      return platform[0][1][0] * this.canvasBgRelation
+      return platform[0][1][0] 
     }
   }
 
@@ -165,7 +165,7 @@ class Game {
     this.playerFace.drawKenFace()
     this.playerFace.drawEmptyLife()
     this.playerFace.drawLife()
-
+    console.log(this.player.bgPositionY)
     // 4. control de la recursion
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
