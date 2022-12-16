@@ -28,6 +28,7 @@ class Ken {
   positionY: number
   speedY: number
   jumpPower: number
+  mapRelationfactor: number
 
   constructor() {
     //walking animation
@@ -37,7 +38,7 @@ class Ken {
       x: 0, // posición en eje x
       y: 0, // posición en eje y
       w: [49], // ancho
-      h: 87, // alto
+      h: 95, // alto //!87
     }
     //jumping animation
     this.imgJump = new Image(),
@@ -68,13 +69,15 @@ class Ken {
     this.speedY = 0
     this.jumpPower = -3
 
+    this.mapRelationfactor = 1.65
+
   }
   drawKen = () => {
     ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.positionX, this.positionY, this.action.w, this.action.h)
   }
 
-  animateKen = (frames: number, right: boolean, left: boolean, ground: number, platform: number) => {
-    if (this.positionY < ground || this.positionY < platform) {
+  animateKen = (frames: number, right: boolean, left: boolean, ground: number) => {
+    if (this.positionY < ground - this.action.h*this.mapRelationfactor ) {
       this.animateKenJumping(frames)
     } else {
       this.animateKenWalking(frames, right, left)
@@ -111,32 +114,23 @@ class Ken {
     }
   }
 
-  gravity = (frames: number, gravity: number, ground: number, platform: number) => { //
+  gravity = (frames: number, gravity: number, ground: number) => { //
     this.positionY = this.positionY + this.speedY
     this.bgPositionY = this.bgPositionY + this.speedY
- 
-
-    if (this.bgPositionY < ground) {
-      if (this.bgPositionY < platform) {
+    if (this.bgPositionY < ground - this.action.h*this.mapRelationfactor) {
       if (frames % 5 === 0) {
         this.speedY += gravity
-        console.log("platform gravity", platform, "ken position Y", this.bgPositionY,)
+        //console.log("platform gravity", platform, "ken position Y", this.bgPositionY,)
       }
     } else {
-      this.positionY = platform
-      this.bgPositionY = platform
+      this.positionY = ground - this.action.h*this.mapRelationfactor
+      this.bgPositionY = ground - this.action.h*this.mapRelationfactor
       //this.positionY += this.speedY
     } 
   }
-  else {
-    this.positionY = ground
-    this.bgPositionY = ground
-  }
-  }
+
   kenJumping = () => {
-
     this.speedY = this.jumpPower
-
   }
 
 
@@ -150,14 +144,9 @@ class Ken {
     }
   }
 
-  movingKen = (right: boolean, left: boolean, isJumping: boolean, ground: number) => {
+  movingKen = (right: boolean, left: boolean, isJumping: boolean, ground : number) => {
     
-
-
-
-
-
-    if (isJumping && this.positionY >= ground) {
+    if (isJumping && this.positionY >= ground - this.action.h*this.mapRelationfactor) {
       this.kenJumping()
     }
     if ((right || left)) {
