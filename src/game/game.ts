@@ -16,6 +16,8 @@ class Game {
   ground: number
   playerFace: KenFace
   bgPadding: number
+  bgHeight: number
+  canvasBgRelation: number
 
   constructor() {
     // todas nuestras propiedades o elementos del juego
@@ -26,8 +28,8 @@ class Game {
     this.playerFace = new KenFace()
     this.x = 1; // posición en eje x
     this.y = 0; // posición en eje y
-    this.w = 40; // ancho 
-    this.h = 35; // alto 
+    //this.w = 40; // ancho 
+    //this.h = 35; // alto 
     //  this.mainCharacter = new Ryu() // creando un nuevo obj de la clase pollo
     this.frames = 0 // aumentará 60 veces por segundo
     this.isGameOn = true
@@ -36,17 +38,21 @@ class Game {
 
     this.score = 0
     this.gravity = 0.1
-    this.fallSpeed = 0
-
-    this.ground = 300
+    //this.fallSpeed = 0
+    //background adjustment
+    //this.ground = 300
     this.bgPadding = 100
+    this.bgHeight = 336
+
+    this.canvasBgRelation = canvas.height / (this.bgHeight - this.bgPadding)
 
   }
 
   drawFondo = () => {
     //ctx.drawImage(this.fondo, 0, 0, canvas.width, canvas.height)
-    ctx.drawImage(this.fondo, this.x, this.y + this.bgPadding, canvas.width, 336, 0, 0, canvas.width, canvas.height)
+    ctx.drawImage(this.fondo, this.x, this.y + this.bgPadding, canvas.width, this.bgHeight, 0, 0, canvas.width, canvas.height)
   };
+
 
   gravityFunction = () => {
     this.player.gravity(this.frames, this.gravity, this.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY)) //
@@ -75,50 +81,56 @@ class Game {
   }
   //movimiento derecha
   moveRight = () => {
-    this.x = this.x + 1;
+    this.x = this.x + this.player.walkSpeed;
     this.direction = "right";
+    this.player.bgPositionX = this.player.bgPositionX + this.player.walkSpeed
 
   };
   //movimiento izquierda
   moveLeft = () => {
     if (this.x > 0) {
-      this.x = this.x - 1;
+      this.x = this.x - this.player.walkSpeed;
       this.direction = "left";
+      this.player.bgPositionX = this.player.bgPositionX - this.player.walkSpeed
     }
   };
 
   moveBackground = () => {
     if ((this.player.positionX >= (canvas.width / 2)) && this.movement["right"]) {
       this.moveRight();
-      this.player.bgPositionX++
+
     } else if ((this.player.positionX <= 0) && this.movement["left"]) {
       this.moveLeft();
-      this.player.bgPositionX--
+
     }
   }
 
   mapping = (movingElementPositionX: number, movingElementPositionY: number): number => {
-    let platform:number[][] = mapPrint.find((eachPlatfom) => {
-      if (eachPlatfom[0][0] < movingElementPositionX && movingElementPositionX < eachPlatfom[0][1] && movingElementPositionY <= (eachPlatfom[1][0] + this.player.action.h)) {
-        //console.log("platform is at", eachPlatfom[0][0], "-", eachPlatfom[0][1], "ken position", movingElementPositionX)
-        return eachPlatfom[1][0]
-      }
-      //console.log("plataforma",platform[0][1][0], "posicionY", this.player.bgPositionY )
-    })
-    if (platform === undefined ) {
-      console.log("PLATTT",platform)
-      return 500
-    } else {
-      console.log("PLATTT",(platform[1][0] - this.player.action.h) , "bgposy", this.player.bgPositionY,"posy", this.player.positionY)
-      return platform[1][0] + this.player.action.h
+    let platform: number[][][] = mapPrint.filter((eachPlatfom) => {
+      if ((eachPlatfom[0][0] < movingElementPositionX && movingElementPositionX < eachPlatfom[0][1]) && (movingElementPositionY <= (eachPlatfom[1][0] * this.canvasBgRelation))) {
+        return eachPlatfom
+    }})
+    if (platform.length>1) {
+      platform.sort((elem2: number[][], elem1: number[][]) : number=> {
+        if(elem2[1][0]> elem1[1][0]) {
+          return 1
+        } else if (elem1[1][0]> elem2[1][0]) {
+          return -1
+        }else{
+          return 0
+        }
+      })
     }
-  //return (this.frames < 30) ? (350 ) : (platform[1][0])//- this.player.action.h //[0] //- this.player.action.h
-}
+    if (platform === undefined) {
+      return canvas.height
+    } else {
+      return platform[0][1][0] 
+    }
+  }
 
   moving = () => {
     this.moveBackground()
     this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY))
-    //this.player.kenJumping(this.movement.isJumping, this.ground)
 
   }
 
@@ -135,17 +147,14 @@ class Game {
 
   gameLoop = () => {
     this.frames = this.frames + 1
-    //console.log(this.frames)
 
     // 1. limpiar el canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // 2. acciones y movimientos de los elementos
-    //this.moveBackground()
     this.moving()
     this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY))
-    //this.player.movingKen(this.movement["right"], this.movement["left"])
-    //this.player.kenJumping(this.movement.isJumping, this.ground)
+
     this.gravityFunction()
     // 3. dibujado de los elementos
     this.drawFondo();
@@ -159,7 +168,6 @@ class Game {
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
     }
-    //delete me
-    //console.log("ground", this.ground, "positionY",this.player.positionY, "isJumping", this.movement.isJumping, "speedY", this.player.speedY)
+
   };
 }
