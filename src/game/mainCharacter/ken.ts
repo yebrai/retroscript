@@ -31,21 +31,21 @@ class Ken {
   mapRelationfactor: number
   walkSpeed = 1
   groundFeetDistance: number
-  groundMargin:number
+  groundMargin: number
 
   constructor() {
     //walking animation
     this.imgWalk = new Image(),
       this.imgWalk.src = "../../../images/player/kenWalking.png",
       this.walk = {
-        x: 0, // posición en eje x
-        y: 0, // posición en eje y
+        x: 0,
+        y: 0,
         w: [49], // ancho
         h: 95, // alto //!87
       }
     //jumping animation
     this.imgJump = new Image()
-      this.imgJump.src = "../../../images/player/kenJump.png"
+    this.imgJump.src = "../../../images/player/kenJump.png"
     this.jump = {
       x: [0, 46, 88, 154, 194, 274, 324],
       y: 0,
@@ -81,19 +81,30 @@ class Ken {
     //this.mapRelationfactor = 1.65
 
   }
+
   drawKen = () => {
     ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.positionX, this.positionY, this.action.w, this.action.h)
     ctx.drawImage(this.img, this.positionX, this.bgPositionY, 10, 10) //draw feet position
   }
 
+  gravity = (gravity: number, ground: number) => { //
+    this.positionY = this.positionY + Math.floor(this.speedY)
+    this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
+    if (Math.floor(this.bgPositionY) < ground - this.groundMargin) {
+      this.speedY += gravity
+    }
+    if ((Math.floor(this.bgPositionY) > ground - this.groundMargin || Math.floor(this.bgPositionY) > ground) && this.speedY > 0) {
+      this.speedY = 0
+    }
+  }
+
   animateKen = (frames: number, right: boolean, left: boolean, ground: number) => {
-    if ((Math.floor(this.bgPositionY) > ground - this.groundMargin)  && this.speedY === 0) {
+    if ((Math.floor(this.bgPositionY) > ground - this.groundMargin) && this.speedY === 0) {
       this.animateKenWalking(frames, right, left)
     } else {
       this.animateKenJumping(frames)
     }
   }
-
 
   animateKenWalking = (frames: number, right: boolean, left: boolean) => {
     this.img = this.imgWalk
@@ -124,15 +135,13 @@ class Ken {
     }
   }
 
-  gravity = (frames: number, gravity: number, ground: number) => { //
-    this.positionY = this.positionY + Math.floor(this.speedY)
-    this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
-    if (Math.floor(this.bgPositionY) < ground - this.groundMargin ) {
-      this.speedY += gravity
-      console.log("florBgPosY",Math.floor(this.bgPositionY), "ground", ground , "speedY", this.speedY)
+
+  movingKen = (right: boolean, left: boolean, isJumping: boolean, ground: number) => {
+    if (isJumping && Math.floor(this.bgPositionY) > ground - this.groundMargin) {
+      this.kenJumping()
     }
-    if ((Math.floor(this.bgPositionY) > ground - this.groundMargin || Math.floor(this.bgPositionY) > ground) && this.speedY > 0) {
-        this.speedY = 0
+    if ((right || left)) {
+      this.kenWalking(right, left)
     }
   }
 
@@ -150,18 +159,4 @@ class Ken {
       this.bgPositionX = this.bgPositionX - this.walkSpeed
     }
   }
-
-  movingKen = (right: boolean, left: boolean, isJumping: boolean, ground: number) => {
-
-    if (isJumping && Math.floor(this.bgPositionY) > ground - this.groundMargin) {
-      this.kenJumping()
-    }
-    if ((right || left)) {
-      this.kenWalking(right, left)
-    }
-  }
-
-  //delete me
-
-
 }

@@ -11,23 +11,23 @@ gameOverScreen.style.display = "none"
 canvas.style.display = "none"
 
 const startGame = () => {
-    console.log("iniciando el juego")
-    
-    // ocultar la pantalla de inicio
-    startScreen.style.display = "none"
-    
-    // mostrar el canvas
-    canvas.style.display = "block"
-    // "block" el elemento toma todo el tamaño del ancho de la pantalla
-    
-    // crear una nueva version del juego
-    
-    
-    gameObj = new Game()
-    // iniciará el juego. ejecutar el metodo gameLoop
-    // en esta seccion se agregarian setTimeout o setIntervals
+  console.log("iniciando el juego")
 
-    gameObj.gameLoop()
+  // ocultar la pantalla de inicio
+  startScreen.style.display = "none"
+
+  // mostrar el canvas
+  canvas.style.display = "block"
+  // "block" el elemento toma todo el tamaño del ancho de la pantalla
+
+  // crear una nueva version del juego
+
+
+  gameObj = new Game()
+  // iniciará el juego. ejecutar el metodo gameLoop
+  // en esta seccion se agregarian setTimeout o setIntervals
+
+  gameObj.gameLoop()
 }
 
 // * ADD EVENT LISTENERS
@@ -35,24 +35,24 @@ startBtn.addEventListener("click", startGame)
 restartBtn.addEventListener("click", startGame)
 
 window.addEventListener("keydown", (event) => {
-    if (event.code === "KeyA") {
-      gameObj.movement["left"] = true;
-    } else if (event.code === "KeyD") {
-      gameObj.movement["right"] = true;
-    } else if (event.code === "KeyW") {
-        gameObj.movement["isJumping"] = true;
-      }else if (event.code === "KeyS") {
-        console.log("platformmapping", gameObj.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY), "posX posY", gameObj.player.bgPositionX, gameObj.player.bgPositionY, "SpeedY", gameObj.player.speedY)
-      }
-  });
+  if (event.code === "KeyA") {
+    gameObj.movement["left"] = true;
+  } else if (event.code === "KeyD") {
+    gameObj.movement["right"] = true;
+  } else if (event.code === "KeyW") {
+    gameObj.movement["isJumping"] = true;
+  } else if (event.code === "KeyS") {
+    //used for monitoring purposes
+  }
+});
 
-  window.addEventListener("keyup", (event) => {
-     if (event.code === "KeyA") {
-      gameObj.movement["left"] = false;
-    } else if (event.code === "KeyD") {
-      gameObj.movement["right"] = false;
-    } else if (event.code === "KeyW") {
-        gameObj.movement["isJumping"] = false;
-      }
-  });
+window.addEventListener("keyup", (event) => {
+  if (event.code === "KeyA") {
+    gameObj.movement["left"] = false;
+  } else if (event.code === "KeyD") {
+    gameObj.movement["right"] = false;
+  } else if (event.code === "KeyW") {
+    gameObj.movement["isJumping"] = false;
+  }
+});
 
