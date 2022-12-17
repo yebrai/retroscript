@@ -111,28 +111,34 @@ class Game {
     if (platform.length === 0) {
       return canvas.height
     } else {
-      return platform[0][1][0] //* this.canvasBgRelation
+        return (platform[0][1][0] - this.bgPadding) * this.canvasBgRelation
     }
   }
 
+  //dev purposes only
   drawPlatforms = (deltaX:number) => {
+    let deltaY: number = 1.65
     mapPrint.map((eachPlatform)=> {
-      ctx.drawImage(this.playerFace.imgFullLife, eachPlatform[0][0] + deltaX,eachPlatform[1][0] + deltaX,eachPlatform[0][1] - eachPlatform[0][0], 10)
+      if(eachPlatform[1][0] < canvas.height/2) {
+        ctx.drawImage(this.playerFace.imgFullLife, eachPlatform[0][0] + deltaX, (eachPlatform[1][0] - 100) * deltaY, eachPlatform[0][1] - eachPlatform[0][0], 2)
+      }else {
+        ctx.drawImage(this.playerFace.imgFullLife, eachPlatform[0][0] + deltaX, (eachPlatform[1][0] - 100) * deltaY, eachPlatform[0][1] - eachPlatform[0][0], 2)
+      }
     })
   }
 
+  //dev purposes only
   drawMapElements = () => {
-    if ((this.player.positionX >= (canvas.width / 2)) && this.direction === "right") {
-
-    this.drawPlatforms(this.x)
-
-    } else if ((this.player.positionX <= 0) && this.direction === "left") {
-      if (this.x > 0) {
-      this.drawPlatforms(this.x)
-       
-      }
-
-    }
+    this.drawPlatforms(-this.x)
+    // if ((this.player.positionX >= (canvas.width / 2)) ) {
+    // this.drawPlatforms(-this.x)
+    // } else if ((this.player.positionX <= 0) ) {
+    //   if (this.x > 0) {
+    //   this.drawPlatforms(-this.x)
+    //   }
+    // }else {
+    //   this.drawPlatforms(-this.x)
+    // }
   }
 
 
@@ -170,7 +176,7 @@ class Game {
     this.playerFace.drawKenFace()
     this.playerFace.drawEmptyLife()
     this.playerFace.drawLife()
-    this.drawMapElements()
+    this.drawMapElements()//dev purposes only
     // 4. recursion
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
