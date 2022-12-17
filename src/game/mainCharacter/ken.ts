@@ -71,7 +71,7 @@ class Ken {
 
     //jumpSpeed
     this.speedY = 0
-    this.jumpPower = -8 //-4
+    this.jumpPower = -4 //-4
 
     //walk speed
     this.walkSpeed = 4 //1
@@ -84,18 +84,20 @@ class Ken {
 
   drawKen = () => {
     ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.positionX, this.positionY, this.action.w, this.action.h)
-    ctx.drawImage(this.img, this.positionX, this.bgPositionY, 10, 10) //draw feet position
+    ctx.drawImage(this.img, this.positionX + 25, this.bgPositionY, 10, 10) //draw feet position dev purposes only
   }
 
-  gravity = (gravity: number, ground: number) => { //
+  gravity = (gravity: number, ground: number, bgCanvasRelation: number) => { //
     this.positionY = this.positionY + Math.floor(this.speedY)
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
     if (Math.floor(this.bgPositionY) < ground - this.groundMargin) {
       this.speedY += gravity
       this.groundMargin = this.speedY + 2
+      
     }
     if ((Math.floor(this.bgPositionY) > ground - this.groundMargin || Math.floor(this.bgPositionY) > ground) && this.speedY > 0) {
       this.speedY = 0
+      this.positionY = ground - this.action.h + this.groundFeetDistance
     }
   }
 

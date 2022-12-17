@@ -50,7 +50,7 @@ class Game {
 
 
   gravityFunction = () => {
-    this.player.gravity( this.gravity, this.mapping(this.player.bgPositionX, this.player.bgPositionY)) //
+    this.player.gravity( this.gravity, this.mapping(this.player.bgPositionX, this.player.bgPositionY), this.canvasBgRelation) //
   }
 
   gameOver = () => {
@@ -92,7 +92,7 @@ class Game {
   mapping = (movingElementPositionX: number, movingElementPositionY: number): number => {
     let platform: number[][][] = mapPrint.filter((eachPlatfom) => {
       if ((eachPlatfom[0][0] < movingElementPositionX && movingElementPositionX < eachPlatfom[0][1])) {
-        if (eachPlatfom[1][0] >= Math.floor(movingElementPositionY)) {
+        if ((eachPlatfom[1][0] - this.bgPadding) * this.canvasBgRelation >= Math.floor(movingElementPositionY)) {
           return eachPlatfom
         }
       }
@@ -111,18 +111,17 @@ class Game {
     if (platform.length === 0) {
       return canvas.height
     } else {
-        return (platform[0][1][0] - this.bgPadding) * this.canvasBgRelation
+        return Math.floor((platform[0][1][0] - this.bgPadding) * this.canvasBgRelation)
     }
   }
 
   //dev purposes only
   drawPlatforms = (deltaX:number) => {
-    let deltaY: number = 1.65
     mapPrint.map((eachPlatform)=> {
       if(eachPlatform[1][0] < canvas.height/2) {
-        ctx.drawImage(this.playerFace.imgFullLife, eachPlatform[0][0] + deltaX, (eachPlatform[1][0] - 100) * deltaY, eachPlatform[0][1] - eachPlatform[0][0], 2)
+        ctx.drawImage(this.playerFace.imgFullLife, eachPlatform[0][0] + deltaX, (eachPlatform[1][0] - this.bgPadding) * this.canvasBgRelation, eachPlatform[0][1] - eachPlatform[0][0], 2)
       }else {
-        ctx.drawImage(this.playerFace.imgFullLife, eachPlatform[0][0] + deltaX, (eachPlatform[1][0] - 100) * deltaY, eachPlatform[0][1] - eachPlatform[0][0], 2)
+        ctx.drawImage(this.playerFace.imgEmptyLife, eachPlatform[0][0] + deltaX, (eachPlatform[1][0] - this.bgPadding) * this.canvasBgRelation, eachPlatform[0][1] - eachPlatform[0][0], 2)
       }
     })
   }
