@@ -63,15 +63,15 @@ class Ken {
     this.spriteFrame = 0
     //position x
     this.positionX = 0
-    this.bgPositionX = this.action.w / 2
+    this.bgPositionX = 25//this.walk.w[0] / 2
     //speed
     this.positionY = 200
-    this.groundFeetDistance = 30
-    this.bgPositionY = this.positionY + 60//this.action.h - this.groundFeetDistance //player feet position
+    this.groundFeetDistance = 18
+    this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance //player feet position
 
     //jumpSpeed
     this.speedY = 0
-    this.jumpPower = -4 //-4
+    this.jumpPower = -8 //-4
 
     //walk speed
     this.walkSpeed = 4 //1
@@ -92,6 +92,7 @@ class Ken {
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
     if (Math.floor(this.bgPositionY) < ground - this.groundMargin) {
       this.speedY += gravity
+      this.groundMargin = this.speedY + 2
     }
     if ((Math.floor(this.bgPositionY) > ground - this.groundMargin || Math.floor(this.bgPositionY) > ground) && this.speedY > 0) {
       this.speedY = 0

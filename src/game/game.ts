@@ -40,7 +40,7 @@ class Game {
     this.bgPadding = 100
     this.bgHeight = 336
 
-    this.canvasBgRelation = canvas.height / (this.bgHeight - this.bgPadding)
+    this.canvasBgRelation = canvas.height / (this.bgHeight)
 
   }
 
@@ -50,7 +50,7 @@ class Game {
 
 
   gravityFunction = () => {
-    this.player.gravity( this.gravity, this.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY)) //
+    this.player.gravity( this.gravity, this.mapping(this.player.bgPositionX, this.player.bgPositionY)) //
   }
 
   gameOver = () => {
@@ -111,13 +111,34 @@ class Game {
     if (platform.length === 0) {
       return canvas.height
     } else {
-      return platform[0][1][0]
+      return platform[0][1][0] //* this.canvasBgRelation
     }
   }
 
+  drawPlatforms = (deltaX:number) => {
+    mapPrint.map((eachPlatform)=> {
+      ctx.drawImage(this.playerFace.imgFullLife, eachPlatform[0][0] + deltaX,eachPlatform[1][0] + deltaX,eachPlatform[0][1] - eachPlatform[0][0], 10)
+    })
+  }
+
+  drawMapElements = () => {
+    if ((this.player.positionX >= (canvas.width / 2)) && this.direction === "right") {
+
+    this.drawPlatforms(this.x)
+
+    } else if ((this.player.positionX <= 0) && this.direction === "left") {
+      if (this.x > 0) {
+      this.drawPlatforms(this.x)
+       
+      }
+
+    }
+  }
+
+
   moving = () => {
     this.moveBackground()
-    this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY))
+    this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
 
   }
 
@@ -139,7 +160,7 @@ class Game {
 
     // 2. actions&movements of elements
     this.moving()
-    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY))
+    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
 
     this.gravityFunction()
     // 3. drawing elements
@@ -149,6 +170,7 @@ class Game {
     this.playerFace.drawKenFace()
     this.playerFace.drawEmptyLife()
     this.playerFace.drawLife()
+    this.drawMapElements()
     // 4. recursion
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
