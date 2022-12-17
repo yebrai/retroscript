@@ -31,6 +31,7 @@ class Ken {
   mapRelationfactor: number
   walkSpeed = 1
   groundFeetDistance: number
+  groundMargin:number
 
   constructor() {
     //walking animation
@@ -43,7 +44,7 @@ class Ken {
         h: 95, // alto //!87
       }
     //jumping animation
-    this.imgJump = new Image(),
+    this.imgJump = new Image()
       this.imgJump.src = "../../../images/player/kenJump.png"
     this.jump = {
       x: [0, 46, 88, 154, 194, 274, 324],
@@ -70,10 +71,12 @@ class Ken {
 
     //jumpSpeed
     this.speedY = 0
-    this.jumpPower = -2
+    this.jumpPower = -4 //-4
 
     //walk speed
-    this.walkSpeed = 1
+    this.walkSpeed = 4 //1
+
+    this.groundMargin = 10
 
     //this.mapRelationfactor = 1.65
 
@@ -84,10 +87,10 @@ class Ken {
   }
 
   animateKen = (frames: number, right: boolean, left: boolean, ground: number) => {
-    if (this.bgPositionY < ground) {
-      this.animateKenJumping(frames)
-    } else {
+    if ((Math.floor(this.bgPositionY) > ground - this.groundMargin)  && this.speedY === 0) {
       this.animateKenWalking(frames, right, left)
+    } else {
+      this.animateKenJumping(frames)
     }
   }
 
@@ -124,12 +127,12 @@ class Ken {
   gravity = (frames: number, gravity: number, ground: number) => { //
     this.positionY = this.positionY + Math.floor(this.speedY)
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
-    if (Math.floor(this.bgPositionY) < ground) {
-      if (frames % 50 === 0) {
-        this.speedY += gravity
-      }
-    } else {
-      this.speedY = 0
+    if (Math.floor(this.bgPositionY) < ground - this.groundMargin ) {
+      this.speedY += gravity
+      console.log("florBgPosY",Math.floor(this.bgPositionY), "ground", ground , "speedY", this.speedY)
+    }
+    if ((Math.floor(this.bgPositionY) > ground - this.groundMargin || Math.floor(this.bgPositionY) > ground) && this.speedY > 0) {
+        this.speedY = 0
     }
   }
 
@@ -150,7 +153,7 @@ class Ken {
 
   movingKen = (right: boolean, left: boolean, isJumping: boolean, ground: number) => {
 
-    if (isJumping && this.bgPositionY >= ground) {
+    if (isJumping && Math.floor(this.bgPositionY) > ground - this.groundMargin) {
       this.kenJumping()
     }
     if ((right || left)) {

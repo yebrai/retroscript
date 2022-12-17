@@ -165,7 +165,6 @@ class Game {
     this.playerFace.drawKenFace()
     this.playerFace.drawEmptyLife()
     this.playerFace.drawLife()
-    console.log(this.player.bgPositionY)
     // 4. control de la recursion
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
