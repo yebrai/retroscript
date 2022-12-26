@@ -71,7 +71,8 @@ class Game {
     this.x = this.x + this.player.walkSpeed;
     this.direction = "right";
     this.player.bgPositionX = this.player.bgPositionX + this.player.walkSpeed
-    this.sonic.bgPositionX = this.sonic.bgPositionX - this.player.walkSpeed
+    this.sonic.bgPositionX = this.sonic.bgPositionX - this.player.walkSpeed //!refactorize
+    this.sonic.positionX = this.sonic.positionX - this.player.walkSpeed //!refactorize
     console.log("x", this.sonic.bgPositionX, "y", this.sonic.bgPositionY)
 
   };
@@ -81,7 +82,8 @@ class Game {
       this.x = this.x - this.player.walkSpeed;
       this.direction = "left";
       this.player.bgPositionX = this.player.bgPositionX - this.player.walkSpeed
-      this.sonic.bgPositionX = this.sonic.bgPositionX - this.player.walkSpeed
+      this.sonic.bgPositionX = this.sonic.bgPositionX + this.player.walkSpeed //!refactorize
+      this.sonic.positionX = this.sonic.positionX + this.player.walkSpeed //!refactorize
     }
   };
 

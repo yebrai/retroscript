@@ -47,7 +47,7 @@ class Sonic {
             h: 95, // alto //!87
           }
 
-        this.positionX = 600
+        this.positionX = 800
         this.positionY = 0
 
         this.bgPositionX = 800
