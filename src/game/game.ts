@@ -10,6 +10,7 @@ class Game {
   direction: string
   movement: { left: boolean, right: boolean, isJumping: boolean }
   player: Ken
+  sonic: Sonic
   gravity: number
   fallSpeed: number
   ground: number
@@ -24,6 +25,7 @@ class Game {
     this.fondo.src = "../../images/Canvas-Background.png"
     this.player = new Ken()
     this.playerFace = new KenFace()
+    this.sonic = new Sonic()
     this.x = 1;
     this.y = 0;
     //  this.mainCharacter = new Ryu() // 
@@ -50,7 +52,8 @@ class Game {
 
 
   gravityFunction = () => {
-    this.player.gravity( this.gravity, this.mapping(this.player.bgPositionX, this.player.bgPositionY), this.canvasBgRelation) //
+    this.player.gravity( this.gravity, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
+    this.sonic.gravity( this.gravity, this.mapping(this.sonic.bgPositionX, this.sonic.bgPositionY))
   }
 
   gameOver = () => {
@@ -68,6 +71,8 @@ class Game {
     this.x = this.x + this.player.walkSpeed;
     this.direction = "right";
     this.player.bgPositionX = this.player.bgPositionX + this.player.walkSpeed
+    this.sonic.bgPositionX = this.sonic.bgPositionX - this.player.walkSpeed
+    console.log("x", this.sonic.bgPositionX, "y", this.sonic.bgPositionY)
 
   };
   //move left
@@ -76,6 +81,7 @@ class Game {
       this.x = this.x - this.player.walkSpeed;
       this.direction = "left";
       this.player.bgPositionX = this.player.bgPositionX - this.player.walkSpeed
+      this.sonic.bgPositionX = this.sonic.bgPositionX - this.player.walkSpeed
     }
   };
 
@@ -144,7 +150,7 @@ class Game {
   moving = () => {
     this.moveBackground()
     this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
-
+    this.sonic.movingSonic(this.frames)
   }
 
 
@@ -166,6 +172,7 @@ class Game {
     // 2. actions&movements of elements
     this.moving()
     this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
+    this.sonic.animateSonicRunning(this.frames)
 
     this.gravityFunction()
     // 3. drawing elements
@@ -175,7 +182,8 @@ class Game {
     this.playerFace.drawKenFace()
     this.playerFace.drawEmptyLife()
     this.playerFace.drawLife()
-    this.drawMapElements()//dev purposes only
+    this.sonic.drawSonic()
+    // this.drawMapElements()//dev purposes only
     // 4. recursion
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);

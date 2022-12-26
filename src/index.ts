@@ -4,6 +4,7 @@ const startScreen = document.querySelector("#splash-screen") as HTMLDivElement
 const startBtn = document.querySelector("#start-btn") as HTMLButtonElement
 const gameOverScreen = document.querySelector("#gameover-screen") as HTMLDivElement
 const restartBtn = document.querySelector("#restart-btn") as HTMLButtonElement
+const themeSound = new Audio('../sounds/kenTheme.mp3')
 
 let gameObj: Game | undefined
 
@@ -21,7 +22,8 @@ const startGame = () => {
   // "block" el elemento toma todo el tamaño del ancho de la pantalla
 
   // crear una nueva version del juego
-
+  themeSound.play()
+  themeSound.volume = 0.1
 
   gameObj = new Game()
   // iniciará el juego. ejecutar el metodo gameLoop

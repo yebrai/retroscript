@@ -4,7 +4,7 @@ class Ken {
   walk: {
     x: number
     y: number
-    w: number[]
+    w: number
     h: number
   }
   imgJump: HTMLImageElement
@@ -40,7 +40,7 @@ class Ken {
       this.walk = {
         x: 0,
         y: 0,
-        w: [49], // ancho
+        w: 49, // ancho
         h: 95, // alto //!87
       }
     //jumping animation
@@ -84,10 +84,9 @@ class Ken {
 
   drawKen = () => {
     ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.positionX, this.positionY, this.action.w, this.action.h)
-    ctx.drawImage(this.img, this.positionX + 25, this.bgPositionY, 10, 10) //draw feet position dev purposes only
   }
 
-  gravity = (gravity: number, ground: number, bgCanvasRelation: number) => { //
+  gravity = (gravity: number, ground: number) => { //
     this.positionY = this.positionY + Math.floor(this.speedY)
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
     if (Math.floor(this.bgPositionY) < ground - this.groundMargin) {
@@ -113,12 +112,12 @@ class Ken {
     this.img = this.imgWalk
     this.action.y = this.walk.y
     this.action.h = this.walk.h
-    this.action.w = this.walk.w[0]
+    this.action.w = this.walk.w
     if (this.action.x % 49 !== 0) {
       this.action.x = 0
     }
     if (frames % 29 === 0 && (right || left)) {
-      this.action.x = this.action.x + this.walk.w[0]
+      this.action.x = this.action.x + this.walk.w
       if (this.action.x > 196) {
         this.action.x = 0
       }
