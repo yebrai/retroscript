@@ -10,7 +10,7 @@ class Game {
   direction: string
   movement: { left: boolean, right: boolean, isJumping: boolean }
   player: Ken
-  sonic: Sonic
+  sonicArr: Sonic[]
   gravity: number
   fallSpeed: number
   ground: number
@@ -25,7 +25,7 @@ class Game {
     this.fondo.src = "../../images/Canvas-Background.png"
     this.player = new Ken()
     this.playerFace = new KenFace()
-    this.sonic = new Sonic()
+    this.sonicArr = []
     this.x = 1;
     this.y = 0;
     //  this.mainCharacter = new Ryu() // 
@@ -53,7 +53,9 @@ class Game {
 
   gravityFunction = () => {
     this.player.gravity( this.gravity, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
-    this.sonic.gravity( this.gravity, this.mapping(this.sonic.bgPositionX, this.sonic.bgPositionY))
+    this.sonicArr.forEach((eachSonic) => {
+      eachSonic.gravity( this.gravity, this.mapping(eachSonic.bgPositionX, eachSonic.bgPositionY))
+    })
   }
 
   gameOver = () => {
@@ -71,7 +73,9 @@ class Game {
     this.x = this.x + this.player.walkSpeed;
     this.direction = "right";
     this.player.bgPositionX = this.player.bgPositionX + this.player.walkSpeed
-    this.sonic.positionX = this.sonic.positionX - this.player.walkSpeed //!refactorize
+    this.sonicArr.forEach((eachSonic) => {
+      eachSonic.positionX = eachSonic.positionX - this.player.walkSpeed
+    }) //!refactorize
   };
   //move left
   moveLeft = () => {
@@ -79,9 +83,19 @@ class Game {
       this.x = this.x - this.player.walkSpeed;
       this.direction = "left";
       this.player.bgPositionX = this.player.bgPositionX - this.player.walkSpeed
-      this.sonic.positionX = this.sonic.positionX + this.player.walkSpeed //!refactorize
+      this.sonicArr.forEach((eachSonic) => {
+      eachSonic.positionX = eachSonic.positionX + this.player.walkSpeed
+      }) //!refactorize
     }
   };
+
+  createSonic = () => {
+    console.log(this.player.bgPositionX)
+    console.log(this.sonicArr)
+    if (this.frames % 200 === 0) {
+      this.sonicArr.push(new Sonic())
+    }
+  }
 
   moveBackground = () => {
     if ((this.player.positionX >= (canvas.width / 2)) && this.movement["right"]) {
@@ -148,7 +162,9 @@ class Game {
   moving = () => {
     this.moveBackground()
     this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
-    this.sonic.movingSonic(this.frames)
+    this.sonicArr.forEach((eachSonic) => {
+    eachSonic.movingSonic(this.frames)
+    })
   }
 
 
@@ -157,7 +173,6 @@ class Game {
     ctx.font = "30px Arial"
     let scoreStr = `Score: ${this.score}`
     ctx.fillText(scoreStr, canvas.width * 0.4, 50)
-    console.log("x", this.sonic.bgPositionX, "y", this.sonic.bgPositionY)
   }
 
   gameLoop = () => {
@@ -168,8 +183,11 @@ class Game {
 
     // 2. actions&movements of elements
     this.moving()
+    this.createSonic()
     this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
-    this.sonic.animateSonicRunning(this.frames)
+    this.sonicArr.forEach((eachSonic) => {
+      eachSonic.animateSonicRunning(this.frames)
+    })
 
     this.gravityFunction()
     // 3. drawing elements
@@ -179,7 +197,9 @@ class Game {
     this.playerFace.drawKenFace()
     this.playerFace.drawEmptyLife()
     this.playerFace.drawLife()
-    this.sonic.drawSonic()
+    this.sonicArr.forEach((eachSonic) => {
+      eachSonic.drawSonic()
+    })
     // this.drawMapElements()//dev purposes only
     // 4. recursion
     if (this.isGameOn === true) {
