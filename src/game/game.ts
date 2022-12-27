@@ -8,7 +8,7 @@ class Game {
   w: number
   h: number
   direction: string
-  movement: { left: boolean, right: boolean, isJumping: boolean }
+  movement: { left: boolean, right: boolean, isJumping: boolean, hadouken: boolean }
   player: Ken
   sonicArr: Sonic[]
   gravity: number
@@ -32,7 +32,7 @@ class Game {
     this.frames = 0 //
     this.isGameOn = true
     this.direction = ""
-    this.movement = { left: false, right: false, isJumping: false };
+    this.movement = { left: false, right: false, isJumping: false, hadouken: false };
 
 
     this.score = 0

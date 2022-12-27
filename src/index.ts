@@ -5,6 +5,7 @@ const startBtn = document.querySelector("#start-btn") as HTMLButtonElement
 const gameOverScreen = document.querySelector("#gameover-screen") as HTMLDivElement
 const restartBtn = document.querySelector("#restart-btn") as HTMLButtonElement
 const themeSound = new Audio('../sounds/kenTheme.mp3')
+const hadouken = new Audio('../sounds/hadouken.mp3')
 
 let gameObj: Game | undefined
 
@@ -46,6 +47,9 @@ window.addEventListener("keydown", (event) => {
   } else if (event.code === "KeyS") {
     //used for monitoring purposes
     console.log("bgPosX", gameObj.player.bgPositionX,"bgPosY", gameObj.player.bgPositionY, "platform", gameObj.mapping(gameObj.player.bgPositionX,gameObj.player.bgPositionY))
+  } else if (event.code === "Space") {
+    hadouken.play()
+    hadouken.volume = 0.1
   }
 });
 
