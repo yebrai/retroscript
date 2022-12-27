@@ -34,6 +34,7 @@ class Game {
     this.direction = ""
     this.movement = { left: false, right: false, isJumping: false };
 
+
     this.score = 0
     this.gravity = 0.1
     //this.fallSpeed = 0
@@ -52,9 +53,9 @@ class Game {
 
 
   gravityFunction = () => {
-    this.player.gravity( this.gravity, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
+    this.player.gravity(this.gravity, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
     this.sonicArr.forEach((eachSonic) => {
-      eachSonic.gravity( this.gravity, this.mapping(eachSonic.bgPositionX, eachSonic.bgPositionY))
+      eachSonic.gravity(this.gravity, this.mapping(eachSonic.bgPositionX, eachSonic.bgPositionY))
     })
   }
 
@@ -75,7 +76,7 @@ class Game {
     this.player.bgPositionX = this.player.bgPositionX + this.player.walkSpeed
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.positionX = eachSonic.positionX - this.player.walkSpeed
-    }) //!refactorize
+    })
   };
   //move left
   moveLeft = () => {
@@ -84,18 +85,23 @@ class Game {
       this.direction = "left";
       this.player.bgPositionX = this.player.bgPositionX - this.player.walkSpeed
       this.sonicArr.forEach((eachSonic) => {
-      eachSonic.positionX = eachSonic.positionX + this.player.walkSpeed
-      }) //!refactorize
+        eachSonic.positionX = eachSonic.positionX + this.player.walkSpeed
+      })
     }
   };
 
   createSonic = () => {
-    console.log(this.player.bgPositionX)
-    console.log(this.sonicArr)
-    if (this.frames % 200 === 0) {
-      this.sonicArr.push(new Sonic())
+    if (this.frames % 20 === 0) {
+      this.sonicArr.push(new Sonic(this.x))
     }
   }
+
+  eliminateSonic = () => {
+    if (this.sonicArr.length > 0 && this.sonicArr[0].bgPositionX <= 0) {
+      this.sonicArr.shift()
+    }
+  }
+  
 
   moveBackground = () => {
     if ((this.player.positionX >= (canvas.width / 2)) && this.movement["right"]) {
@@ -129,16 +135,16 @@ class Game {
     if (platform.length === 0) {
       return canvas.height
     } else {
-        return Math.floor((platform[0][1][0] - this.bgPadding) * this.canvasBgRelation)
+      return Math.floor((platform[0][1][0] - this.bgPadding) * this.canvasBgRelation)
     }
   }
 
   //dev purposes only
-  drawPlatforms = (deltaX:number) => {
-    mapPrint.map((eachPlatform)=> {
-      if(eachPlatform[1][0] < canvas.height/2) {
+  drawPlatforms = (deltaX: number) => {
+    mapPrint.map((eachPlatform) => {
+      if (eachPlatform[1][0] < canvas.height / 2) {
         ctx.drawImage(this.playerFace.imgFullLife, eachPlatform[0][0] + deltaX, (eachPlatform[1][0] - this.bgPadding) * this.canvasBgRelation, eachPlatform[0][1] - eachPlatform[0][0], 2)
-      }else {
+      } else {
         ctx.drawImage(this.playerFace.imgEmptyLife, eachPlatform[0][0] + deltaX, (eachPlatform[1][0] - this.bgPadding) * this.canvasBgRelation, eachPlatform[0][1] - eachPlatform[0][0], 2)
       }
     })
@@ -147,15 +153,6 @@ class Game {
   //dev purposes only
   drawMapElements = () => {
     this.drawPlatforms(-this.x)
-    // if ((this.player.positionX >= (canvas.width / 2)) ) {
-    // this.drawPlatforms(-this.x)
-    // } else if ((this.player.positionX <= 0) ) {
-    //   if (this.x > 0) {
-    //   this.drawPlatforms(-this.x)
-    //   }
-    // }else {
-    //   this.drawPlatforms(-this.x)
-    // }
   }
 
 
@@ -163,7 +160,7 @@ class Game {
     this.moveBackground()
     this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
     this.sonicArr.forEach((eachSonic) => {
-    eachSonic.movingSonic(this.frames)
+      eachSonic.movingSonic(this.frames, this.mapping(eachSonic.bgPositionX, eachSonic.bgPositionY))
     })
   }
 
@@ -184,6 +181,7 @@ class Game {
     // 2. actions&movements of elements
     this.moving()
     this.createSonic()
+    this.eliminateSonic()
     this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.animateSonicRunning(this.frames)
@@ -200,7 +198,7 @@ class Game {
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.drawSonic()
     })
-    // this.drawMapElements()//dev purposes only
+     this.drawMapElements()//dev purposes only
     // 4. recursion
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
