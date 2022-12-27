@@ -155,6 +155,29 @@ class Game {
     this.drawPlatforms(-this.x)
   }
 
+  //collision Sonic-Ken
+  colisionEnemyTorre = () => {
+    this.sonicArr.forEach((eachSonic) => {
+      //con enemigos vivos, aún
+      if (
+        eachSonic.positionX < this.player.positionX + this.player.action.w &&
+        eachSonic.positionX + eachSonic.action.w > this.player.positionX &&
+        eachSonic.positionY < this.player.positionY + this.player.action.h &&
+        eachSonic.action.h + eachSonic.positionY > this.player.positionY 
+      ) {
+        let deadEnemy = this.sonicArr.indexOf(eachSonic);
+        this.sonicArr.splice(deadEnemy, 1);
+        // this.lifes--;
+        // this.heartArray.pop();
+        // let orcLaughtClone = this.orcLaught.cloneNode(true);
+        // orcLaughtClone.volume = 0.01;
+        // orcLaughtClone.play();
+        // if (this.lifes === 0) {
+        //   this.gameOver();
+        // }
+      }
+    });
+  };
 
   moving = () => {
     this.moveBackground()
@@ -186,7 +209,7 @@ class Game {
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.animateSonicRunning(this.frames)
     })
-
+    this.colisionEnemyTorre()
     this.gravityFunction()
     // 3. drawing elements
     this.drawFondo();
@@ -198,7 +221,7 @@ class Game {
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.drawSonic()
     })
-     this.drawMapElements()//dev purposes only
+    // this.drawMapElements()//dev purposes only
     // 4. recursion
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
