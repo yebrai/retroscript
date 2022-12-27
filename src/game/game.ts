@@ -11,6 +11,7 @@ class Game {
   movement: { left: boolean, right: boolean, isJumping: boolean, hadouken: boolean }
   player: Ken
   sonicArr: Sonic[]
+  hadoukenArr: Hadouken[]
   gravity: number
   fallSpeed: number
   ground: number
@@ -18,6 +19,7 @@ class Game {
   bgPadding: number
   bgHeight: number
   canvasBgRelation: number
+  hadoukenCreated: boolean
 
   constructor() {
     // background
@@ -26,6 +28,7 @@ class Game {
     this.player = new Ken()
     this.playerFace = new KenFace()
     this.sonicArr = []
+    this.hadoukenArr = []
     this.x = 1;
     this.y = 0;
     //  this.mainCharacter = new Ryu() // 
@@ -33,7 +36,7 @@ class Game {
     this.isGameOn = true
     this.direction = ""
     this.movement = { left: false, right: false, isJumping: false, hadouken: false };
-
+    this.hadoukenCreated= true
 
     this.score = 0
     this.gravity = 0.1
@@ -101,6 +104,13 @@ class Game {
       this.sonicArr.shift()
     }
   }
+
+  createHadouken = () => {
+    if (!this.hadoukenCreated) {
+      this.hadoukenArr.push(new Hadouken(this.player.positionX, this.player.positionY))
+      this.hadoukenCreated = true
+    }
+  }
   
 
   moveBackground = () => {
@@ -156,9 +166,8 @@ class Game {
   }
 
   //collision Sonic-Ken
-  colisionEnemyTorre = () => {
+  colisionSonicKen = () => {
     this.sonicArr.forEach((eachSonic) => {
-      //con enemigos vivos, aún
       if (
         eachSonic.positionX < this.player.positionX + this.player.action.w &&
         eachSonic.positionX + eachSonic.action.w > this.player.positionX &&
@@ -167,15 +176,26 @@ class Game {
       ) {
         let deadEnemy = this.sonicArr.indexOf(eachSonic);
         this.sonicArr.splice(deadEnemy, 1);
-        // this.lifes--;
-        // this.heartArray.pop();
-        // let orcLaughtClone = this.orcLaught.cloneNode(true);
-        // orcLaughtClone.volume = 0.01;
-        // orcLaughtClone.play();
-        // if (this.lifes === 0) {
-        //   this.gameOver();
-        // }
       }
+    });
+  };
+
+  //collision Sonic-Hadouken
+  colisionSonicHadouken = () => {
+    this.hadoukenArr.forEach((eachHadouken) => {
+      this.sonicArr.forEach((eachSonic) => {
+      if (
+        eachSonic.positionX < eachHadouken.hadouken.x + eachHadouken.hadouken.w &&
+        eachSonic.positionX + eachSonic.action.w > eachHadouken.hadouken.x &&
+        eachSonic.positionY < eachHadouken.hadouken.y + eachHadouken.hadouken.h &&
+        eachSonic.action.h + eachSonic.positionY > eachHadouken.hadouken.y 
+      ) {
+        let deadEnemy = this.sonicArr.indexOf(eachSonic);
+        let deadHadouken = this.hadoukenArr.indexOf(eachHadouken);
+        this.sonicArr.splice(deadEnemy, 1);
+        this.hadoukenArr.splice(deadHadouken, 1);
+      }
+    })
     });
   };
 
@@ -185,6 +205,10 @@ class Game {
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.movingSonic(this.frames, this.mapping(eachSonic.bgPositionX, eachSonic.bgPositionY))
     })
+    this.hadoukenArr.forEach((eachHadouken) => {
+      eachHadouken.moveHadouken()
+    }
+    )
   }
 
 
@@ -204,12 +228,14 @@ class Game {
     // 2. actions&movements of elements
     this.moving()
     this.createSonic()
+    this.createHadouken()
     this.eliminateSonic()
-    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
+    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.movement.hadouken, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.animateSonicRunning(this.frames)
     })
-    this.colisionEnemyTorre()
+    this.colisionSonicKen()
+    this.colisionSonicHadouken()
     this.gravityFunction()
     // 3. drawing elements
     this.drawFondo();
@@ -220,6 +246,9 @@ class Game {
     this.playerFace.drawLife()
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.drawSonic()
+    })
+    this.hadoukenArr.forEach((eachHadouken) => {
+      eachHadouken.drawHadouken()
     })
     // this.drawMapElements()//dev purposes only
     // 4. recursion

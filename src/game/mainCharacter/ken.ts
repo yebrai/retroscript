@@ -14,6 +14,13 @@ class Ken {
     w: number[]
     h: number
   }
+  imgHadouken: HTMLImageElement
+  hadouken: {
+    x: number
+    y: number
+    w: number
+    h: number
+  }
   img: HTMLImageElement
   action: {
     x: number
@@ -51,6 +58,15 @@ class Ken {
       y: 0,
       w: [46, 42, 64, 40, 80, 50, 40],
       h: 95
+    }
+    //hadouken animation
+    this.imgHadouken = new Image()
+    this.imgHadouken.src = "../../../images/player/hadoukenSprite.png"
+    this.hadouken = {
+      x: 0,
+      y: 0,
+      w: 68,
+      h: 95 //!85
     }
     this.img //= this.imgWalk
     this.action = {
@@ -92,7 +108,7 @@ class Ken {
     if (Math.floor(this.bgPositionY) < ground - this.groundMargin) {
       this.speedY += gravity
       this.groundMargin = this.speedY + 2
-      
+
     }
     if ((Math.floor(this.bgPositionY) > ground - this.groundMargin || Math.floor(this.bgPositionY) > ground) && this.speedY > 0) {
       this.speedY = 0
@@ -100,11 +116,15 @@ class Ken {
     }
   }
 
-  animateKen = (frames: number, right: boolean, left: boolean, ground: number) => {
-    if ((Math.floor(this.bgPositionY) > ground - this.groundMargin) && this.speedY === 0) {
-      this.animateKenWalking(frames, right, left)
+  animateKen = (frames: number, right: boolean, left: boolean, hadouken: boolean ground: number) => {
+    if (hadouken) {
+      this.animateKenHadouken(frames, hadouken)
     } else {
-      this.animateKenJumping(frames)
+      if ((Math.floor(this.bgPositionY) > ground - this.groundMargin) && this.speedY === 0) {
+        this.animateKenWalking(frames, right, left)
+      } else {
+        this.animateKenJumping(frames)
+      }
     }
   }
 
@@ -119,6 +139,22 @@ class Ken {
     if (frames % 29 === 0 && (right || left)) {
       this.action.x = this.action.x + this.walk.w
       if (this.action.x > 196) {
+        this.action.x = 0
+      }
+    }
+  }
+
+  animateKenHadouken = (frames: number, hadouken: boolean) => {
+    this.img = this.imgHadouken
+    this.action.y = this.hadouken.y
+    this.action.h = this.hadouken.h
+    this.action.w = this.hadouken.w
+    if (this.action.x % 68 !== 0) {
+      this.action.x = 0
+    }
+    if (frames % 29 === 0 && (hadouken)) {
+      this.action.x = this.action.x + this.hadouken.w
+      if (this.action.x > 204) {
         this.action.x = 0
       }
     }
