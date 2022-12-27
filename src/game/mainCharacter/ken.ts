@@ -102,6 +102,12 @@ class Ken {
     ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.positionX, this.positionY, this.action.w, this.action.h)
   }
 
+  drawKenHitBox = () => {
+    ctx.beginPath();
+    ctx.ellipse(this.positionX + this.action.w/2, this.positionY + this.action.h/2, this.action.w/4, this.action.h/2, 0, 0, Math.PI *2)
+    ctx.stroke();
+  }
+
   gravity = (gravity: number, ground: number) => { //
     this.positionY = this.positionY + Math.floor(this.speedY)
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance

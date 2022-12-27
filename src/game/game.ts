@@ -241,6 +241,7 @@ class Game {
     this.drawFondo();
     this.drawScore()
     this.player.drawKen()
+    this.player.drawKenHitBox()
     this.playerFace.drawKenFace()
     this.playerFace.drawEmptyLife()
     this.playerFace.drawLife()
