@@ -116,7 +116,7 @@ class Ken {
     }
   }
 
-  animateKen = (frames: number, right: boolean, left: boolean, hadouken: boolean ground: number) => {
+  animateKen = (frames: number, right: boolean, left: boolean, hadouken: boolean, ground: number) => {
     if (hadouken) {
       this.animateKenHadouken(frames, hadouken)
     } else {
