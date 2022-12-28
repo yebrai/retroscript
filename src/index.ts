@@ -54,7 +54,7 @@ window.addEventListener("keydown", (event) => {
     setTimeout(() => {
       gameObj.movement["hadouken"] = false;
       gameObj.hadoukenCreated = false;
-    }, 1500) //! needs a correction on frames
+    }, 500) //! needs a correction on frames
   }
 });
 

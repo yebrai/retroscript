@@ -158,7 +158,7 @@ class Ken {
     if (this.action.x % 68 !== 0) {
       this.action.x = 0
     }
-    if (frames % 29 === 0 && (hadouken)) {
+    if (frames % 10 === 0 && (hadouken)) {
       this.action.x = this.action.x + this.hadouken.w
       if (this.action.x > 204) {
         this.action.x = 0
@@ -170,7 +170,7 @@ class Ken {
     this.img = this.imgJump
     this.action.y = this.jump.y
     this.action.h = this.jump.h
-    if (frames % 29 === 0) {
+    if (frames % 14 === 0) {
       this.action.x = this.jump.x[this.spriteFrame]
       this.action.w = this.jump.w[this.spriteFrame]
       this.spriteFrame = this.spriteFrame + 1
