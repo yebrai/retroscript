@@ -176,6 +176,10 @@ class Game {
       ) {
         let deadEnemy = this.sonicArr.indexOf(eachSonic);
         this.sonicArr.splice(deadEnemy, 1);
+        this.player.health--
+        if (this.player.health <= 0) {
+          this.gameOver()
+        }
       }
     });
   };
@@ -194,6 +198,7 @@ class Game {
         let deadHadouken = this.hadoukenArr.indexOf(eachHadouken);
         this.sonicArr.splice(deadEnemy, 1);
         this.hadoukenArr.splice(deadHadouken, 1);
+        this.score++
       }
     })
     });
@@ -215,6 +220,7 @@ class Game {
   // * BONUS 
   drawScore = () => {
     ctx.font = "30px Arial"
+    ctx.fillStyle = "white";
     let scoreStr = `Score: ${this.score}`
     ctx.fillText(scoreStr, canvas.width * 0.4, 50)
   }
@@ -242,9 +248,9 @@ class Game {
     this.drawScore()
     this.player.drawKen()
     this.player.drawKenHitBox()
-    this.playerFace.drawKenFace()
+    this.playerFace.drawKenFace(this.player.health)
     this.playerFace.drawEmptyLife()
-    this.playerFace.drawLife()
+    this.playerFace.drawLife(this.player.health)
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.drawSonic()
     })

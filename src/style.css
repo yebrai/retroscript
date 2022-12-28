@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap');
+
+html {
+    background-image: url('../images/background/background.jpg');
+}
+
 #container {
     display: flex;
     align-items: center;
@@ -26,4 +32,30 @@
 
 #my-canvas {
  margin-top: 185px;
+}
+
+#gameover-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    max-width: 90vw;
+    margin-top: 80px;
+}
+
+body button {
+    background-color: Transparent;
+    cursor: pointer;
+    text-shadow: 0 0 10px black;
+    color: black;
+    font-size: 1.5rem;
+    font-family: 'Bungee Spice', cursive;
+    border: 0;
+
+}
+
+body button:hover {
+    box-shadow: 0 0 20px  white;
+    background-color: transparent;
+    border-radius: 20px;
 }

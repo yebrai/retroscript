@@ -39,6 +39,7 @@ class Ken {
   walkSpeed = 1
   groundFeetDistance: number
   groundMargin: number
+  health: number
 
   constructor() {
     //walking animation
@@ -96,6 +97,7 @@ class Ken {
 
     //this.mapRelationfactor = 1.65
 
+    this.health = 3
   }
 
   drawKen = () => {

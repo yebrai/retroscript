@@ -17,6 +17,7 @@ const startGame = () => {
 
   // ocultar la pantalla de inicio
   startScreen.style.display = "none"
+  gameOverScreen.style.display = "none"
 
   // mostrar el canvas
   canvas.style.display = "block"
