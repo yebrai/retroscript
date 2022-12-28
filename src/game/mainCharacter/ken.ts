@@ -16,9 +16,9 @@ class Ken {
   }
   imgHadouken: HTMLImageElement
   hadouken: {
-    x: number
+    x: number[]
     y: number
-    w: number
+    w: number[]
     h: number
   }
   img: HTMLImageElement
@@ -28,7 +28,8 @@ class Ken {
     w: number
     h: number
   }
-  spriteFrame: number
+  spriteJump: number
+  spriteHadouken: number
   positionX: number
   bgPositionX: number
   bgPositionY: number
@@ -40,6 +41,8 @@ class Ken {
   groundFeetDistance: number
   groundMargin: number
   health: number
+  hadoukenAnimation: boolean
+  hadoukenCreated: boolean
 
   constructor() {
     //walking animation
@@ -64,9 +67,9 @@ class Ken {
     this.imgHadouken = new Image()
     this.imgHadouken.src = "../../../images/player/hadoukenSprite.png"
     this.hadouken = {
-      x: 0,
+      x: [0, 55, 125, 196],
       y: 0,
-      w: 68,
+      w: [55, 70, 71, 76],
       h: 95 //!85
     }
     this.img //= this.imgWalk
@@ -77,7 +80,8 @@ class Ken {
       h: 0,
     }//= this.walk
     //sprite frame counter
-    this.spriteFrame = 0
+    this.spriteJump = 0
+    this.spriteHadouken = 0
     //position x
     this.positionX = 0
     this.bgPositionX = 25//this.walk.w[0] / 2
@@ -98,6 +102,8 @@ class Ken {
     //this.mapRelationfactor = 1.65
 
     this.health = 3
+    this.hadoukenAnimation = false
+    this.hadoukenCreated = true
   }
 
   drawKen = () => {
@@ -124,9 +130,9 @@ class Ken {
     }
   }
 
-  animateKen = (frames: number, right: boolean, left: boolean, hadouken: boolean, ground: number) => {
-    if (hadouken) {
-      this.animateKenHadouken(frames, hadouken)
+  animateKen = (frames: number, right: boolean, left: boolean, ground: number) => {
+    if (this.hadoukenAnimation) {
+      this.animateKenHadouken(frames)
     } else {
       if ((Math.floor(this.bgPositionY) > ground - this.groundMargin) && this.speedY === 0) {
         this.animateKenWalking(frames, right, left)
@@ -152,19 +158,22 @@ class Ken {
     }
   }
 
-  animateKenHadouken = (frames: number, hadouken: boolean) => {
+  animateKenHadouken = (frames: number) => {
     this.img = this.imgHadouken
     this.action.y = this.hadouken.y
     this.action.h = this.hadouken.h
-    this.action.w = this.hadouken.w
-    if (this.action.x % 68 !== 0) {
-      this.action.x = 0
-    }
-    if (frames % 10 === 0 && (hadouken)) {
-      this.action.x = this.action.x + this.hadouken.w
-      if (this.action.x > 204) {
+    if (frames % 10 === 0 && this.hadoukenAnimation) {
+      if (this.spriteHadouken > 3) {
         this.action.x = 0
+        this.hadoukenAnimation = false
+        this.hadoukenCreated = false
+        this.action.w = this.hadouken.w[this.spriteHadouken]
+        this.spriteHadouken = 0
       }
+      this.action.w = this.hadouken.w[this.spriteHadouken]
+      this.action.x = this.hadouken.x[this.spriteHadouken]
+      console.log("actionx",this.action.x, 'actionW', this.action.w, "sprite", this.spriteHadouken)
+      this.spriteHadouken++
     }
   }
 
@@ -173,11 +182,11 @@ class Ken {
     this.action.y = this.jump.y
     this.action.h = this.jump.h
     if (frames % 14 === 0) {
-      this.action.x = this.jump.x[this.spriteFrame]
-      this.action.w = this.jump.w[this.spriteFrame]
-      this.spriteFrame = this.spriteFrame + 1
-    } if (this.spriteFrame > 5) {
-      this.spriteFrame = 0
+      this.action.x = this.jump.x[this.spriteJump]
+      this.action.w = this.jump.w[this.spriteJump]
+      this.spriteJump++
+    } if (this.spriteJump > 5) {
+      this.spriteJump = 0
     }
   }
 

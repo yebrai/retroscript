@@ -51,11 +51,7 @@ window.addEventListener("keydown", (event) => {
   } else if (event.code === "Space") {
     hadouken.play()
     hadouken.volume = 0.1
-    gameObj.movement["hadouken"] = true;
-    setTimeout(() => {
-      gameObj.movement["hadouken"] = false;
-      gameObj.hadoukenCreated = false;
-    }, 500) //! needs a correction on frames
+    gameObj.player.hadoukenAnimation = true;
   }
 });
 

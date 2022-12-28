@@ -37,7 +37,6 @@ class KenFace {
       }
 
       drawLife = (health: number) => {
-        console.log(health)
           ctx.drawImage(this.imgFullLife, this.x +80, this.y + 25, this.hpDraw[health - 1], 15)
       }
 

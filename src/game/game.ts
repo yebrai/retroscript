@@ -8,7 +8,7 @@ class Game {
   w: number
   h: number
   direction: string
-  movement: { left: boolean, right: boolean, isJumping: boolean, hadouken: boolean }
+  movement: { left: boolean, right: boolean, isJumping: boolean }
   player: Ken
   sonicArr: Sonic[]
   hadoukenArr: Hadouken[]
@@ -19,7 +19,6 @@ class Game {
   bgPadding: number
   bgHeight: number
   canvasBgRelation: number
-  hadoukenCreated: boolean
 
   constructor() {
     // background
@@ -35,8 +34,7 @@ class Game {
     this.frames = 0 //
     this.isGameOn = true
     this.direction = ""
-    this.movement = { left: false, right: false, isJumping: false, hadouken: false };
-    this.hadoukenCreated= true
+    this.movement = { left: false, right: false, isJumping: false};
 
     this.score = 0
     this.gravity = 0.1
@@ -44,7 +42,7 @@ class Game {
     //background adjustment
     //this.ground = 300
     this.bgPadding = 112
-    this.bgHeight = 336
+    this.bgHeight = 224
 
     this.canvasBgRelation = canvas.height / (this.bgHeight)
 
@@ -106,9 +104,9 @@ class Game {
   }
 
   createHadouken = () => {
-    if (!this.hadoukenCreated) {
+    if (!this.player.hadoukenCreated) {
       this.hadoukenArr.push(new Hadouken(this.player.positionX, this.player.positionY))
-      this.hadoukenCreated = true
+      this.player.hadoukenCreated = true
     }
   }
   
@@ -178,7 +176,7 @@ class Game {
         this.sonicArr.splice(deadEnemy, 1);
         this.player.health--
         if (this.player.health <= 0) {
-          this.gameOver()
+          //this.gameOver()
         }
       }
     });
@@ -236,7 +234,7 @@ class Game {
     this.createSonic()
     this.createHadouken()
     this.eliminateSonic()
-    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.movement.hadouken, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
+    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.animateSonicRunning(this.frames)
     })
@@ -254,6 +252,7 @@ class Game {
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.drawSonic()
     })
+    console.log("secs")
     this.hadoukenArr.forEach((eachHadouken) => {
       eachHadouken.drawHadouken()
     })
