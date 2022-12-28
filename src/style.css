@@ -1,79 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Nabla&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Nabla&display=swap");
 
 html {
-    background-image: url('../images/background/background.jpg');
+  background-image: url("../images/background/background.jpg");
 }
 
 #container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-image-title {
-   max-width: 90vw;
-   margin-top: 40px;
+  max-width: 90vw;
+  margin-top: 40px;
 }
 
 #splash-screen {
-    display: flex;
-    flex-direction: column;
-    gap: 100px;
-    justify-content: top;
-    margin: 120px auto;
-    align-items: center;
-    background-image: url('../images/Canvas-Background.png');
-    background-repeat: no-repeat;
-    background-size: 4080px 550px;
-    background-position: 0 -184px;
-    width: 41.65vw;
-    height: 41.6vh;
-    box-shadow:0 0 100px 10px black;
-
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  justify-content: top;
+  margin: 120px auto;
+  align-items: center;
+  background-image: url("../images/Canvas-Background.png");
+  background-repeat: no-repeat;
+  background-size: 4080px 550px;
+  background-position: 0 -184px;
+  width: 41.65vw;
+  height: 41.6vh;
+  box-shadow: 0 0 100px 10px black;
 }
 
 #my-canvas {
- margin-top: 120px;
-     box-shadow:0 0 10px black;
+  margin-top: 120px;
+  box-shadow: 0 0 100px 10px black;
 }
 
 #gameover-screen {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    align-items: center;
-    max-width: 90vw;
-    margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
+  max-width: 90vw;
+  margin-top: 120px;
 }
 
 body button {
-    background-color: Transparent;
-    cursor: pointer;
-    text-shadow: 0 0 10px black;
-    color: black;
-    font-size: 1.5rem;
-    font-family: 'Bungee Spice', cursive;
-    border: 0;
-    transition-duration: 0.4s;
-
+  background-color: Transparent;
+  cursor: pointer;
+  text-shadow: 0 0 10px black;
+  color: black;
+  font-size: 1.5rem;
+  font-family: "Bungee Spice", cursive;
+  border: 0;
+  transition-duration: 0.4s;
 }
 
 body button:hover {
-    background-color: transparent;
-    border-radius: 20px;
-    transition-duration: 0.4s;
-    transform: scale(1.2);
-    ;
+  background-color: transparent;
+  border-radius: 20px;
+  transition-duration: 0.4s;
+  transform: scale(1.2);
 }
 
 #restart-btn {
-    font-family: 'Nabla', cursive;
-    transition-duration: 0.7s;
+  font-family: "Nabla", cursive;
+  transition-duration: 0.7s;
 }
 
 #restart-btn:hover {
-    box-shadow: none;
-    transition-duration: 0.7s;
-    transform: rotate(360deg);
+  box-shadow: none;
+  transition-duration: 0.7s;
+  transform: rotate(360deg);
 }
