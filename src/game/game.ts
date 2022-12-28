@@ -43,7 +43,7 @@ class Game {
     //this.fallSpeed = 0
     //background adjustment
     //this.ground = 300
-    this.bgPadding = 100
+    this.bgPadding = 112
     this.bgHeight = 336
 
     this.canvasBgRelation = canvas.height / (this.bgHeight)

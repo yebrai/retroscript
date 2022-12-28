@@ -82,7 +82,7 @@ class Ken {
     this.positionX = 0
     this.bgPositionX = 25//this.walk.w[0] / 2
     //speed
-    this.positionY = 200
+    this.positionY = 150
     this.groundFeetDistance = 18
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance //player feet position
 
