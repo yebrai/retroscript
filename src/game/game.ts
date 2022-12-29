@@ -137,16 +137,12 @@ class Game {
     }
   }
 
-  //  bossBulletAi = () => {
-  //    this.bossBulletArr.forEach((eachBullet) => {
-  //      console.log("y",eachBullet.originY, "x", eachBullet.originX)
-  //      if (eachBullet.originY = 500) {
-  //       eachBullet.originY += eachBullet.speed
-  //      }
-  //    })
-  //  }
-
   bossStage = () => {
+    this.bossBulletArr.forEach((eachBossBullet) =>{
+      if(eachBossBullet.guidedBullet || this.isBossStage) {
+        eachBossBullet.drawBossBullet()
+     }
+    })
     if (this.player.bgPositionX > 3050) {
       this.isBossStage = true
 
@@ -154,21 +150,24 @@ class Game {
     }
     if (this.isBossStage) {
       this.boss.drawBoss()
-      this.bossBulletArr.forEach((eachBossBullet) =>{
-        eachBossBullet.drawBossBullet()
-      })
     }
   }
   
 
   moveBackground = () => {
     if ((this.player.positionX >= (canvas.width / 2)) && this.movement["right"] && !this.isBossStage) {
-      this.moveRight();
-
+      this.moveRight()
+      this.moveBulletBackground(-this.player.walkSpeed)
     } else if ((this.player.positionX <= 0) && this.movement["left"] && !this.isBossStage) {
       this.moveLeft();
-
+      this.moveBulletBackground(this.player.walkSpeed)
     }
+  }
+
+  moveBulletBackground = (velocity: number) => {
+    this.bossBulletArr.forEach((eachBullet) => {
+      eachBullet.originX += velocity
+    })
   }
 
   mapping = (movingElementPositionX: number, movingElementPositionY: number): number => {
@@ -264,10 +263,9 @@ class Game {
       eachHadouken.moveHadouken()
     })
     this.bossBulletArr.forEach((eachBossBullet) => {
-      eachBossBullet.moveBossBullet(this.frames)
+      eachBossBullet.moveBossBullet(this.frames, this.player.positionX)
     })
   }
-
 
   // * BONUS 
   drawScore = () => {

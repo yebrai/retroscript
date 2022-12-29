@@ -18,6 +18,7 @@ class BossBullet {
     originY: number
     spriteBossBullet: number
     guidedBullet: boolean
+    bgPositionX: number
     constructor(originX: number, originY: number) {
         //bossBullet image
         this.imgBossBullet = new Image(),
@@ -40,18 +41,24 @@ class BossBullet {
         this.originY = originY
         this.spriteBossBullet = 0
         this.guidedBullet = false
+        this.bgPositionX
 
     }
     drawBossBullet = () => {
         ctx.drawImage(this.imgBossBullet, this.action.x, this.action.y, this.action.w, this.action.h, this.originX, this.originY, this.bossBullet.w, this.bossBullet.h)
     }
 
-    moveBossBullet = (frames: number) => {
-        if (!this.guidedBullet) {
+    moveBossBullet = (frames: number, kenPosition: number) => {
+        console.log(this.originY)
+        if (!this.guidedBullet && this.originY > -200) {
             this.originY -= this.speed
-        } else if (this.originY < -100) {
+        } else {
             this.guidedBullet = true
             this.originY += this.speed
+            console.log(this.originY)
+            if (this.originY <= -100) {
+            this.originX = kenPosition
+            }
         }
     }
 
