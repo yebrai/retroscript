@@ -95,9 +95,9 @@ class Ken {
     this.jumpPower = -4 //-4
 
     //walk speed
-    this.walkSpeed = 4 //1
+    this.walkSpeed = 10 //4 //1
 
-    this.groundMargin = 10
+    this.groundMargin = 20
 
     //this.mapRelationfactor = 1.65
 

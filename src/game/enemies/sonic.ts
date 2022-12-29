@@ -116,7 +116,6 @@ class Sonic {
     this.action.w = this.lose.w
     if (frames % 13 === 0) {
       this.action.x = this.action.x + this.lose.w
-      console.log(this.action.x)
       if (this.action.x > 252) {
         this.action.x = 0
       }

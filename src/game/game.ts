@@ -133,6 +133,15 @@ class Game {
     }
   }
 
+  //  bossBulletAi = () => {
+  //    this.bossBulletArr.forEach((eachBullet) => {
+  //      console.log("y",eachBullet.originY, "x", eachBullet.originX)
+  //      if (eachBullet.originY = 500) {
+  //       eachBullet.originY += eachBullet.speed
+  //      }
+  //    })
+  //  }
+
   bossStage = () => {
     if (this.player.bgPositionX > 3050) {
       this.isBossStage = true
@@ -253,7 +262,7 @@ class Game {
       eachHadouken.moveHadouken()
     })
     this.bossBulletArr.forEach((eachBossBullet) => {
-      eachBossBullet.moveBossBullet()
+      eachBossBullet.moveBossBullet(this.frames)
     })
   }
 
