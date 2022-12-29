@@ -1,6 +1,7 @@
 class Sonic {
   img: HTMLImageElement
   imgRunning: HTMLImageElement
+  imgLosing: HTMLImageElement
   x: number
   y: number
   w: number
@@ -29,11 +30,22 @@ class Sonic {
   randomJump: number
   jumpPower: number
 
+  lose: {
+    x: number
+    y: number
+    w: number
+    h: number
+  }
+
+  health: number
 
   constructor(bgTraveled: number) {
     this.img = new Image()
     this.imgRunning = new Image()
     this.imgRunning.src = '../../../images/enemies/sonic.png'
+
+    this.imgLosing = new Image()
+    this.imgLosing.src = '../../../images/enemies/sonicDie.png'
 
     this.action = {
       x: 0,
@@ -48,6 +60,15 @@ class Sonic {
       w: 95,
       h: 95,
     }
+
+    this.lose = {
+      x: 0,
+      y: 0,
+      w: 84,
+      h: 94,
+    }
+
+    this.health = 1
 
     this.positionX = 1500
     this.positionY = 0
@@ -87,6 +108,21 @@ class Sonic {
     }
   }
 
+  //Bug animation lose. (inverse, ground and shift sonic)
+  animateSonicLose = (frames: number) => {
+    this.img = this.imgLosing
+    this.action.y = this.lose.y
+    this.action.h = this.lose.h
+    this.action.w = this.lose.w
+    if (frames % 13 === 0) {
+      this.action.x = this.action.x + this.lose.w
+      console.log(this.action.x)
+      if (this.action.x > 252) {
+        this.action.x = 0
+      }
+    }
+  }
+
   gravity = (gravity: number, ground: number) => { //
     this.positionY = this.positionY + Math.floor(this.speedY)
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
@@ -100,12 +136,19 @@ class Sonic {
     }
   }
 
+  //
   movingSonic = (frames: number, ground: number) => {
-    this.bgPositionX = this.bgPositionX - this.walkSpeed
-    this.positionX = this.positionX - this.walkSpeed
-    if (frames % this.randomJump <= 10 && Math.floor(this.bgPositionY) > ground - this.groundMargin) {
+    if (this.health < 1) {
+      this.positionY--
+      return
+    }
+    else if (frames % this.randomJump <= 10 && Math.floor(this.bgPositionY) > ground - this.groundMargin) {
       this.speedY = this.jumpPower
     }
+    this.bgPositionX = this.bgPositionX - this.walkSpeed
+    this.positionX = this.positionX - this.walkSpeed
+    
+
   }
 
 
