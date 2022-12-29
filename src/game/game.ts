@@ -12,6 +12,8 @@ class Game {
   player: Ken
   sonicArr: Sonic[]
   hadoukenArr: Hadouken[]
+  bossBulletArr: BossBullet[]
+  boss: Boss
   gravity: number
   fallSpeed: number
   ground: number
@@ -19,6 +21,7 @@ class Game {
   bgPadding: number
   bgHeight: number
   canvasBgRelation: number
+  isBossStage: boolean
 
   constructor() {
     // background
@@ -26,25 +29,26 @@ class Game {
     this.fondo.src = "../../images/Canvas-Background.png"
     this.player = new Ken()
     this.playerFace = new KenFace()
+    this.boss = new Boss()
     this.sonicArr = []
     this.hadoukenArr = []
+    this.bossBulletArr = []
     this.x = 1;
     this.y = 0;
-    //  this.mainCharacter = new Ryu() // 
-    this.frames = 0 //
+    this.frames = 0 
     this.isGameOn = true
     this.direction = ""
     this.movement = { left: false, right: false, isJumping: false};
 
     this.score = 0
     this.gravity = 0.1
-    //this.fallSpeed = 0
     //background adjustment
-    //this.ground = 300
     this.bgPadding = 112
     this.bgHeight = 224
 
     this.canvasBgRelation = canvas.height / (this.bgHeight)
+
+    this.isBossStage = false
 
   }
 
@@ -58,6 +62,7 @@ class Game {
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.gravity(this.gravity, this.mapping(eachSonic.bgPositionX, eachSonic.bgPositionY))
     })
+    this.boss.gravity(this.gravity, this.mapping(this.boss.bgPositionX, this.boss.bgPositionY))
   }
 
   gameOver = () => {
@@ -109,13 +114,34 @@ class Game {
       this.player.hadoukenCreated = true
     }
   }
+
+  createBossBullet = () => {
+    if (!this.boss.bossBulletCreated) {
+      this.bossBulletArr.push(new BossBullet(this.boss.positionX, this.boss.positionY))
+      this.boss.bossBulletCreated = true
+    }
+  }
+
+  bossStage = () => {
+    if (this.player.bgPositionX > 3050) {
+      this.isBossStage = true
+
+      //needs boss theme music, more drama ;)
+    }
+    if (this.isBossStage) {
+      this.boss.drawBoss()
+      this.bossBulletArr.forEach((eachBossBullet) =>{
+        eachBossBullet.drawBossBullet()
+      })
+    }
+  }
   
 
   moveBackground = () => {
-    if ((this.player.positionX >= (canvas.width / 2)) && this.movement["right"]) {
+    if ((this.player.positionX >= (canvas.width / 2)) && this.movement["right"] && !this.isBossStage) {
       this.moveRight();
 
-    } else if ((this.player.positionX <= 0) && this.movement["left"]) {
+    } else if ((this.player.positionX <= 0) && this.movement["left"] && !this.isBossStage) {
       this.moveLeft();
 
     }
@@ -204,14 +230,16 @@ class Game {
 
   moving = () => {
     this.moveBackground()
-    this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
+    this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.mapping(this.player.bgPositionX, this.player.bgPositionY), this.isBossStage)
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.movingSonic(this.frames, this.mapping(eachSonic.bgPositionX, eachSonic.bgPositionY))
     })
     this.hadoukenArr.forEach((eachHadouken) => {
       eachHadouken.moveHadouken()
-    }
-    )
+    })
+    this.bossBulletArr.forEach((eachBossBullet) => {
+      eachBossBullet.moveBossBullet()
+    })
   }
 
 
@@ -233,10 +261,15 @@ class Game {
     this.moving()
     this.createSonic()
     this.createHadouken()
+    this.createBossBullet()
     this.eliminateSonic()
     this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.animateSonicRunning(this.frames)
+    })
+    this.boss.animateBossShooting(this.frames)
+    this.bossBulletArr.forEach((eachBossBullet) => {
+      eachBossBullet.animateBossBullet(this.frames)
     })
     this.colisionSonicKen()
     this.colisionSonicHadouken()
@@ -252,10 +285,10 @@ class Game {
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.drawSonic()
     })
-    console.log("secs")
     this.hadoukenArr.forEach((eachHadouken) => {
       eachHadouken.drawHadouken()
     })
+    this.bossStage()
     // this.drawMapElements()//dev purposes only
     // 4. recursion
     if (this.isGameOn === true) {

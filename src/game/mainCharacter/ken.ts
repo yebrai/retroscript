@@ -172,7 +172,6 @@ class Ken {
       }
       this.action.w = this.hadouken.w[this.spriteHadouken]
       this.action.x = this.hadouken.x[this.spriteHadouken]
-      console.log("actionx",this.action.x, 'actionW', this.action.w, "sprite", this.spriteHadouken)
       this.spriteHadouken++
     }
   }
@@ -191,12 +190,12 @@ class Ken {
   }
 
 
-  movingKen = (right: boolean, left: boolean, isJumping: boolean, ground: number) => {
+  movingKen = (right: boolean, left: boolean, isJumping: boolean, ground: number, bossStage:boolean) => {
     if (isJumping && Math.floor(this.bgPositionY) > ground - this.groundMargin) {
       this.kenJumping()
     }
     if ((right || left)) {
-      this.kenWalking(right, left)
+      this.kenWalking(right, left, bossStage)
     }
   }
 
@@ -205,13 +204,23 @@ class Ken {
   }
 
 
-  kenWalking = (right: boolean, left: boolean) => {
-    if (right && (this.positionX < (canvas.width / 2))) {
-      this.positionX = this.positionX + this.walkSpeed;
-      this.bgPositionX = this.bgPositionX + this.walkSpeed
-    } else if (left && (this.positionX > 0)) {
-      this.positionX = this.positionX - this.walkSpeed;
-      this.bgPositionX = this.bgPositionX - this.walkSpeed
+  kenWalking = (right: boolean, left: boolean, bossStage: boolean) => {
+    if (bossStage) { //needs refactorization
+      if (right && (this.positionX < canvas.width-this.action.w)) {
+        this.positionX = this.positionX + this.walkSpeed;
+        this.bgPositionX = this.bgPositionX + this.walkSpeed
+      } else if (left && (this.positionX > 0)) {
+        this.positionX = this.positionX - this.walkSpeed;
+        this.bgPositionX = this.bgPositionX - this.walkSpeed
+      }
+    } else {
+      if (right && (this.positionX < (canvas.width / 2))) {
+        this.positionX = this.positionX + this.walkSpeed;
+        this.bgPositionX = this.bgPositionX + this.walkSpeed
+      } else if (left && (this.positionX > 0)) {
+        this.positionX = this.positionX - this.walkSpeed;
+        this.bgPositionX = this.bgPositionX - this.walkSpeed
+      }
     }
   }
 }
