@@ -145,7 +145,6 @@ class Game {
     })
     if (this.player.bgPositionX > 3050) {
       this.isBossStage = true
-
       //needs boss theme music, more drama ;)
     }
     if (this.isBossStage) {
@@ -153,20 +152,27 @@ class Game {
     }
   }
   
-
   moveBackground = () => {
     if ((this.player.positionX >= (canvas.width / 2)) && this.movement["right"] && !this.isBossStage) {
       this.moveRight()
       this.moveBulletBackground(-this.player.walkSpeed)
+      this.moveHadoukenBackground(-this.player.walkSpeed)
     } else if ((this.player.positionX <= 0) && this.movement["left"] && !this.isBossStage) {
       this.moveLeft();
       this.moveBulletBackground(this.player.walkSpeed)
+      this.moveHadoukenBackground(this.player.walkSpeed)
     }
   }
 
   moveBulletBackground = (velocity: number) => {
     this.bossBulletArr.forEach((eachBullet) => {
       eachBullet.originX += velocity
+    })
+  }
+
+  moveHadoukenBackground = (velocity: number) => {
+    this.hadoukenArr.forEach((eachHadouken) => {
+      eachHadouken.hadouken.x += velocity
     })
   }
 
@@ -296,7 +302,7 @@ class Game {
     })
     this.boss.animateBossShooting(this.frames)
     this.bossBulletArr.forEach((eachBossBullet) => {
-      eachBossBullet.animateBossBullet(this.frames)
+      eachBossBullet.bossBulletEffect(this.frames)
     })
     this.colisionSonicKen()
     this.colisionSonicHadouken()
