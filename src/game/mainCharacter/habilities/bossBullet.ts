@@ -49,12 +49,10 @@ class BossBullet {
     moveBossBullet = (frames: number) => {
         if (!this.guidedBullet) {
             this.originY -= this.speed
-        } else if (this.originY === 1000) {
+        } else if (this.originY < -100) {
             this.guidedBullet = true
             this.originY += this.speed
         }
-
-        console.log(this.guidedBullet)
     }
 
     animateBossBullet = (frames: number) => {

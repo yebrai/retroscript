@@ -114,9 +114,13 @@ class Game {
   }
 
   eliminateSonic = () => {
-    if (this.sonicArr.length > 0 && this.sonicArr[0].bgPositionX <= 0) {
-      this.sonicArr.shift()
-    }
+    this.sonicArr.forEach((eachSonic) => {
+      if(eachSonic.positionY > 400 || eachSonic.bgPositionX <= 0) {
+        let deadEnemy = this.sonicArr.indexOf(eachSonic)
+        this.sonicArr.splice(deadEnemy, 1);
+      }
+      
+    })
   }
 
   createHadouken = () => {
@@ -243,10 +247,8 @@ class Game {
         this.hadoukenArr.splice(deadHadouken, 1);
         this.score++
         eachSonic.health--
-        console.log(eachSonic.health)
         let deadEnemy = this.sonicArr.indexOf(eachSonic);
-        
-        //this.sonicArr.splice(deadEnemy, 1);
+        console.log(eachSonic.positionY)
       }
     })
     });

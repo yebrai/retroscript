@@ -62,9 +62,9 @@ class Sonic {
     }
 
     this.lose = {
-      x: 0,
+      x: 247.5,
       y: 0,
-      w: 84,
+      w: 82.5,
       h: 94,
     }
 
@@ -108,21 +108,23 @@ class Sonic {
     }
   }
 
-  //Bug animation lose. (inverse, ground and shift sonic)
   animateSonicLose = (frames: number) => {
+    if (this.action.x % this.lose.w !== 0) {
+      this.action.x = this.lose.x
+    }
     this.img = this.imgLosing
     this.action.y = this.lose.y
     this.action.h = this.lose.h
     this.action.w = this.lose.w
-    if (frames % 13 === 0) {
-      this.action.x = this.action.x + this.lose.w
-      if (this.action.x > 252) {
-        this.action.x = 0
-      }
+    if (frames % 13 === 0 && this.action.x > 0) {
+      this.action.x = this.action.x - this.lose.w
     }
   }
 
   gravity = (gravity: number, ground: number) => { //
+    if (!this.health) {
+      ground = 1000
+    }
     this.positionY = this.positionY + Math.floor(this.speedY)
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
     if (Math.floor(this.bgPositionY) < ground - this.groundMargin) {
