@@ -21,7 +21,6 @@ class BossBullet {
     spriteBossBullet: number
     spriteBulletImpact: number
     guidedBullet: boolean
-    bgPositionX: number
     bulletImpact: {
         x: number
         y: number
@@ -60,7 +59,6 @@ class BossBullet {
         this.spriteBossBullet = 0
         this.spriteBulletImpact = 6
         this.guidedBullet = false
-        this.bgPositionX
     }
     drawBossBullet = () => {
         ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.originX, this.originY, this.action.w, this.action.h)
