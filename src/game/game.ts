@@ -153,11 +153,11 @@ class Game {
   }
   
   moveBackground = () => {
-    if ((this.player.positionX >= (canvas.width / 2)) && this.movement["right"] && !this.isBossStage) {
+    if ((this.player.positionX >= (canvas.width / 2)) && this.movement["right"] && !this.isBossStage && this.player.health > 0) {
       this.moveRight()
       this.moveBulletBackground(-this.player.walkSpeed)
       this.moveHadoukenBackground(-this.player.walkSpeed)
-    } else if ((this.player.positionX <= 0) && this.movement["left"] && !this.isBossStage) {
+    } else if ((this.player.positionX <= 0) && this.movement["left"] && !this.isBossStage && this.player.health > 0) {
       this.moveLeft();
       this.moveBulletBackground(this.player.walkSpeed)
       this.moveHadoukenBackground(this.player.walkSpeed)

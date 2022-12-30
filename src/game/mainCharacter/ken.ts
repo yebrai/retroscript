@@ -221,11 +221,13 @@ class Ken {
   }
 
   movingKen = (right: boolean, left: boolean, isJumping: boolean, ground: number, bossStage:boolean) => {
-    if (isJumping && Math.floor(this.bgPositionY) > ground - this.groundMargin) {
-      this.kenJumping()
-    }
-    if ((right || left)) {
-      this.kenWalking(right, left, bossStage)
+    if (this.health > 0) {
+      if (isJumping && Math.floor(this.bgPositionY) > ground - this.groundMargin) {
+        this.kenJumping()
+      }
+      if ((right || left)) {
+        this.kenWalking(right, left, bossStage)
+      }
     }
   }
 
