@@ -1,4 +1,4 @@
-class KenFace {
+class BossFace {
     img: HTMLImageElement
     imgInjured: HTMLImageElement
     x: number
@@ -14,7 +14,7 @@ class KenFace {
         this.img.src = "../../../images/player/kenOk.png"
         this.imgInjured = new Image()
         this.imgInjured.src = "../../../images/player/kenDmg.png"
-        this.x = 5
+        this.x = 720
         this.y = 20
         this.imgEmptyLife = new Image()
         this.imgEmptyLife.src = "../../../images/player/emptyLife.png"
@@ -24,9 +24,9 @@ class KenFace {
 
     }
 
-    drawKenFace = (health:number) => {
-      this.drawEmptyLife()
-      this.drawLife(health)
+    drawBossFace = (health:number) => {
+        this.drawEmptyLife()
+        this.drawLife(health)
       if (health === 3) {
         ctx.drawImage(this.img, this.x, this.y, 70, 70)
       } else{
