@@ -245,9 +245,8 @@ class Game {
         let deadEnemy = this.sonicArr.indexOf(eachSonic);
         this.sonicArr.splice(deadEnemy, 1);
         if (this.player.img !== this.player.imgLowPunch) {
-          console.log("health -1")
+          //this.player.health--
         }
-        //this.player.health--
         if (this.player.health <= 0) {
           //this.gameOver()
 
