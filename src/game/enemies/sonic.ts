@@ -88,14 +88,14 @@ class Sonic {
     this.walkSpeed = 4
 
     //random jump
-    this.randomJump =  72 + (Math.random() * 144)
+    this.randomJump = 72 + (Math.random() * 144)
   }
 
   drawSonic = () => {
     ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.positionX, this.positionY, 40, 60)
   }
 
-  animateSonic = (frames:number) => {
+  animateSonic = (frames: number) => {
     if (this.health > 0) {
       this.animateSonicRunning(frames)
     } else { this.animateSonicLose(frames) }
@@ -154,7 +154,7 @@ class Sonic {
     }
     this.bgPositionX = this.bgPositionX - this.walkSpeed
     this.positionX = this.positionX - this.walkSpeed
-    
+
 
   }
 

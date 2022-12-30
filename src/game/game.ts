@@ -8,7 +8,7 @@ class Game {
   w: number
   h: number
   direction: string
-  movement: { left: boolean, right: boolean, isJumping: boolean }
+  movement: { left: boolean, right: boolean, isJumping: boolean, down: boolean }
   player: Ken
   sonicArr: Sonic[]
   hadoukenArr: Hadouken[]
@@ -45,7 +45,7 @@ class Game {
     this.frames = 0
     this.isGameOn = true
     this.direction = ""
-    this.movement = { left: false, right: false, isJumping: false };
+    this.movement = { left: false, right: false, isJumping: false, down: false };
 
     this.score = 0
     this.gravity = 0.1
@@ -272,7 +272,13 @@ class Game {
       ) {
         let deadEnemy = this.sonicArr.indexOf(eachSonic);
         this.sonicArr.splice(deadEnemy, 1);
-        //this.player.health--
+        if (this.player.img !== this.player.imgLowPunch) {
+          //this.player.health--
+        }
+        if (this.player.health <= 0) {
+          //this.gameOver()
+
+        }
       }
     });
   };
@@ -336,7 +342,7 @@ class Game {
 
   moving = () => {
     this.moveBackground()
-    this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.mapping(this.player.bgPositionX, this.player.bgPositionY), this.isBossStage)
+    this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.mapping(this.player.bgPositionX, this.player.bgPositionY), this.isBossStage, this.boss.health)
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.movingSonic(this.frames, this.mapping(eachSonic.bgPositionX, eachSonic.bgPositionY))
     })
@@ -370,7 +376,7 @@ class Game {
     this.createBossBullet()
     this.eliminateSonic()
     this.eliminateBossBullet()
-    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.boss.health, this.mapping(this.player.bgPositionX, this.player.bgPositionY)) 
+    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.boss.health, this.mapping(this.player.bgPositionX, this.player.bgPositionY), this.movement.down)
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.animateSonic(this.frames)
     })

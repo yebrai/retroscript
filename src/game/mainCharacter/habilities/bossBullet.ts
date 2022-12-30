@@ -1,5 +1,5 @@
 class BossBullet {
-    
+
     img: HTMLImageElement
     imgBossBullet: HTMLImageElement
     imgBulletImpact: HTMLImageElement
@@ -32,15 +32,15 @@ class BossBullet {
         //bossBullet image
         this.img
         this.imgBossBullet = new Image(),
-        this.imgBossBullet.src = "../../../../images/enemies/boss/bulletBoss.png",
-        this.imgBulletImpact = new Image()
+            this.imgBossBullet.src = "../../../../images/enemies/boss/bulletBoss.png",
+            this.imgBulletImpact = new Image()
         this.imgBulletImpact.src = "../../../../images/enemies/boss/bulletBossImpact.png"
-            this.bossBullet = {
-                x: [4, 101, 198, 294, 397, 495, 591], 
-                y: 0, 
-                w: 76,
-                h: 81,
-            }
+        this.bossBullet = {
+            x: [4, 101, 198, 294, 397, 495, 591],
+            y: 0,
+            w: 76,
+            h: 81,
+        }
         this.action = {
             x: 0,
             y: 0,
@@ -48,8 +48,8 @@ class BossBullet {
             h: 0,
         }
         this.bulletImpact = {
-            x: 0, 
-            y: 397, 
+            x: 0,
+            y: 397,
             w: 68,
             h: [77, 87, 86, 80, 67, 52],
         }
@@ -60,7 +60,7 @@ class BossBullet {
         this.spriteBossBullet = 0
         this.spriteBulletImpact = 6
         this.guidedBullet = false
-        this.isFlying= true
+        this.isFlying = true
     }
     drawBossBullet = () => {
         ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.originX, this.originY, this.action.w, this.action.h)
@@ -73,7 +73,7 @@ class BossBullet {
             this.guidedBullet = true
             this.originY += this.speed
             if (this.originY <= -100) {
-            this.originX = kenPosition
+                this.originX = kenPosition
             }
         }
     }
@@ -101,7 +101,7 @@ class BossBullet {
             this.spriteBulletImpact--
         }
     }
-    
+
 
     animateBossBullet = (frames: number) => {
         this.img = this.imgBossBullet

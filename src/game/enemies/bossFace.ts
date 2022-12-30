@@ -1,13 +1,13 @@
 class BossFace {
-    img: HTMLImageElement
-    imgInjured: HTMLImageElement
-    x: number
-    y: number
-    w: number
-    h: number
-    imgEmptyLife: HTMLImageElement
-    imgFullLife: HTMLImageElement
-    hpDraw: number[]
+  img: HTMLImageElement
+  imgInjured: HTMLImageElement
+  x: number
+  y: number
+  w: number
+  h: number
+  imgEmptyLife: HTMLImageElement
+  imgFullLife: HTMLImageElement
+  hpDraw: number[]
 
     constructor() {
         this.img = new Image()
@@ -22,24 +22,23 @@ class BossFace {
         this.imgFullLife.src = "../../../images/player/fullLife.png"
         this.hpDraw = [30, 60, 90, 120, 150]
 
+  }
+  drawBossFace = (health: number) => {
+    this.drawEmptyLife()
+    this.drawLife(health)
+    if (health > 4) {
+      ctx.drawImage(this.img, this.x, this.y, 70, 70)
+    } else {
+      ctx.drawImage(this.imgInjured, this.x, this.y, 70, 70)
     }
+  }
 
-    drawBossFace = (health:number) => {
-        this.drawEmptyLife()
-        this.drawLife(health)
-      if (health > 4) {
-        ctx.drawImage(this.img, this.x, this.y, 70, 70)
-      } else{
-        ctx.drawImage(this.imgInjured, this.x, this.y, 70, 70)
-      }
-      }
+  drawEmptyLife = () => {
+    ctx.drawImage(this.imgEmptyLife, this.x - 160, this.y + 25, 150, 15)
+  }
 
-      drawEmptyLife = () => {
-        ctx.drawImage(this.imgEmptyLife, this.x -160, this.y + 25, 150, 15)
-      }
-
-      drawLife = (health: number) => {
-          ctx.drawImage(this.imgFullLife, this.x -160, this.y + 25, this.hpDraw[health - 1], 15)
-      }
+  drawLife = (health: number) => {
+    ctx.drawImage(this.imgFullLife, this.x - 160, this.y + 25, this.hpDraw[health - 1], 15)
+  }
 
 }
