@@ -14,7 +14,7 @@ class BossFace {
         this.img.src = "../../../images/enemies/boss/duoFace.png"
         this.imgInjured = new Image()
         this.imgInjured.src = "../../../images/enemies/boss/duoFaceInjured.png"
-        this.x = 720
+        this.x = 725
         this.y = 20
         this.imgEmptyLife = new Image()
         this.imgEmptyLife.src = "../../../images/player/emptyLife.png"

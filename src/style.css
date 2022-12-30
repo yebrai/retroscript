@@ -46,7 +46,7 @@ html {
   margin-top: 120px;
 }
 
-body button {
+body button, #win-title {
   background-color: Transparent;
   cursor: pointer;
   text-shadow: 0 0 10px black;
@@ -73,4 +73,18 @@ body button:hover {
   box-shadow: none;
   transition-duration: 0.7s;
   transform: rotate(360deg);
+}
+
+#win-screen h1{
+  font-size: 3rem;
+  cursor: default
+}
+
+#win-screen {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: absolute;
 }

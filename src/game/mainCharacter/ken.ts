@@ -161,17 +161,19 @@ class Ken {
   animateKen = (frames: number, right: boolean, left: boolean,bossHealth:number, ground: number) => {
     if (this.health < 1) {
       this.animateKenFalling(frames)
-    } else if (bossHealth < 1){
-      this.animateKenWinning(frames)
     }
     else {
-      if (this.hadoukenAnimation) {
-        this.animateKenHadouken(frames)
+      if (bossHealth < 1){
+        this.animateKenWinning(frames)
       } else {
-        if ((Math.floor(this.bgPositionY) > ground - this.groundMargin) && this.speedY === 0) {
-          this.animateKenWalking(frames, right, left)
+        if (this.hadoukenAnimation) {
+          this.animateKenHadouken(frames)
         } else {
-          this.animateKenJumping(frames)
+          if ((Math.floor(this.bgPositionY) > ground - this.groundMargin) && this.speedY === 0) {
+            this.animateKenWalking(frames, right, left)
+          } else {
+            this.animateKenJumping(frames)
+          }
         }
       }
     }

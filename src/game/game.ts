@@ -25,6 +25,9 @@ class Game {
   isBossStage: boolean
   gameOverSound: HTMLAudioElement
   themeSound: HTMLAudioElement
+  winSound: HTMLAudioElement
+  bossTheme: HTMLAudioElement
+  winGame: boolean
 
   constructor() {
     // background
@@ -52,9 +55,13 @@ class Game {
 
     this.canvasBgRelation = canvas.height / (this.bgHeight)
 
+    this.winGame = false
+
     this.isBossStage = false
     this.gameOverSound = new Audio('../../sounds/gameOverSound.mp3')
     this.themeSound = new Audio('../../sounds/kenTheme.mp3')
+    this.winSound = new Audio('../../sounds/winAudio.mp3')
+    this.bossTheme = new Audio ('../../sounds/bossTheme.mp3')
 
   }
 
@@ -77,16 +84,33 @@ class Game {
     this.gameOverSound.play()
     this.gameOverSound.volume = 0.1
     this.themeSound.pause()
+    this.bossTheme.pause()
     // hide canvas
     canvas.style.display = "none"
     // show gameover screen
     gameOverScreen.style.display = "flex"
   }
 
+  loser = () => {
+    if (this.player.health <= 0) {
+      this.gameOver()
+    }
+  }
+
+  winner = () => {
+    winScreen.style.display = "flex"
+      this.winSound.play()
+      this.winSound.volume = 0.1
+      this.winGame = true
+      
+  }
+
   mainTheme = () => {
+    if (!this.winGame && !this.isBossStage)
     this.themeSound.play()
     this.themeSound.volume = 0.1
   }
+
 
   //move right
   moveRight = () => {
@@ -110,7 +134,7 @@ class Game {
   };
 
   createSonic = () => {
-    if (this.frames % 80 === 0) {
+    if (this.frames % 80 === 0 && !this.isBossStage) {
       this.sonicArr.push(new Sonic(this.x))
     }
   }
@@ -154,13 +178,17 @@ class Game {
       }
     })
     if (this.player.bgPositionX > 3050) {
+      this.themeSound.pause()
+      this.bossTheme.play()
+      this.bossTheme.volume = 0.2
       this.isBossStage = true
-      
-      //needs boss theme music, more drama ;)
     }
     if (this.isBossStage) {
       this.boss.drawBoss()
       this.bossFace.drawBossFace(this.boss.health)
+    }
+    if(this.boss.health < 1 && this.boss.bgPositionY < 500) {
+      this.winner()
     }
   }
 
@@ -245,10 +273,6 @@ class Game {
         let deadEnemy = this.sonicArr.indexOf(eachSonic);
         this.sonicArr.splice(deadEnemy, 1);
         //this.player.health--
-        if (this.player.health <= 0) {
-          //this.gameOver()
-
-        }
       }
     });
   };
@@ -346,7 +370,7 @@ class Game {
     this.createBossBullet()
     this.eliminateSonic()
     this.eliminateBossBullet()
-    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.boss.health, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
+    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.boss.health, this.mapping(this.player.bgPositionX, this.player.bgPositionY)) 
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.animateSonic(this.frames)
     })
@@ -371,6 +395,7 @@ class Game {
       eachHadouken.drawHadouken()
     })
     this.bossStage()
+    this.loser()
     // this.drawMapElements()//dev purposes only
     // 4. recursion
     if (this.isGameOn === true) {
