@@ -90,7 +90,6 @@ class BossBullet {
         if (this.spriteBulletImpact === 6) {
             this.action.y = this.bulletImpact.y
             this.spriteBulletImpact--
-            console.log("test")
         }
         this.speed = 0
         this.img = this.imgBulletImpact

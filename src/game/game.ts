@@ -119,7 +119,15 @@ class Game {
         let deadEnemy = this.sonicArr.indexOf(eachSonic)
         this.sonicArr.splice(deadEnemy, 1);
       }
-      
+    })
+  }
+
+  eliminateBossBullet = () => {
+    this.bossBulletArr.forEach((eachBossBullet) => {
+      if (eachBossBullet.spriteBulletImpact < 0 ) {
+        let impactedBullet = this.bossBulletArr.indexOf(eachBossBullet)
+        this.bossBulletArr.splice(impactedBullet, 1);
+      }
     })
   }
 
@@ -305,6 +313,7 @@ class Game {
 
     // 1. clean canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    console.log(this.bossBulletArr)
 
     // 2. actions&movements of elements
     this.mainTheme()
@@ -313,6 +322,7 @@ class Game {
     this.createHadouken()
     this.createBossBullet()
     this.eliminateSonic()
+    this.eliminateBossBullet()
     this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
     this.sonicArr.forEach((eachSonic) => {
       if (eachSonic.health > 0) {
