@@ -108,7 +108,7 @@ class Game {
   };
 
   createSonic = () => {
-    if (this.frames % 20 === 0) {
+    if (this.frames % 80 === 0) {
       this.sonicArr.push(new Sonic(this.x))
     }
   }
@@ -229,6 +229,9 @@ class Game {
   //collision Sonic-Ken
   colisionSonicKen = () => {
     this.sonicArr.forEach((eachSonic) => {
+      if(eachSonic.health < 1) {
+        return
+      }
       if (
         eachSonic.positionX < this.player.positionX + this.player.action.w &&
         eachSonic.positionX + eachSonic.action.w > this.player.positionX &&
@@ -260,8 +263,6 @@ class Game {
         this.hadoukenArr.splice(deadHadouken, 1);
         this.score++
         eachSonic.health--
-        let deadEnemy = this.sonicArr.indexOf(eachSonic);
-        console.log(eachSonic.positionY)
       }
     })
     });
@@ -270,6 +271,9 @@ class Game {
   //collision bossBullet-Ken
   colisionBossBulletKen = () => {
     this.bossBulletArr.forEach((eachBossBullet) => {
+      if (eachBossBullet.spriteBulletImpact < 6) {
+        return
+      }
       if (
         eachBossBullet.originX < this.player.positionX + this.player.action.w &&
         eachBossBullet.originX + eachBossBullet.action.w > this.player.positionX &&
@@ -313,7 +317,6 @@ class Game {
 
     // 1. clean canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    console.log(this.bossBulletArr)
 
     // 2. actions&movements of elements
     this.mainTheme()
