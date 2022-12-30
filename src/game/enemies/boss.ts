@@ -128,8 +128,6 @@ class Boss {
     this.action.y = this.lose.y
     this.action.h = this.lose.h
     this.action.w = this.lose.w
-    console.log(this.action.x)
-    console.log(this.action.w)
     if (frames % 25 === 0 && this.action.x > 0) {
       this.action.x = this.action.x - this.lose.w
     }

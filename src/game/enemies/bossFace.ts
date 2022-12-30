@@ -27,7 +27,6 @@ class BossFace {
     drawBossFace = (health:number) => {
         this.drawEmptyLife()
         this.drawLife(health)
-        console.log(health)
       if (health > 4) {
         ctx.drawImage(this.img, this.x, this.y, 70, 70)
       } else{

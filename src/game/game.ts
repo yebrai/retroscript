@@ -346,7 +346,7 @@ class Game {
     this.createBossBullet()
     this.eliminateSonic()
     this.eliminateBossBullet()
-    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
+    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.boss.health, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.animateSonic(this.frames)
     })
