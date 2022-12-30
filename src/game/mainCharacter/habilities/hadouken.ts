@@ -22,8 +22,8 @@ class Hadouken {
     }
     drawHadouken = () => {
         ctx.drawImage(this.imgHadouken, this.hadouken.x, this.hadouken.y, this.hadouken.w, this.hadouken.h)
-      }
-    
+    }
+
     moveHadouken = () => {
         this.hadouken.x += this.speed
     }

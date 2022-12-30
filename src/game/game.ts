@@ -37,10 +37,10 @@ class Game {
     this.bossBulletArr = []
     this.x = 1;
     this.y = 0;
-    this.frames = 0 
+    this.frames = 0
     this.isGameOn = true
     this.direction = ""
-    this.movement = { left: false, right: false, isJumping: false};
+    this.movement = { left: false, right: false, isJumping: false };
 
     this.score = 0
     this.gravity = 0.1
@@ -115,7 +115,7 @@ class Game {
 
   eliminateSonic = () => {
     this.sonicArr.forEach((eachSonic) => {
-      if(eachSonic.positionY > 400 || eachSonic.bgPositionX <= 0) {
+      if (eachSonic.positionY > 400 || eachSonic.bgPositionX <= 0) {
         let deadEnemy = this.sonicArr.indexOf(eachSonic)
         this.sonicArr.splice(deadEnemy, 1);
       }
@@ -124,7 +124,7 @@ class Game {
 
   eliminateBossBullet = () => {
     this.bossBulletArr.forEach((eachBossBullet) => {
-      if (eachBossBullet.spriteBulletImpact < 0 ) {
+      if (eachBossBullet.spriteBulletImpact < 0) {
         let impactedBullet = this.bossBulletArr.indexOf(eachBossBullet)
         this.bossBulletArr.splice(impactedBullet, 1);
       }
@@ -146,10 +146,10 @@ class Game {
   }
 
   bossStage = () => {
-    this.bossBulletArr.forEach((eachBossBullet) =>{
-      if(eachBossBullet.guidedBullet || this.isBossStage) {
+    this.bossBulletArr.forEach((eachBossBullet) => {
+      if (eachBossBullet.guidedBullet || this.isBossStage) {
         eachBossBullet.drawBossBullet()
-     }
+      }
     })
     if (this.player.bgPositionX > 3050) {
       this.isBossStage = true
@@ -159,7 +159,7 @@ class Game {
       this.boss.drawBoss()
     }
   }
-  
+
   moveBackground = () => {
     if ((this.player.positionX >= (canvas.width / 2)) && this.movement["right"] && !this.isBossStage && this.player.health > 0) {
       this.moveRight()
@@ -233,7 +233,7 @@ class Game {
         eachSonic.positionX < this.player.positionX + this.player.action.w &&
         eachSonic.positionX + eachSonic.action.w > this.player.positionX &&
         eachSonic.positionY < this.player.positionY + this.player.action.h &&
-        eachSonic.action.h + eachSonic.positionY > this.player.positionY 
+        eachSonic.action.h + eachSonic.positionY > this.player.positionY
       ) {
         let deadEnemy = this.sonicArr.indexOf(eachSonic);
         this.sonicArr.splice(deadEnemy, 1);
@@ -250,20 +250,20 @@ class Game {
   colisionSonicHadouken = () => {
     this.hadoukenArr.forEach((eachHadouken) => {
       this.sonicArr.forEach((eachSonic) => {
-      if (
-        eachSonic.positionX < eachHadouken.hadouken.x + eachHadouken.hadouken.w &&
-        eachSonic.positionX + eachSonic.action.w > eachHadouken.hadouken.x &&
-        eachSonic.positionY < eachHadouken.hadouken.y + eachHadouken.hadouken.h &&
-        eachSonic.action.h + eachSonic.positionY > eachHadouken.hadouken.y 
-      ) {
-        let deadHadouken = this.hadoukenArr.indexOf(eachHadouken);
-        this.hadoukenArr.splice(deadHadouken, 1);
-        this.score++
-        eachSonic.health--
-        let deadEnemy = this.sonicArr.indexOf(eachSonic);
-        console.log(eachSonic.positionY)
-      }
-    })
+        if (
+          eachSonic.positionX < eachHadouken.hadouken.x + eachHadouken.hadouken.w &&
+          eachSonic.positionX + eachSonic.action.w > eachHadouken.hadouken.x &&
+          eachSonic.positionY < eachHadouken.hadouken.y + eachHadouken.hadouken.h &&
+          eachSonic.action.h + eachSonic.positionY > eachHadouken.hadouken.y
+        ) {
+          let deadHadouken = this.hadoukenArr.indexOf(eachHadouken);
+          this.hadoukenArr.splice(deadHadouken, 1);
+          this.score++
+          eachSonic.health--
+          let deadEnemy = this.sonicArr.indexOf(eachSonic);
+          console.log(eachSonic.positionY)
+        }
+      })
     });
   };
 
@@ -282,7 +282,7 @@ class Game {
         if (this.player.health <= 0) {
           //this.gameOver()
         }
-      } 
+      }
     });
   };
 
@@ -313,7 +313,6 @@ class Game {
 
     // 1. clean canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    console.log(this.bossBulletArr)
 
     // 2. actions&movements of elements
     this.mainTheme()
@@ -327,7 +326,7 @@ class Game {
     this.sonicArr.forEach((eachSonic) => {
       if (eachSonic.health > 0) {
         eachSonic.animateSonicRunning(this.frames)
-      } else {eachSonic.animateSonicLose(this.frames)}
+      } else { eachSonic.animateSonicLose(this.frames) }
     })
     this.boss.animateBossShooting(this.frames)
     this.bossBulletArr.forEach((eachBossBullet) => {

@@ -79,7 +79,7 @@ class Sonic {
     this.groundMargin = 10
 
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
-
+ 
 
     //jumpSpeed
     this.speedY = 0

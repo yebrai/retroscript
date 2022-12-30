@@ -80,15 +80,15 @@ class Ken {
       w: [55, 70, 71, 76],
       h: 95 //!85
     }
-     //falling animation
-     this.imgFalling = new Image()
-     this.imgFalling.src = "../../../images/player/kenFalling.png"
-     this.falling = {
-       x: [0, 56, 132, 208, 284, 366],
-       y: 0,
-       w: 0,
-       h: 61 //!61
-     }
+    //falling animation
+    this.imgFalling = new Image()
+    this.imgFalling.src = "../../../images/player/kenFalling.png"
+    this.falling = {
+      x: [0, 56, 132, 208, 284, 366],
+      y: 0,
+      w: 0,
+      h: 61 //!61
+    }
     this.img //= this.imgWalk
     this.action = {
       x: 0,
@@ -119,7 +119,7 @@ class Ken {
 
     //this.mapRelationfactor = 1.65
 
-    this.health = 3
+    this.health = 399999 //dev purposes only, default 3
     this.hadoukenAnimation = false
     this.hadoukenCreated = true
   }
@@ -146,7 +146,7 @@ class Ken {
   animateKen = (frames: number, right: boolean, left: boolean, ground: number) => {
     if (this.health < 1) {
       this.animateKenFalling(frames)
-    }else {
+    } else {
       if (this.hadoukenAnimation) {
         this.animateKenHadouken(frames)
       } else {
@@ -217,10 +217,10 @@ class Ken {
       this.action.x = this.falling.x[this.spriteFalling]
       this.action.w = this.falling.x[this.spriteFalling + 1] - this.falling.x[this.spriteFalling]
       this.spriteFalling++
-    } 
+    }
   }
 
-  movingKen = (right: boolean, left: boolean, isJumping: boolean, ground: number, bossStage:boolean) => {
+  movingKen = (right: boolean, left: boolean, isJumping: boolean, ground: number, bossStage: boolean) => {
     if (this.health > 0) {
       if (isJumping && Math.floor(this.bgPositionY) > ground - this.groundMargin) {
         this.kenJumping()
@@ -238,7 +238,7 @@ class Ken {
 
   kenWalking = (right: boolean, left: boolean, bossStage: boolean) => {
     if (bossStage) { //needs refactorization
-      if (right && (this.positionX < canvas.width-this.action.w)) {
+      if (right && (this.positionX < canvas.width - this.action.w)) {
         this.positionX = this.positionX + this.walkSpeed;
         this.bgPositionX = this.bgPositionX + this.walkSpeed
       } else if (left && (this.positionX > 0)) {
