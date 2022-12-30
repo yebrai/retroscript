@@ -32,9 +32,21 @@ class KenFace {
     }
   }
 
+<<<<<<< HEAD
   drawEmptyLife = () => {
     ctx.drawImage(this.imgEmptyLife, this.x + 80, this.y + 25, 150, 15)
   }
+=======
+    drawKenFace = (health:number) => {
+      this.drawEmptyLife()
+      this.drawLife(health)
+      if (health > 2) {
+        ctx.drawImage(this.img, this.x, this.y, 70, 70)
+      } else{
+        ctx.drawImage(this.imgInjured, this.x, this.y, 70, 70)
+      }
+      }
+>>>>>>> 01cacad5809641481d2b0b6a17bf1eefd2d87143
 
   drawLife = (health: number) => {
     ctx.drawImage(this.imgFullLife, this.x + 80, this.y + 25, this.hpDraw[health - 1], 15)

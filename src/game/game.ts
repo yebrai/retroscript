@@ -18,6 +18,7 @@ class Game {
   fallSpeed: number
   ground: number
   playerFace: KenFace
+  bossFace: BossFace
   bgPadding: number
   bgHeight: number
   canvasBgRelation: number
@@ -32,6 +33,7 @@ class Game {
     this.player = new Ken()
     this.playerFace = new KenFace()
     this.boss = new Boss()
+    this.bossFace = new BossFace()
     this.sonicArr = []
     this.hadoukenArr = []
     this.bossBulletArr = []
@@ -108,7 +110,7 @@ class Game {
   };
 
   createSonic = () => {
-    if (this.frames % 20 === 0) {
+    if (this.frames % 80 === 0) {
       this.sonicArr.push(new Sonic(this.x))
     }
   }
@@ -153,10 +155,12 @@ class Game {
     })
     if (this.player.bgPositionX > 3050) {
       this.isBossStage = true
+      
       //needs boss theme music, more drama ;)
     }
     if (this.isBossStage) {
       this.boss.drawBoss()
+      this.bossFace.drawBossFace(this.boss.health)
     }
   }
 
@@ -229,6 +233,9 @@ class Game {
   //collision Sonic-Ken
   colisionSonicKen = () => {
     this.sonicArr.forEach((eachSonic) => {
+      if (eachSonic.health < 1) {
+        return
+      }
       if (
         eachSonic.positionX < this.player.positionX + this.player.action.w &&
         eachSonic.positionX + eachSonic.action.w > this.player.positionX &&
@@ -237,7 +244,7 @@ class Game {
       ) {
         let deadEnemy = this.sonicArr.indexOf(eachSonic);
         this.sonicArr.splice(deadEnemy, 1);
-        this.player.health--
+        //this.player.health--
         if (this.player.health <= 0) {
           //this.gameOver()
 
@@ -260,8 +267,11 @@ class Game {
           this.hadoukenArr.splice(deadHadouken, 1);
           this.score++
           eachSonic.health--
+<<<<<<< HEAD
           let deadEnemy = this.sonicArr.indexOf(eachSonic);
           console.log(eachSonic.positionY)
+=======
+>>>>>>> 01cacad5809641481d2b0b6a17bf1eefd2d87143
         }
       })
     });
@@ -270,6 +280,9 @@ class Game {
   //collision bossBullet-Ken
   colisionBossBulletKen = () => {
     this.bossBulletArr.forEach((eachBossBullet) => {
+      if (eachBossBullet.spriteBulletImpact < 6) {
+        return
+      }
       if (
         eachBossBullet.originX < this.player.positionX + this.player.action.w &&
         eachBossBullet.originX + eachBossBullet.action.w > this.player.positionX &&
@@ -283,6 +296,25 @@ class Game {
           //this.gameOver()
         }
       }
+<<<<<<< HEAD
+=======
+    });
+  };
+
+  colisionBossHadouken = () => {
+    this.hadoukenArr.forEach((eachHadouken) => {
+      if (
+        this.boss.positionX < eachHadouken.hadouken.x + eachHadouken.hadouken.w &&
+        this.boss.positionX + this.boss.action.w > eachHadouken.hadouken.x &&
+        this.boss.positionY < eachHadouken.hadouken.y + eachHadouken.hadouken.h &&
+        this.boss.action.h + this.boss.positionY > eachHadouken.hadouken.y
+      ) {
+        let deadHadouken = this.hadoukenArr.indexOf(eachHadouken);
+        this.hadoukenArr.splice(deadHadouken, 1);
+        this.score++
+        this.boss.health--
+      }
+>>>>>>> 01cacad5809641481d2b0b6a17bf1eefd2d87143
     });
   };
 
@@ -322,27 +354,30 @@ class Game {
     this.createBossBullet()
     this.eliminateSonic()
     this.eliminateBossBullet()
-    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
+    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.boss.health, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
     this.sonicArr.forEach((eachSonic) => {
+<<<<<<< HEAD
       if (eachSonic.health > 0) {
         eachSonic.animateSonicRunning(this.frames)
       } else { eachSonic.animateSonicLose(this.frames) }
+=======
+      eachSonic.animateSonic(this.frames)
+>>>>>>> 01cacad5809641481d2b0b6a17bf1eefd2d87143
     })
-    this.boss.animateBossShooting(this.frames)
+    this.boss.animateBoss(this.frames)
     this.bossBulletArr.forEach((eachBossBullet) => {
       eachBossBullet.bossBulletEffect(this.frames)
     })
     this.colisionSonicKen()
     this.colisionSonicHadouken()
     this.colisionBossBulletKen()
+    this.colisionBossHadouken()
     this.gravityFunction()
     // 3. drawing elements
     this.drawFondo();
     this.drawScore()
     this.player.drawKen()
     this.playerFace.drawKenFace(this.player.health)
-    this.playerFace.drawEmptyLife()
-    this.playerFace.drawLife(this.player.health)
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.drawSonic()
     })
