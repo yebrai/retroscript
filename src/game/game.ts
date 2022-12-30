@@ -348,7 +348,9 @@ class Game {
         eachSonic.animateSonicRunning(this.frames)
       } else {eachSonic.animateSonicLose(this.frames)}
     })
-    this.boss.animateBossShooting(this.frames)
+    if (this.boss.health > 0) {
+      this.boss.animateBossShooting(this.frames)
+    } else {this.boss.animateBossFalling(this.frames)}
     this.bossBulletArr.forEach((eachBossBullet) => {
       eachBossBullet.bossBulletEffect(this.frames)
     })
