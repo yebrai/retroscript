@@ -348,13 +348,9 @@ class Game {
     this.eliminateBossBullet()
     this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
     this.sonicArr.forEach((eachSonic) => {
-      if (eachSonic.health > 0) {
-        eachSonic.animateSonicRunning(this.frames)
-      } else { eachSonic.animateSonicLose(this.frames) }
+      eachSonic.animateSonic(this.frames)
     })
-    if (this.boss.health > 0) {
-      this.boss.animateBossShooting(this.frames)
-    } else { this.boss.animateBossFalling(this.frames) }
+    this.boss.animateBoss(this.frames)
     this.bossBulletArr.forEach((eachBossBullet) => {
       eachBossBullet.bossBulletEffect(this.frames)
     })

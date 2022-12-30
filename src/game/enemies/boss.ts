@@ -95,6 +95,12 @@ class Boss {
     }
   }
 
+  animateBoss = (frames: number) => {
+    if (this.health > 0) {
+      this.animateBossShooting(frames)
+    } else { this.animateBossFalling(frames) }
+  }
+
   animateBossShooting = (frames: number) => {
     this.img = this.imgBoss
     this.action.y = this.boss.y

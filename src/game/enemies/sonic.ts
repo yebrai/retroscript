@@ -95,6 +95,12 @@ class Sonic {
     ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.positionX, this.positionY, 40, 60)
   }
 
+  animateSonic = (frames:number) => {
+    if (this.health > 0) {
+      this.animateSonicRunning(frames)
+    } else { this.animateSonicLose(frames) }
+  }
+
   animateSonicRunning = (frames: number) => {
     this.img = this.imgRunning
     this.action.y = this.run.y
