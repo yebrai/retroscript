@@ -71,7 +71,7 @@ class Boss {
 
     this.bgPositionX = 3000
     this.bossBulletCreated = true
-    this.health = 1
+    this.health = 5
     }
 
     drawBoss = () => {

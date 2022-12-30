@@ -27,7 +27,7 @@ class KenFace {
     drawKenFace = (health:number) => {
       this.drawEmptyLife()
       this.drawLife(health)
-      if (health === 3) {
+      if (health > 2) {
         ctx.drawImage(this.img, this.x, this.y, 70, 70)
       } else{
         ctx.drawImage(this.imgInjured, this.x, this.y, 70, 70)

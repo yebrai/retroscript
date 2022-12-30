@@ -155,10 +155,12 @@ class Game {
     })
     if (this.player.bgPositionX > 3050) {
       this.isBossStage = true
+      
       //needs boss theme music, more drama ;)
     }
     if (this.isBossStage) {
       this.boss.drawBoss()
+      this.bossFace.drawBossFace(this.boss.health)
     }
   }
 
@@ -366,7 +368,6 @@ class Game {
     this.drawScore()
     this.player.drawKen()
     this.playerFace.drawKenFace(this.player.health)
-    this.bossFace.drawBossFace(this.boss.health)
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.drawSonic()
     })
