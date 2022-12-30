@@ -21,6 +21,7 @@ class BossBullet {
     spriteBossBullet: number
     spriteBulletImpact: number
     guidedBullet: boolean
+    isFlying: boolean
     bulletImpact: {
         x: number
         y: number
@@ -59,6 +60,7 @@ class BossBullet {
         this.spriteBossBullet = 0
         this.spriteBulletImpact = 6
         this.guidedBullet = false
+        this.isFlying= true
     }
     drawBossBullet = () => {
         ctx.drawImage(this.img, this.action.x, this.action.y, this.action.w, this.action.h, this.originX, this.originY, this.action.w, this.action.h)
@@ -77,7 +79,7 @@ class BossBullet {
     }
 
     bossBulletEffect = (frames: number) => {
-        if (this.originY > mapPrint[19][1][0] - 60 ) {
+        if (this.originY > mapPrint[19][1][0] - 60 || !this.isFlying) {
             this.bossBulletImpact(frames)
         } else {
             this.animateBossBullet(frames)
@@ -96,10 +98,9 @@ class BossBullet {
         this.action.x = this.bulletImpact.x
         this.action.h = this.bulletImpact.h[this.spriteBulletImpact]
         if (frames % 10 === 0) {
-            console.log("YYYYY",this.action.y)
             this.action.y -= this.bulletImpact.h[this.spriteBulletImpact - 1]
-                this.spriteBulletImpact--
-            }
+            this.spriteBulletImpact--
+        }
     }
     
 

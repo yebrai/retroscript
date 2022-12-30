@@ -259,6 +259,25 @@ class Game {
     });
   };
 
+  //collision bossBullet-Ken
+  colisionBossBulletKen = () => {
+    this.bossBulletArr.forEach((eachBossBullet) => {
+      if (
+        eachBossBullet.originX < this.player.positionX + this.player.action.w &&
+        eachBossBullet.originX + eachBossBullet.action.w > this.player.positionX &&
+        eachBossBullet.originY < this.player.positionY + this.player.action.h &&
+        eachBossBullet.action.h + eachBossBullet.originY > this.player.positionY &&
+        eachBossBullet.isFlying
+      ) {
+        this.player.health--
+        eachBossBullet.isFlying = false
+        if (this.player.health <= 0) {
+          //this.gameOver()
+        }
+      } 
+    });
+  };
+
   moving = () => {
     this.moveBackground()
     this.player.movingKen(this.movement["right"], this.movement["left"], this.movement.isJumping, this.mapping(this.player.bgPositionX, this.player.bgPositionY), this.isBossStage)
@@ -306,12 +325,12 @@ class Game {
     })
     this.colisionSonicKen()
     this.colisionSonicHadouken()
+    this.colisionBossBulletKen()
     this.gravityFunction()
     // 3. drawing elements
     this.drawFondo();
     this.drawScore()
     this.player.drawKen()
-    this.player.drawKenHitBox()
     this.playerFace.drawKenFace(this.player.health)
     this.playerFace.drawEmptyLife()
     this.playerFace.drawLife(this.player.health)
