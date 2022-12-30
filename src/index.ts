@@ -45,7 +45,7 @@ window.addEventListener("keydown", (event) => {
     gameObj.movement["isJumping"] = true;
   } else if (event.code === "KeyS") {
     //used for monitoring purposes
-    console.log("bgPosX", gameObj.player.bgPositionX,"bgPosY", gameObj.player.bgPositionY, "platform", gameObj.mapping(gameObj.player.bgPositionX,gameObj.player.bgPositionY))
+    console.log("bgPosX", gameObj.player.bgPositionX, "bgPosY", gameObj.player.bgPositionY, "platform", gameObj.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY))
   } else if (event.code === "Space") {
     hadouken.play()
     hadouken.volume = 0.1

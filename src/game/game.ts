@@ -155,7 +155,7 @@ class Game {
     })
     if (this.player.bgPositionX > 3050) {
       this.isBossStage = true
-      
+
       //needs boss theme music, more drama ;)
     }
     if (this.isBossStage) {
@@ -267,11 +267,6 @@ class Game {
           this.hadoukenArr.splice(deadHadouken, 1);
           this.score++
           eachSonic.health--
-<<<<<<< HEAD
-          let deadEnemy = this.sonicArr.indexOf(eachSonic);
-          console.log(eachSonic.positionY)
-=======
->>>>>>> 01cacad5809641481d2b0b6a17bf1eefd2d87143
         }
       })
     });
@@ -296,8 +291,6 @@ class Game {
           //this.gameOver()
         }
       }
-<<<<<<< HEAD
-=======
     });
   };
 
@@ -314,7 +307,6 @@ class Game {
         this.score++
         this.boss.health--
       }
->>>>>>> 01cacad5809641481d2b0b6a17bf1eefd2d87143
     });
   };
 
@@ -356,13 +348,7 @@ class Game {
     this.eliminateBossBullet()
     this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.boss.health, this.mapping(this.player.bgPositionX, this.player.bgPositionY))
     this.sonicArr.forEach((eachSonic) => {
-<<<<<<< HEAD
-      if (eachSonic.health > 0) {
-        eachSonic.animateSonicRunning(this.frames)
-      } else { eachSonic.animateSonicLose(this.frames) }
-=======
       eachSonic.animateSonic(this.frames)
->>>>>>> 01cacad5809641481d2b0b6a17bf1eefd2d87143
     })
     this.boss.animateBoss(this.frames)
     this.bossBulletArr.forEach((eachBossBullet) => {

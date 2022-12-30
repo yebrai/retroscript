@@ -87,18 +87,18 @@ class Ken {
       w: [55, 70, 71, 76],
       h: 95 //!85
     }
-     //falling animation
-     this.imgFalling = new Image()
-     this.imgFalling.src = "../../../images/player/kenFalling.png"
-     this.falling = {
-       x: [0, 56, 132, 208, 284, 366],
-       y: 0,
-       w: 0,
-       h: 61 //!61
-     }
-     this.imgWinning = new Image()
-     this.imgWinning.src = "../../../images/player/kenWin.png"
-     this.winning = {
+    //falling animation
+    this.imgFalling = new Image()
+    this.imgFalling.src = "../../../images/player/kenFalling.png"
+    this.falling = {
+      x: [0, 56, 132, 208, 284, 366],
+      y: 0,
+      w: 0,
+      h: 61 //!61
+    }
+    this.imgWinning = new Image()
+    this.imgWinning.src = "../../../images/player/kenWin.png"
+    this.winning = {
       x: 0,
       y: 0,
       w: 48.25, // ancho
@@ -134,7 +134,7 @@ class Ken {
 
     //this.mapRelationfactor = 1.65
 
-    this.health = 399999 //dev purposes only, default 3
+    this.health = 3 //dev purposes only, default 3
     this.hadoukenAnimation = false
     this.hadoukenCreated = true
   }
@@ -158,10 +158,10 @@ class Ken {
     }
   }
 
-  animateKen = (frames: number, right: boolean, left: boolean,bossHealth:number, ground: number) => {
+  animateKen = (frames: number, right: boolean, left: boolean, bossHealth: number, ground: number) => {
     if (this.health < 1) {
       this.animateKenFalling(frames)
-    } else if (bossHealth < 1){
+    } else if (bossHealth < 1) {
       this.animateKenWinning(frames)
     }
     else {
@@ -224,7 +224,7 @@ class Ken {
     }
   }
 
-  animateKenWinning = (frames:number) => {
+  animateKenWinning = (frames: number) => {
     this.img = this.imgWinning
     this.action.y = this.winning.y
     this.action.h = this.winning.h
