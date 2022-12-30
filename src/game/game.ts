@@ -240,7 +240,7 @@ class Game {
       ) {
         let deadEnemy = this.sonicArr.indexOf(eachSonic);
         this.sonicArr.splice(deadEnemy, 1);
-        this.player.health--
+        //this.player.health--
         if (this.player.health <= 0) {
           //this.gameOver()
 
@@ -287,6 +287,22 @@ class Game {
           //this.gameOver()
         }
       } 
+    });
+  };
+
+  colisionBossHadouken = () => {
+    this.hadoukenArr.forEach((eachHadouken) => {
+      if (
+        this.boss.positionX < eachHadouken.hadouken.x + eachHadouken.hadouken.w &&
+        this.boss.positionX + this.boss.action.w > eachHadouken.hadouken.x &&
+        this.boss.positionY < eachHadouken.hadouken.y + eachHadouken.hadouken.h &&
+        this.boss.action.h + this.boss.positionY > eachHadouken.hadouken.y 
+      ) {
+        let deadHadouken = this.hadoukenArr.indexOf(eachHadouken);
+        this.hadoukenArr.splice(deadHadouken, 1);
+        this.score++
+        this.boss.health--
+      }
     });
   };
 
@@ -339,6 +355,7 @@ class Game {
     this.colisionSonicKen()
     this.colisionSonicHadouken()
     this.colisionBossBulletKen()
+    this.colisionBossHadouken()
     this.gravityFunction()
     // 3. drawing elements
     this.drawFondo();

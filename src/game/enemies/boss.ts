@@ -25,6 +25,7 @@ class Boss {
   groundMargin: number
   groundFeetDistance : number
   bossBulletCreated: boolean
+  health: number
 
     constructor() {
         this.imgBoss = new Image(),
@@ -54,6 +55,7 @@ class Boss {
 
     this.bgPositionX = 3000
     this.bossBulletCreated = true
+    this.health = 1
     }
 
     drawBoss = () => {
@@ -88,7 +90,7 @@ class Boss {
       this.action.x = this.boss.x[this.spriteBoss]
       this.action.w = this.boss.w//[this.spriteBoss]
       this.spriteBoss++
-    } 
+    }
 
 }
 }

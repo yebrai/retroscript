@@ -122,7 +122,7 @@ class Sonic {
   }
 
   gravity = (gravity: number, ground: number) => { //
-    if (!this.health) {
+    if (this.health <= 0) {
       ground = 1000
     }
     this.positionY = this.positionY + Math.floor(this.speedY)
