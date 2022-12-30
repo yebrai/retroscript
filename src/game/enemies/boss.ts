@@ -118,7 +118,6 @@ class Boss {
     }
   }
 
-
   //Needs some improvements
   animateBossFalling = (frames: number) => {
     if (this.action.x % this.lose.w !== 0) {

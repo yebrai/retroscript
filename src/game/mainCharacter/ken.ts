@@ -287,7 +287,7 @@ class Ken {
   }
 
   movingKen = (right: boolean, left: boolean, isJumping: boolean, ground: number, bossStage: boolean, bossHealth: number) => {
-    if (this.health > 0 && bossHealth > 0 ) {
+    if (this.health > 0 && bossHealth > 0 && this.img !== this.imgLowPunch) {
       if (isJumping && Math.floor(this.bgPositionY) > ground - this.groundMargin) {
         this.kenJumping()
       }

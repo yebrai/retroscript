@@ -62,7 +62,6 @@ class Game {
     this.themeSound = new Audio('../../sounds/kenTheme.mp3')
     this.winSound = new Audio('../../sounds/winAudio.mp3')
     this.bossTheme = new Audio ('../../sounds/bossTheme.mp3')
-
   }
 
   drawFondo = () => {
@@ -131,6 +130,7 @@ class Game {
         eachSonic.positionX = eachSonic.positionX + this.player.walkSpeed
       })
     }
+
   };
 
   createSonic = () => {
@@ -142,7 +142,7 @@ class Game {
   eliminateSonic = () => {
     this.sonicArr.forEach((eachSonic) => {
       if (eachSonic.positionY > 400 || eachSonic.bgPositionX <= 0) {
-        let deadEnemy = this.sonicArr.indexOf(eachSonic)
+        const deadEnemy = this.sonicArr.indexOf(eachSonic)
         this.sonicArr.splice(deadEnemy, 1);
       }
     })
@@ -151,7 +151,7 @@ class Game {
   eliminateBossBullet = () => {
     this.bossBulletArr.forEach((eachBossBullet) => {
       if (eachBossBullet.spriteBulletImpact < 0) {
-        let impactedBullet = this.bossBulletArr.indexOf(eachBossBullet)
+        const impactedBullet = this.bossBulletArr.indexOf(eachBossBullet)
         this.bossBulletArr.splice(impactedBullet, 1);
       }
     })
@@ -217,7 +217,7 @@ class Game {
   }
 
   mapping = (movingElementPositionX: number, movingElementPositionY: number): number => {
-    let platform: number[][][] = mapPrint.filter((eachPlatfom) => {
+    const platform: number[][][] = mapPrint.filter((eachPlatfom) => {
       if ((eachPlatfom[0][0] < movingElementPositionX && movingElementPositionX < eachPlatfom[0][1])) {
         if ((eachPlatfom[1][0] - this.bgPadding) * this.canvasBgRelation >= Math.floor(movingElementPositionY)) {
           return eachPlatfom
@@ -269,16 +269,16 @@ class Game {
         eachSonic.positionX + eachSonic.action.w > this.player.positionX &&
         eachSonic.positionY < this.player.positionY + this.player.action.h &&
         eachSonic.action.h + eachSonic.positionY > this.player.positionY
-      ) {
-        let deadEnemy = this.sonicArr.indexOf(eachSonic);
-        this.sonicArr.splice(deadEnemy, 1);
+       ) {
         if (this.player.img !== this.player.imgLowPunch) {
-          //this.player.health--
+          this.player.health--
+          const deadEnemy = this.sonicArr.indexOf(eachSonic);
+          this.sonicArr.splice(deadEnemy, 1);
+        } else {
+          eachSonic.health--
+          this.score++
         }
-        if (this.player.health <= 0) {
-          //this.gameOver()
 
-        }
       }
     });
   };
@@ -293,7 +293,7 @@ class Game {
           eachSonic.positionY < eachHadouken.hadouken.y + eachHadouken.hadouken.h &&
           eachSonic.action.h + eachSonic.positionY > eachHadouken.hadouken.y
         ) {
-          let deadHadouken = this.hadoukenArr.indexOf(eachHadouken);
+          const deadHadouken = this.hadoukenArr.indexOf(eachHadouken);
           this.hadoukenArr.splice(deadHadouken, 1);
           this.score++
           eachSonic.health--
@@ -315,11 +315,11 @@ class Game {
         eachBossBullet.action.h + eachBossBullet.originY > this.player.positionY &&
         eachBossBullet.isFlying
       ) {
+        if (this.player.img !== this.player.imgWinning) {
         this.player.health--
         eachBossBullet.isFlying = false
-        if (this.player.health <= 0) {
-          //this.gameOver()
         }
+
       }
     });
   };
@@ -327,12 +327,12 @@ class Game {
   colisionBossHadouken = () => {
     this.hadoukenArr.forEach((eachHadouken) => {
       if (
-        this.boss.positionX < eachHadouken.hadouken.x + eachHadouken.hadouken.w &&
-        this.boss.positionX + this.boss.action.w > eachHadouken.hadouken.x &&
-        this.boss.positionY < eachHadouken.hadouken.y + eachHadouken.hadouken.h &&
-        this.boss.action.h + this.boss.positionY > eachHadouken.hadouken.y
+          this.boss.positionX < eachHadouken.hadouken.x + eachHadouken.hadouken.w &&
+          this.boss.positionX + this.boss.action.w > eachHadouken.hadouken.x &&
+          this.boss.positionY < eachHadouken.hadouken.y + eachHadouken.hadouken.h &&
+          this.boss.bossHeight + this.boss.positionY > eachHadouken.hadouken.y
       ) {
-        let deadHadouken = this.hadoukenArr.indexOf(eachHadouken);
+        const deadHadouken = this.hadoukenArr.indexOf(eachHadouken);
         this.hadoukenArr.splice(deadHadouken, 1);
         this.score++
         this.boss.health--
@@ -358,7 +358,7 @@ class Game {
   drawScore = () => {
     ctx.font = "30px Arial"
     ctx.fillStyle = "white";
-    let scoreStr = `Score: ${this.score}`
+    const scoreStr = `Score: ${this.score}`
     ctx.fillText(scoreStr, canvas.width * 0.4, 50)
   }
 
