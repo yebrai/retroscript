@@ -21,6 +21,13 @@ class Ken {
     w: number[]
     h: number
   }
+  imgFalling: HTMLImageElement
+  falling: {
+    x: number[]
+    y: number
+    w: number
+    h: number
+  }
   img: HTMLImageElement
   action: {
     x: number
@@ -30,6 +37,7 @@ class Ken {
   }
   spriteJump: number
   spriteHadouken: number
+  spriteFalling: number
   positionX: number
   bgPositionX: number
   bgPositionY: number
@@ -72,16 +80,26 @@ class Ken {
       w: [55, 70, 71, 76],
       h: 95 //!85
     }
+     //falling animation
+     this.imgFalling = new Image()
+     this.imgFalling.src = "../../../images/player/kenFalling.png"
+     this.falling = {
+       x: [0, 56, 132, 208, 284, 366],
+       y: 0,
+       w: 0,
+       h: 61 //!61
+     }
     this.img //= this.imgWalk
     this.action = {
       x: 0,
       y: 0,
       w: 0,
       h: 0,
-    }//= this.walk
+    }
     //sprite frame counter
     this.spriteJump = 0
     this.spriteHadouken = 0
+    this.spriteFalling = 0
     //position x
     this.positionX = 0
     this.bgPositionX = 25//this.walk.w[0] / 2
@@ -126,13 +144,17 @@ class Ken {
   }
 
   animateKen = (frames: number, right: boolean, left: boolean, ground: number) => {
-    if (this.hadoukenAnimation) {
-      this.animateKenHadouken(frames)
-    } else {
-      if ((Math.floor(this.bgPositionY) > ground - this.groundMargin) && this.speedY === 0) {
-        this.animateKenWalking(frames, right, left)
+    if (this.health < 1) {
+      this.animateKenFalling(frames)
+    }else {
+      if (this.hadoukenAnimation) {
+        this.animateKenHadouken(frames)
       } else {
-        this.animateKenJumping(frames)
+        if ((Math.floor(this.bgPositionY) > ground - this.groundMargin) && this.speedY === 0) {
+          this.animateKenWalking(frames, right, left)
+        } else {
+          this.animateKenJumping(frames)
+        }
       }
     }
   }
@@ -184,6 +206,19 @@ class Ken {
     }
   }
 
+  animateKenFalling = (frames: number) => {
+    this.img = this.imgFalling
+    this.action.y = this.falling.y
+    this.action.h = this.falling.h
+    if (frames % 14 === 0) {
+      if (this.spriteFalling > 4) {
+        return
+      }
+      this.action.x = this.falling.x[this.spriteFalling]
+      this.action.w = this.falling.x[this.spriteFalling + 1] - this.falling.x[this.spriteFalling]
+      this.spriteFalling++
+    } 
+  }
 
   movingKen = (right: boolean, left: boolean, isJumping: boolean, ground: number, bossStage:boolean) => {
     if (isJumping && Math.floor(this.bgPositionY) > ground - this.groundMargin) {
