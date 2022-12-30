@@ -44,8 +44,7 @@ window.addEventListener("keydown", (event) => {
   } else if (event.code === "KeyW") {
     gameObj.movement["isJumping"] = true;
   } else if (event.code === "KeyS") {
-    //used for monitoring purposes
-    console.log("bgPosX", gameObj.player.bgPositionX, "bgPosY", gameObj.player.bgPositionY, "platform", gameObj.mapping(gameObj.player.bgPositionX, gameObj.player.bgPositionY))
+    gameObj.movement["down"] = true;
   } else if (event.code === "Space") {
     hadouken.play()
     hadouken.volume = 0.1
@@ -60,6 +59,8 @@ window.addEventListener("keyup", (event) => {
     gameObj.movement["right"] = false;
   } else if (event.code === "KeyW") {
     gameObj.movement["isJumping"] = false;
+  } else if (event.code === "KeyS") {
+    gameObj.movement["down"] = false;
   }
 });
 

@@ -35,6 +35,13 @@ class Ken {
     w: number
     h: number
   }
+  imgLowPunch: HTMLImageElement
+  lowPunch: {
+    x: number[]
+    y: number
+    w: number
+    h: number
+  }
   img: HTMLImageElement
   action: {
     x: number
@@ -45,6 +52,7 @@ class Ken {
   spriteJump: number
   spriteHadouken: number
   spriteFalling: number
+  spriteLowPunch: number
   positionX: number
   bgPositionX: number
   bgPositionY: number
@@ -104,6 +112,14 @@ class Ken {
       w: 48.25, // ancho
       h: 114, // alto //!87
     }
+    this.imgLowPunch = new Image()
+    this.imgLowPunch.src = "../../../images/player/kenLowPunch.png"
+    this.lowPunch = {
+      x: [0, 53, 116],
+      y: 0,
+      w: 0, // ancho
+      h: 95,  
+    }
     this.img //= this.imgWalk
     this.action = {
       x: 0,
@@ -115,6 +131,7 @@ class Ken {
     this.spriteJump = 0
     this.spriteHadouken = 0
     this.spriteFalling = 0
+    this.spriteLowPunch = 0
     //position x
     this.positionX = 0
     this.bgPositionX = 25//this.walk.w[0] / 2
@@ -158,7 +175,7 @@ class Ken {
     }
   }
 
-  animateKen = (frames: number, right: boolean, left: boolean, bossHealth: number, ground: number) => {
+  animateKen = (frames: number, right: boolean, left: boolean, bossHealth: number, ground: number, down: boolean) => {
     if (this.health < 1) {
       this.animateKenFalling(frames)
     } else if (bossHealth < 1) {
@@ -169,8 +186,12 @@ class Ken {
         this.animateKenHadouken(frames)
       } else {
         if ((Math.floor(this.bgPositionY) > ground - this.groundMargin) && this.speedY === 0) {
-          this.animateKenWalking(frames, right, left)
-        } else {
+          if (down) {
+            this.animateKenLowPunch(frames)
+          } else {
+            this.animateKenWalking(frames, right, left)
+          }
+        }else {
           this.animateKenJumping(frames)
         }
       }
@@ -248,6 +269,20 @@ class Ken {
       this.action.x = this.falling.x[this.spriteFalling]
       this.action.w = this.falling.x[this.spriteFalling + 1] - this.falling.x[this.spriteFalling]
       this.spriteFalling++
+    }
+  }
+
+  animateKenLowPunch = (frames: number) => {
+    this.img = this.imgLowPunch
+    this.action.y = this.lowPunch.y
+    this.action.h = this.lowPunch.h
+    if (frames % 10 === 0) {
+      if (this.spriteLowPunch > 1) {
+        this.spriteLowPunch = 0
+      }
+      this.action.x = this.lowPunch.x[this.spriteLowPunch]
+      this.action.w = this.lowPunch.x[this.spriteLowPunch + 1] - this.lowPunch.x[this.spriteLowPunch]
+      this.spriteLowPunch++
     }
   }
 
