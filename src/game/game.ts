@@ -85,8 +85,6 @@ class Game {
     this.isGameOn = false
     this.gameOverSound.play()
     this.gameOverSound.volume = 0.1
-    this.themeSound.pause()
-    this.bossTheme.pause()
     //Hide canvas
     canvas.style.display = "none"
     //Show gameover screen
@@ -103,8 +101,7 @@ class Game {
     winScreen.style.display = "flex"
       this.winSound.play()
       this.winSound.volume = 0.1
-      this.winGame = true
-      
+      this.winGame = true  
   }
 
   mainTheme = () => {
@@ -135,7 +132,7 @@ class Game {
   }
 
   createSonic = () => {
-    if (this.frames % 80 === 0 && !this.isBossStage) {
+    if (this.frames % 80 === 0 && !this.isBossStage && this.player.img !== this.player.imgWinning) {
       this.sonicArr.push(new Sonic(this.x))
     }
   }
@@ -311,6 +308,9 @@ class Game {
   }
 
   colisionBossHadouken = () => {
+    if (!this.isBossStage) {
+      return
+    }
     this.hadoukenArr.forEach((eachHadouken) => {
       if (
           this.boss.positionX < eachHadouken.hadouken.x + eachHadouken.hadouken.w &&
@@ -404,7 +404,9 @@ class Game {
     //Recursion
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop)
+    } else {
+      this.bossTheme.pause()
+      this.themeSound.pause()
     }
-
   }
 }

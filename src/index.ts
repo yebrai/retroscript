@@ -28,10 +28,15 @@ const startGame = () => {
   gameObj.gameLoop()
 }
 
+const restartGame = () => {
+  gameObj.isGameOn = false
+  startGame()
+}
+
 // Events
 startBtn.addEventListener("click", startGame)
-restartBtn.addEventListener("click", startGame)
-tryAgainBtn.addEventListener("click", startGame)
+restartBtn.addEventListener("click",startGame)
+tryAgainBtn.addEventListener("click", restartGame)
 
 window.addEventListener("keydown", (event) => {
   if (event.code === "KeyA") {
