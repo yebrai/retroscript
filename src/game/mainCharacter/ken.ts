@@ -68,16 +68,16 @@ class Ken {
   hadoukenCreated: boolean
 
   constructor() {
-    //walking animation
+    //Walking animation
     this.imgWalk = new Image(),
       this.imgWalk.src = "../../../images/player/kenWalking.png",
       this.walk = {
         x: 0,
         y: 0,
-        w: 49, // ancho
-        h: 95, // alto //!87
+        w: 49, 
+        h: 95, 
       }
-    //jumping animation
+    //Jumping animation
     this.imgJump = new Image()
     this.imgJump.src = "../../../images/player/kenJump.png"
     this.jump = {
@@ -86,7 +86,7 @@ class Ken {
       w: [46, 42, 64, 40, 80, 50, 40],
       h: 95
     }
-    //hadouken animation
+    //Hadouken animation
     this.imgHadouken = new Image()
     this.imgHadouken.src = "../../../images/player/hadoukenSprite.png"
     this.hadouken = {
@@ -95,7 +95,7 @@ class Ken {
       w: [55, 70, 71, 76],
       h: 95 //!85
     }
-    //falling animation
+    //Falling animation
     this.imgFalling = new Image()
     this.imgFalling.src = "../../../images/player/kenFalling.png"
     this.falling = {
@@ -104,54 +104,54 @@ class Ken {
       w: 0,
       h: 61 //!61
     }
+    //Winning animation
     this.imgWinning = new Image()
     this.imgWinning.src = "../../../images/player/kenWin.png"
     this.winning = {
       x: 0,
       y: 0,
-      w: 48.25, // ancho
-      h: 114, // alto //!87
+      w: 48.25,
+      h: 114,
     }
     this.imgLowPunch = new Image()
     this.imgLowPunch.src = "../../../images/player/kenLowPunch.png"
     this.lowPunch = {
       x: [0, 53, 116],
       y: 0,
-      w: 0, // ancho
+      w: 0,
       h: 95,  
     }
-    this.img //= this.imgWalk
+    this.img
     this.action = {
       x: 0,
       y: 0,
       w: 0,
       h: 0,
     }
-    //sprite frame counter
+
+    //Sprite frame counter
     this.spriteJump = 0
     this.spriteHadouken = 0
     this.spriteFalling = 0
     this.spriteLowPunch = 0
-    //position x
+    //Position x
     this.positionX = 0
     this.bgPositionX = 25//this.walk.w[0] / 2
-    //speed
+    //Speed
     this.positionY = 150
     this.groundFeetDistance = 18
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance //player feet position
 
-    //jumpSpeed
+    //JumpSpeed
     this.speedY = 0
     this.jumpPower = -4 //-4
 
-    //walk speed
+    //Walk speed
     this.walkSpeed = 10 //4 //1
 
     this.groundMargin = 20
 
-    //this.mapRelationfactor = 1.65
-
-    this.health = 3 //dev purposes only, default 3
+    this.health = 3
     this.hadoukenAnimation = false
     this.hadoukenCreated = true
   }
@@ -304,18 +304,18 @@ class Ken {
   kenWalking = (right: boolean, left: boolean, bossStage: boolean) => {
     if (bossStage) { //needs refactorization
       if (right && (this.positionX < canvas.width - this.action.w)) {
-        this.positionX = this.positionX + this.walkSpeed;
+        this.positionX = this.positionX + this.walkSpeed
         this.bgPositionX = this.bgPositionX + this.walkSpeed
       } else if (left && (this.positionX > 0)) {
-        this.positionX = this.positionX - this.walkSpeed;
+        this.positionX = this.positionX - this.walkSpeed
         this.bgPositionX = this.bgPositionX - this.walkSpeed
       }
     } else {
       if (right && (this.positionX < (canvas.width / 2))) {
-        this.positionX = this.positionX + this.walkSpeed;
+        this.positionX = this.positionX + this.walkSpeed
         this.bgPositionX = this.bgPositionX + this.walkSpeed
       } else if (left && (this.positionX > 0)) {
-        this.positionX = this.positionX - this.walkSpeed;
+        this.positionX = this.positionX - this.walkSpeed
         this.bgPositionX = this.bgPositionX - this.walkSpeed
       }
     }

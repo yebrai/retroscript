@@ -33,6 +33,11 @@ class Game {
     // background
     this.fondo = new Image()
     this.fondo.src = "../../images/Canvas-Background.png"
+    this.x = 1
+    this.y = 0
+    this.score = 0
+
+    //Classes
     this.player = new Ken()
     this.playerFace = new KenFace()
     this.boss = new Boss()
@@ -40,24 +45,22 @@ class Game {
     this.sonicArr = []
     this.hadoukenArr = []
     this.bossBulletArr = []
-    this.x = 1;
-    this.y = 0;
     this.frames = 0
-    this.isGameOn = true
     this.direction = ""
-    this.movement = { left: false, right: false, isJumping: false, down: false };
-
-    this.score = 0
-    this.gravity = 0.1
+    this.movement = { left: false, right: false, isJumping: false, down: false }
+    
     //background adjustment
+    this.gravity = 0.1
     this.bgPadding = 112
     this.bgHeight = 224
-
     this.canvasBgRelation = canvas.height / (this.bgHeight)
-
+    
+    //Controllers
     this.winGame = false
-
+    this.isGameOn = true
     this.isBossStage = false
+
+    //Sounds
     this.gameOverSound = new Audio('../../sounds/gameOverSound.mp3')
     this.themeSound = new Audio('../../sounds/kenTheme.mp3')
     this.winSound = new Audio('../../sounds/winAudio.mp3')
@@ -66,7 +69,7 @@ class Game {
 
   drawFondo = () => {
     ctx.drawImage(this.fondo, this.x, this.y + this.bgPadding, canvas.width, this.bgHeight, 0, 0, canvas.width, canvas.height)
-  };
+  }
 
 
   gravityFunction = () => {
@@ -78,15 +81,15 @@ class Game {
   }
 
   gameOver = () => {
-    // stop game
+    //Stop game
     this.isGameOn = false
     this.gameOverSound.play()
     this.gameOverSound.volume = 0.1
     this.themeSound.pause()
     this.bossTheme.pause()
-    // hide canvas
+    //Hide canvas
     canvas.style.display = "none"
-    // show gameover screen
+    //Show gameover screen
     gameOverScreen.style.display = "flex"
   }
 
@@ -110,28 +113,26 @@ class Game {
     this.themeSound.volume = 0.1
   }
 
-
-  //move right
   moveRight = () => {
-    this.x = this.x + this.player.walkSpeed;
-    this.direction = "right";
+    this.x = this.x + this.player.walkSpeed
+    this.direction = "right"
     this.player.bgPositionX = this.player.bgPositionX + this.player.walkSpeed
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.positionX = eachSonic.positionX - this.player.walkSpeed
     })
-  };
-  //move left
+  }
+
   moveLeft = () => {
     if (this.x > 0) {
-      this.x = this.x - this.player.walkSpeed;
-      this.direction = "left";
+      this.x = this.x - this.player.walkSpeed
+      this.direction = "left"
       this.player.bgPositionX = this.player.bgPositionX - this.player.walkSpeed
       this.sonicArr.forEach((eachSonic) => {
         eachSonic.positionX = eachSonic.positionX + this.player.walkSpeed
       })
     }
 
-  };
+  }
 
   createSonic = () => {
     if (this.frames % 80 === 0 && !this.isBossStage) {
@@ -143,7 +144,7 @@ class Game {
     this.sonicArr.forEach((eachSonic) => {
       if (eachSonic.positionY > 400 || eachSonic.bgPositionX <= 0) {
         const deadEnemy = this.sonicArr.indexOf(eachSonic)
-        this.sonicArr.splice(deadEnemy, 1);
+        this.sonicArr.splice(deadEnemy, 1)
       }
     })
   }
@@ -152,7 +153,7 @@ class Game {
     this.bossBulletArr.forEach((eachBossBullet) => {
       if (eachBossBullet.spriteBulletImpact < 0) {
         const impactedBullet = this.bossBulletArr.indexOf(eachBossBullet)
-        this.bossBulletArr.splice(impactedBullet, 1);
+        this.bossBulletArr.splice(impactedBullet, 1)
       }
     })
   }
@@ -198,7 +199,7 @@ class Game {
       this.moveBulletBackground(-this.player.walkSpeed)
       this.moveHadoukenBackground(-this.player.walkSpeed)
     } else if ((this.player.positionX <= 0) && this.movement["left"] && !this.isBossStage && this.player.health > 0) {
-      this.moveLeft();
+      this.moveLeft()
       this.moveBulletBackground(this.player.walkSpeed)
       this.moveHadoukenBackground(this.player.walkSpeed)
     }
@@ -216,6 +217,7 @@ class Game {
     })
   }
 
+  //Background (Plataforms and ground)
   mapping = (movingElementPositionX: number, movingElementPositionY: number): number => {
     const platform: number[][][] = mapPrint.filter((eachPlatfom) => {
       if ((eachPlatfom[0][0] < movingElementPositionX && movingElementPositionX < eachPlatfom[0][1])) {
@@ -242,18 +244,7 @@ class Game {
     }
   }
 
-  //dev purposes only
-  drawPlatforms = (deltaX: number) => {
-    mapPrint.map((eachPlatform) => {
-      if (eachPlatform[1][0] < canvas.height / 2) {
-        ctx.drawImage(this.playerFace.imgFullLife, eachPlatform[0][0] + deltaX, (eachPlatform[1][0] - this.bgPadding) * this.canvasBgRelation, eachPlatform[0][1] - eachPlatform[0][0], 2)
-      } else {
-        ctx.drawImage(this.playerFace.imgEmptyLife, eachPlatform[0][0] + deltaX, (eachPlatform[1][0] - this.bgPadding) * this.canvasBgRelation, eachPlatform[0][1] - eachPlatform[0][0], 2)
-      }
-    })
-  }
-
-  //collision Sonic-Ken
+  //Collision Sonic-Ken
   colisionSonicKen = () => {
     this.sonicArr.forEach((eachSonic) => {
       if (eachSonic.health < 1) {
@@ -267,18 +258,18 @@ class Game {
        ) {
         if (this.player.img !== this.player.imgLowPunch) {
           this.player.health--
-          const deadEnemy = this.sonicArr.indexOf(eachSonic);
-          this.sonicArr.splice(deadEnemy, 1);
+          const deadEnemy = this.sonicArr.indexOf(eachSonic)
+          this.sonicArr.splice(deadEnemy, 1)
         } else {
           eachSonic.health--
           this.score++
         }
 
       }
-    });
-  };
+    })
+  }
 
-  //collision Sonic-Hadouken
+  //Collision Sonic-Hadouken
   colisionSonicHadouken = () => {
     this.hadoukenArr.forEach((eachHadouken) => {
       this.sonicArr.forEach((eachSonic) => {
@@ -288,16 +279,16 @@ class Game {
           eachSonic.positionY < eachHadouken.hadouken.y + eachHadouken.hadouken.h &&
           eachSonic.action.h + eachSonic.positionY > eachHadouken.hadouken.y
         ) {
-          const deadHadouken = this.hadoukenArr.indexOf(eachHadouken);
-          this.hadoukenArr.splice(deadHadouken, 1);
+          const deadHadouken = this.hadoukenArr.indexOf(eachHadouken)
+          this.hadoukenArr.splice(deadHadouken, 1)
           this.score++
           eachSonic.health--
         }
       })
-    });
-  };
+    })
+  }
 
-  //collision bossBullet-Ken
+  //Collision bossBullet-Ken
   colisionBossBulletKen = () => {
     this.bossBulletArr.forEach((eachBossBullet) => {
       if (eachBossBullet.spriteBulletImpact < 6) {
@@ -316,8 +307,8 @@ class Game {
         }
 
       }
-    });
-  };
+    })
+  }
 
   colisionBossHadouken = () => {
     this.hadoukenArr.forEach((eachHadouken) => {
@@ -327,13 +318,13 @@ class Game {
           this.boss.positionY < eachHadouken.hadouken.y + eachHadouken.hadouken.h &&
           this.boss.bossHeight + this.boss.positionY > eachHadouken.hadouken.y
       ) {
-        const deadHadouken = this.hadoukenArr.indexOf(eachHadouken);
-        this.hadoukenArr.splice(deadHadouken, 1);
+        const deadHadouken = this.hadoukenArr.indexOf(eachHadouken)
+        this.hadoukenArr.splice(deadHadouken, 1)
         this.score++
         this.boss.health--
       }
-    });
-  };
+    })
+  }
 
   moving = () => {
     this.moveBackground()
@@ -349,10 +340,9 @@ class Game {
     })
   }
 
-  // * BONUS 
   drawScore = () => {
     ctx.font = "30px Arial"
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "white"
     const scoreStr = `Score: ${this.score}`
     ctx.fillText(scoreStr, canvas.width * 0.4, 50)
   }
@@ -396,28 +386,25 @@ class Game {
 
   gameLoop = () => {
     this.frames = this.frames + 1
-
-    // 1. clean canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // 2. actions&movements of elements
+    // Clean canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    // Actions&movements of elements
     this.mainTheme()
     this.moving()
     this.createEliminateElements()
     this.animations()
     this.collisions()
     this.gravityFunction()
-    // 3. drawing elements
-    this.drawFondo();
+    //Drawing elements
+    this.drawFondo()
     this.drawScore()
     this.drawingElements()
     this.bossStage()
     this.loser()
-    // this.drawMapElements()//dev purposes only
-    // 4. recursion
+    //Recursion
     if (this.isGameOn === true) {
-      requestAnimationFrame(this.gameLoop);
+      requestAnimationFrame(this.gameLoop)
     }
 
-  };
+  }
 }

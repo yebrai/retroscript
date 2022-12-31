@@ -29,7 +29,6 @@ class BossBullet {
         h: number[]
     }
     constructor(originX: number, originY: number) {
-        //bossBullet image
         this.img
         this.imgBossBullet = new Image(),
             this.imgBossBullet.src = "../../../../images/enemies/boss/bulletBoss.png",

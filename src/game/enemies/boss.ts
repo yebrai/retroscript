@@ -5,7 +5,7 @@ class Boss {
   boss: {
     x: number[]
     y: number
-    w: number //[]
+    w: number
     h: number
   }
   action: {
@@ -43,7 +43,7 @@ class Boss {
     this.boss = {
       x: [3, 106, 205, 295, 383, 474, 565, 650, 741, 826, 911],
       y: 0,
-      w: 74, //[68, 72,74,69,68,65,65,65,66,66,61], 
+      w: 74,
       h: 80,
     }
 

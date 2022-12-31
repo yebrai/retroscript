@@ -67,25 +67,21 @@ class Sonic {
       w: 82.5,
       h: 94,
     }
-
     this.health = 1
-
     this.positionX = 1500
     this.positionY = 0
-
-    this.bgPositionX = this.positionX + bgTraveled + 30 //35 to center sprite feet
-    //speed
+    this.bgPositionX = this.positionX + bgTraveled + 30
     this.groundFeetDistance = 43
     this.groundMargin = 10
-
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
-
-
+    
     //jumpSpeed
     this.speedY = 0
     this.jumpPower = -4
-
+    
+    //Speed
     this.walkSpeed = 4
+
 
     //random jump
     this.randomJump = 72 + (Math.random() * 144)
