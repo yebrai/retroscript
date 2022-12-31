@@ -38,7 +38,7 @@ class Boss {
     this.img = new Image()
     this.imgBoss = new Image()
     this.imgBoss.src = "../../../images/enemies/boss/duoBoss.png",
-      this.imgLosing = new Image()
+    this.imgLosing = new Image()
     this.imgLosing.src = "../../../images/enemies/boss/bossFalling.png"
     this.boss = {
       x: [3, 106, 205, 295, 383, 474, 565, 650, 741, 826, 911],
@@ -113,7 +113,7 @@ class Boss {
         this.spriteBoss = 0
       }
       this.action.x = this.boss.x[this.spriteBoss]
-      this.action.w = this.boss.w//[this.spriteBoss]
+      this.action.w = this.boss.w
       this.spriteBoss++
     }
   }

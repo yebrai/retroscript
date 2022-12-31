@@ -167,7 +167,6 @@ class Ken {
     if (Math.floor(this.bgPositionY) < ground - this.groundMargin) {
       this.speedY += gravity
       this.groundMargin = this.speedY + 2
-
     }
     if ((Math.floor(this.bgPositionY) > ground - this.groundMargin || Math.floor(this.bgPositionY) > ground) && this.speedY > 0) {
       this.speedY = 0

@@ -154,8 +154,6 @@ class Sonic {
     }
     this.bgPositionX = this.bgPositionX - this.walkSpeed
     this.positionX = this.positionX - this.walkSpeed
-
-
   }
 
 

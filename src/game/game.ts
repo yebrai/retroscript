@@ -253,11 +253,6 @@ class Game {
     })
   }
 
-  //dev purposes only
-  drawMapElements = () => {
-    this.drawPlatforms(-this.x)
-  }
-
   //collision Sonic-Ken
   colisionSonicKen = () => {
     this.sonicArr.forEach((eachSonic) => {
@@ -362,6 +357,43 @@ class Game {
     ctx.fillText(scoreStr, canvas.width * 0.4, 50)
   }
 
+  createEliminateElements = () => {
+    this.createSonic()
+    this.createHadouken()
+    this.createBossBullet()
+    this.eliminateSonic()
+    this.eliminateBossBullet()
+  }
+
+  animations = () => {
+    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.boss.health, this.mapping(this.player.bgPositionX, this.player.bgPositionY), this.movement.down)
+    this.sonicArr.forEach((eachSonic) => {
+      eachSonic.animateSonic(this.frames)
+    })
+    this.boss.animateBoss(this.frames)
+    this.bossBulletArr.forEach((eachBossBullet) => {
+      eachBossBullet.bossBulletEffect(this.frames)
+    })
+  }
+
+  collisions = () => {
+    this.colisionSonicKen()
+    this.colisionSonicHadouken()
+    this.colisionBossBulletKen()
+    this.colisionBossHadouken()
+  }
+
+  drawingElements = () => {
+    this.player.drawKen()
+    this.playerFace.drawKenFace(this.player.health)
+    this.sonicArr.forEach((eachSonic) => {
+      eachSonic.drawSonic()
+    })
+    this.hadoukenArr.forEach((eachHadouken) => {
+      eachHadouken.drawHadouken()
+    })
+  }
+
   gameLoop = () => {
     this.frames = this.frames + 1
 
@@ -371,35 +403,14 @@ class Game {
     // 2. actions&movements of elements
     this.mainTheme()
     this.moving()
-    this.createSonic()
-    this.createHadouken()
-    this.createBossBullet()
-    this.eliminateSonic()
-    this.eliminateBossBullet()
-    this.player.animateKen(this.frames, this.movement.right, this.movement.left, this.boss.health, this.mapping(this.player.bgPositionX, this.player.bgPositionY), this.movement.down)
-    this.sonicArr.forEach((eachSonic) => {
-      eachSonic.animateSonic(this.frames)
-    })
-    this.boss.animateBoss(this.frames)
-    this.bossBulletArr.forEach((eachBossBullet) => {
-      eachBossBullet.bossBulletEffect(this.frames)
-    })
-    this.colisionSonicKen()
-    this.colisionSonicHadouken()
-    this.colisionBossBulletKen()
-    this.colisionBossHadouken()
+    this.createEliminateElements()
+    this.animations()
+    this.collisions()
     this.gravityFunction()
     // 3. drawing elements
     this.drawFondo();
     this.drawScore()
-    this.player.drawKen()
-    this.playerFace.drawKenFace(this.player.health)
-    this.sonicArr.forEach((eachSonic) => {
-      eachSonic.drawSonic()
-    })
-    this.hadoukenArr.forEach((eachHadouken) => {
-      eachHadouken.drawHadouken()
-    })
+    this.drawingElements()
     this.bossStage()
     this.loser()
     // this.drawMapElements()//dev purposes only
