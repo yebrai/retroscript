@@ -1,18 +1,18 @@
 class BossBullet {
 
-    img: HTMLImageElement
-    readonly imgBossBullet: HTMLImageElement
-    readonly imgBulletImpact: HTMLImageElement
-    readonly bossBullet: ActionXArr
-    action: Action
-    speed: number
-    originX: number
-    originY: number
-    spriteBossBullet: number
-    spriteBulletImpact: number
-    guidedBullet: boolean
-    isFlying: boolean
-    readonly bulletImpact: {
+   private img: HTMLImageElement
+   private readonly imgBossBullet: HTMLImageElement
+   private readonly imgBulletImpact: HTMLImageElement
+   private readonly bossBullet: ActionXArr
+   public action: Action
+   private speed: number
+   public originX: number
+   public originY: number
+   private spriteBossBullet: number
+   public spriteBulletImpact: number
+   public guidedBullet: boolean
+   public isFlying: boolean
+   private readonly bulletImpact: {
         x: number
         y: number
         w: number

@@ -1,28 +1,25 @@
 class Sonic {
-  img: HTMLImageElement
-  readonly imgRunning: HTMLImageElement
-  readonly imgLosing: HTMLImageElement
-  x: number
-  y: number
-  w: number
-  h: number
-  positionX: number
-  positionY: number
-  action: Action
-  readonly run: Action
-
-  readonly walkSpeed: number
-  bgPositionX: number
-  bgPositionY: number
-  speedY: number
-  groundFeetDistance: number
-  groundMargin: number
-  randomJump: number
-  readonly jumpPower: number
-
-  readonly lose: Action
-
-  health: number
+ private img: HTMLImageElement
+ private readonly imgRunning: HTMLImageElement
+ private readonly imgLosing: HTMLImageElement
+ private x: number
+ private y: number
+ private w: number
+ private h: number
+ public positionX: number
+ public positionY: number
+ public action: Action
+ private readonly run: Action
+ private readonly walkSpeed: number
+ public bgPositionX: number
+ public bgPositionY: number
+ private speedY: number
+ private groundFeetDistance: number
+ private groundMargin: number
+ private randomJump: number
+ private readonly jumpPower: number
+ private readonly lose: Action
+ public health: number
 
   constructor(bgTraveled: number) {
     this.img = new Image()

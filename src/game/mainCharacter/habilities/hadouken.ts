@@ -1,15 +1,15 @@
 class Hadouken {
-    readonly imgHadouken: HTMLImageElement
-    readonly hadouken: Action
-    readonly speed: number
+    private readonly imgHadouken: HTMLImageElement
+    public readonly hadouken: Action
+    private readonly speed: number
     constructor(originX: number, originY: number) {
         this.imgHadouken = new Image(),
             this.imgHadouken.src = "../../../images/player/hadoukenImg.png",
             this.hadouken = {
                 x: originX + 50, 
                 y: originY + 25,
-                w: 34, 
-                h: 25,  
+                w: 34,
+                h: 25, 
             }
         this.speed = 8
     }

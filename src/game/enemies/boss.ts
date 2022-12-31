@@ -1,23 +1,23 @@
 class Boss {
-  img: HTMLImageElement
-  readonly imgBoss: HTMLImageElement
-  readonly imgLosing: HTMLImageElement
-  readonly boss: ActionXArr
-  action: Action
-  readonly lose: Action
-  positionX: number
-  positionY: number
-  readonly bossWide: number
-  readonly bossHeight: number
-  spriteBoss: number
+ private  img: HTMLImageElement
+ private readonly imgBoss: HTMLImageElement
+ private readonly imgLosing: HTMLImageElement
+ private readonly boss: ActionXArr
+ public action: Action
+ private readonly lose: Action
+ public positionX: number
+ public positionY: number
+ private readonly bossWide: number
+ public readonly bossHeight: number
+ private spriteBoss: number
 
-  speedY: number
-  bgPositionX: number
-  bgPositionY: number
-  groundMargin: number
-  readonly groundFeetDistance: number
-  bossBulletCreated: boolean
-  health: number
+ private speedY: number
+ public bgPositionX: number
+ public bgPositionY: number
+ private groundMargin: number
+ private readonly groundFeetDistance: number
+ public bossBulletCreated: boolean
+ public health: number
 
   constructor() {
     this.img = new Image()

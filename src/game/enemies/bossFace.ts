@@ -1,13 +1,13 @@
 class BossFace {
-  img: HTMLImageElement
-  imgInjured: HTMLImageElement
-  x: number
-  y: number
-  w: number
-  h: number
-  imgEmptyLife: HTMLImageElement
-  imgFullLife: HTMLImageElement
-  hpDraw: number[]
+ private img: HTMLImageElement
+ private imgInjured: HTMLImageElement
+ private x: number
+ private y: number
+ private w: number
+ private h: number
+ private imgEmptyLife: HTMLImageElement
+ private imgFullLife: HTMLImageElement
+ private hpDraw: number[]
 
     constructor() {
         this.img = new Image()
