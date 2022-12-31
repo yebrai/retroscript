@@ -3,8 +3,6 @@ class BossFace {
  private imgInjured: HTMLImageElement
  private x: number
  private y: number
- private w: number
- private h: number
  private imgEmptyLife: HTMLImageElement
  private imgFullLife: HTMLImageElement
  private hpDraw: number[]

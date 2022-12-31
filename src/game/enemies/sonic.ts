@@ -2,10 +2,6 @@ class Sonic {
  private img: HTMLImageElement
  private readonly imgRunning: HTMLImageElement
  private readonly imgLosing: HTMLImageElement
- private x: number
- private y: number
- private w: number
- private h: number
  public positionX: number
  public positionY: number
  public action: Action
@@ -25,10 +21,8 @@ class Sonic {
     this.img = new Image()
     this.imgRunning = new Image()
     this.imgRunning.src = '../../../images/enemies/sonic.png'
-
     this.imgLosing = new Image()
     this.imgLosing.src = '../../../images/enemies/sonicDie.png'
-
     this.action = {
       x: 0,
       y: 0,
@@ -56,14 +50,13 @@ class Sonic {
     this.groundFeetDistance = 43
     this.groundMargin = 10
     this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
-    
+
     //jumpSpeed
     this.speedY = 0
     this.jumpPower = -4
     
     //Speed
     this.walkSpeed = 4
-
 
     //random jump
     this.randomJump = 72 + (Math.random() * 144)
@@ -133,7 +126,4 @@ class Sonic {
     this.bgPositionX = this.bgPositionX - this.walkSpeed
     this.positionX = this.positionX - this.walkSpeed
   }
-
-
-
 }
