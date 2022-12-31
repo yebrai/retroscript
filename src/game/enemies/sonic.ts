@@ -1,41 +1,26 @@
 class Sonic {
   img: HTMLImageElement
-  imgRunning: HTMLImageElement
-  imgLosing: HTMLImageElement
+  readonly imgRunning: HTMLImageElement
+  readonly imgLosing: HTMLImageElement
   x: number
   y: number
   w: number
   h: number
   positionX: number
   positionY: number
-  action: {
-    x: number
-    y: number
-    w: number
-    h: number
-  }
-  run: {
-    x: number
-    y: number
-    w: number
-    h: number
-  }
+  action: Action
+  readonly run: Action
 
-  walkSpeed: number
+  readonly walkSpeed: number
   bgPositionX: number
   bgPositionY: number
   speedY: number
   groundFeetDistance: number
   groundMargin: number
   randomJump: number
-  jumpPower: number
+  readonly jumpPower: number
 
-  lose: {
-    x: number
-    y: number
-    w: number
-    h: number
-  }
+  readonly lose: Action
 
   health: number
 

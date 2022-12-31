@@ -1,12 +1,10 @@
 class KenFace {
   img: HTMLImageElement
-  imgInjured: HTMLImageElement
+  readonly imgInjured: HTMLImageElement
   x: number
   y: number
-  w: number
-  h: number
-  imgEmptyLife: HTMLImageElement
-  imgFullLife: HTMLImageElement
+  readonly imgEmptyLife: HTMLImageElement
+  readonly imgFullLife: HTMLImageElement
   hpDraw: number[]
 
   constructor() {

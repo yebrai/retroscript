@@ -1,5 +1,5 @@
 class Game {
-  fondo: HTMLImageElement
+  readonly fondo: HTMLImageElement
   frames: number
   isGameOn: boolean
   score: number
@@ -14,19 +14,19 @@ class Game {
   hadoukenArr: Hadouken[]
   bossBulletArr: BossBullet[]
   boss: Boss
-  gravity: number
+  readonly gravity: number
   fallSpeed: number
   ground: number
   playerFace: KenFace
   bossFace: BossFace
-  bgPadding: number
-  bgHeight: number
+  readonly bgPadding: number
+  readonly bgHeight: number
   canvasBgRelation: number
   isBossStage: boolean
-  gameOverSound: HTMLAudioElement
-  themeSound: HTMLAudioElement
-  winSound: HTMLAudioElement
-  bossTheme: HTMLAudioElement
+  readonly gameOverSound: HTMLAudioElement
+  readonly themeSound: HTMLAudioElement
+  readonly winSound: HTMLAudioElement
+  readonly bossTheme: HTMLAudioElement
   winGame: boolean
 
   constructor() {

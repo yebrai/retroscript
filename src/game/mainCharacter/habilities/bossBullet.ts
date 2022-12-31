@@ -1,20 +1,10 @@
 class BossBullet {
 
     img: HTMLImageElement
-    imgBossBullet: HTMLImageElement
-    imgBulletImpact: HTMLImageElement
-    bossBullet: {
-        x: number[]
-        y: number
-        w: number
-        h: number
-    }
-    action: {
-        x: number
-        y: number
-        w: number
-        h: number
-    }
+    readonly imgBossBullet: HTMLImageElement
+    readonly imgBulletImpact: HTMLImageElement
+    readonly bossBullet: ActionXArr
+    action: Action
     speed: number
     originX: number
     originY: number
@@ -22,7 +12,7 @@ class BossBullet {
     spriteBulletImpact: number
     guidedBullet: boolean
     isFlying: boolean
-    bulletImpact: {
+    readonly bulletImpact: {
         x: number
         y: number
         w: number

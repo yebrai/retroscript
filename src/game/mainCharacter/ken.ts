@@ -1,54 +1,19 @@
 
 class Ken {
-  imgWalk: HTMLImageElement
-  walk: {
-    x: number
-    y: number
-    w: number
-    h: number
-  }
-  imgJump: HTMLImageElement
-  jump: {
-    x: number[]
-    y: number
-    w: number[]
-    h: number
-  }
-  imgHadouken: HTMLImageElement
-  hadouken: {
-    x: number[]
-    y: number
-    w: number[]
-    h: number
-  }
-  imgFalling: HTMLImageElement
-  falling: {
-    x: number[]
-    y: number
-    w: number
-    h: number
-  }
-  imgWinning: HTMLImageElement
-  winning: {
-    x: number
-    y: number
-    w: number
-    h: number
-  }
-  imgLowPunch: HTMLImageElement
-  lowPunch: {
-    x: number[]
-    y: number
-    w: number
-    h: number
-  }
+  readonly imgWalk: HTMLImageElement
+  readonly walk: Action
+  readonly imgJump: HTMLImageElement
+  readonly jump: ActionXWArr
+  readonly imgHadouken: HTMLImageElement
+  readonly hadouken: ActionXWArr
+  readonly imgFalling: HTMLImageElement
+  readonly falling: ActionXArr
+  readonly imgWinning: HTMLImageElement
+  readonly winning: Action
+  readonly imgLowPunch: HTMLImageElement
+  readonly lowPunch: ActionXArr
   img: HTMLImageElement
-  action: {
-    x: number
-    y: number
-    w: number
-    h: number
-  }
+  action: Action
   spriteJump: number
   spriteHadouken: number
   spriteFalling: number
@@ -58,10 +23,10 @@ class Ken {
   bgPositionY: number
   positionY: number
   speedY: number
-  jumpPower: number
+  readonly jumpPower: number
   mapRelationfactor: number
-  walkSpeed = 1
-  groundFeetDistance: number
+  readonly walkSpeed: number
+  readonly groundFeetDistance: number
   groundMargin: number
   health: number
   hadoukenAnimation: boolean

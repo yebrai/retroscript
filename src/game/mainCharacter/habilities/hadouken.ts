@@ -1,12 +1,7 @@
 class Hadouken {
-    imgHadouken: HTMLImageElement
-    hadouken: {
-        x: number
-        y: number
-        w: number
-        h: number
-    }
-    speed: number
+    readonly imgHadouken: HTMLImageElement
+    readonly hadouken: Action
+    readonly speed: number
     constructor(originX: number, originY: number) {
         this.imgHadouken = new Image(),
             this.imgHadouken.src = "../../../images/player/hadoukenImg.png",

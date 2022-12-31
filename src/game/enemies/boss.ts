@@ -1,36 +1,21 @@
 class Boss {
   img: HTMLImageElement
-  imgBoss: HTMLImageElement
-  imgLosing: HTMLImageElement
-  boss: {
-    x: number[]
-    y: number
-    w: number
-    h: number
-  }
-  action: {
-    x: number
-    y: number
-    w: number
-    h: number
-  }
-  lose: {
-    x: number
-    y: number
-    w: number
-    h: number
-  }
+  readonly imgBoss: HTMLImageElement
+  readonly imgLosing: HTMLImageElement
+  readonly boss: ActionXArr
+  action: Action
+  readonly lose: Action
   positionX: number
   positionY: number
-  bossWide: number
-  bossHeight: number
+  readonly bossWide: number
+  readonly bossHeight: number
   spriteBoss: number
 
   speedY: number
   bgPositionX: number
   bgPositionY: number
   groundMargin: number
-  groundFeetDistance: number
+  readonly groundFeetDistance: number
   bossBulletCreated: boolean
   health: number
 
