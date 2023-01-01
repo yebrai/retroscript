@@ -101,18 +101,18 @@ class Ken {
     this.spriteLowPunch = 0
     //Position x
     this.positionX = 0
-    this.bgPositionX = 25//this.walk.w[0] / 2
+    this.bgPositionX = 25
     //Speed
     this.positionY = 150
     this.groundFeetDistance = 18
-    this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance //player feet position
+    this.bgPositionY = this.positionY + this.action.h - this.groundFeetDistance
 
     //JumpSpeed
     this.speedY = 0
     this.jumpPower = -4 //-4
 
     //Walk speed
-    this.walkSpeed = 10 //4 //1
+    this.walkSpeed = 4
 
     this.groundMargin = 20
 
