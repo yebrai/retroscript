@@ -20,9 +20,9 @@ class Sonic {
   constructor(bgTraveled: number) {
     this.img = new Image()
     this.imgRunning = new Image()
-    this.imgRunning.src = '../../../images/enemies/sonic.png'
+    this.imgRunning.src = './images/enemies/sonic.png'
     this.imgLosing = new Image()
-    this.imgLosing.src = '../../../images/enemies/sonicDie.png'
+    this.imgLosing.src = './images/enemies/sonicDie.png'
     this.action = {
       x: 0,
       y: 0,

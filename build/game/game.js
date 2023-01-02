@@ -333,9 +333,9 @@ class Game {
         this.isGameOn = true;
         this.isBossStage = false;
         //Sounds
-        this.gameOverSound = new Audio('../../sounds/gameOverSound.mp3');
-        this.themeSound = new Audio('../../sounds/kenTheme.mp3');
-        this.winSound = new Audio('../../sounds/winAudio.mp3');
-        this.bossTheme = new Audio('../../sounds/bossTheme.mp3');
+        this.gameOverSound = new Audio('./sounds/gameOverSound.mp3');
+        this.themeSound = new Audio('./sounds/kenTheme.mp3');
+        this.winSound = new Audio('./sounds/winAudio.mp3');
+        this.bossTheme = new Audio('./sounds/bossTheme.mp3');
     }
 }

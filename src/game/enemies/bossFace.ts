@@ -9,15 +9,15 @@ class BossFace {
 
     constructor() {
         this.img = new Image()
-        this.img.src = "../../../images/enemies/boss/duoFace.png"
+        this.img.src = "./images/enemies/boss/duoFace.png"
         this.imgInjured = new Image()
-        this.imgInjured.src = "../../../images/enemies/boss/duoFaceInjured.png"
+        this.imgInjured.src = "./images/enemies/boss/duoFaceInjured.png"
         this.x = 725
         this.y = 20
         this.imgEmptyLife = new Image()
-        this.imgEmptyLife.src = "../../../images/player/emptyLife.png"
+        this.imgEmptyLife.src = "./images/player/emptyLife.png"
         this.imgFullLife = new Image()
-        this.imgFullLife.src = "../../../images/player/fullLife.png"
+        this.imgFullLife.src = "./images/player/fullLife.png"
         this.hpDraw = [30, 60, 90, 120, 150]
 
   }
