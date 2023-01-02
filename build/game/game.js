@@ -309,7 +309,7 @@ class Game {
         };
         // background
         this.fondo = new Image();
-        this.fondo.src = "../../images/Canvas-Background.png";
+        this.fondo.src = "./images/Canvas-Background.png";
         this.x = 1;
         this.y = 0;
         this.score = 0;
