@@ -22,11 +22,11 @@ Install Retroscript with npm
     
 ## Authors
 
-- [Ivan Garcia Yebra](https://www.github.com/https://github.com/yebrai)
+- [Ivan Garcia Yebra](https://github.com/yebrai)
 
   [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/)
 
-- [Eduard Canal](https://www.github.com/https://github.com/eduacan)
+- [Eduard Canal](https://github.com/eduacan)
 
   [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/)
 
