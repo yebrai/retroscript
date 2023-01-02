@@ -1,33 +1,28 @@
 class Game {
-  readonly fondo: HTMLImageElement
-  frames: number
-  isGameOn: boolean
-  score: number
-  x: number
-  y: number
-  w: number
-  h: number
-  direction: string
-  movement: { left: boolean, right: boolean, isJumping: boolean, down: boolean }
-  player: Ken
-  sonicArr: Sonic[]
-  hadoukenArr: Hadouken[]
-  bossBulletArr: BossBullet[]
-  boss: Boss
-  readonly gravity: number
-  fallSpeed: number
-  ground: number
-  playerFace: KenFace
-  bossFace: BossFace
-  readonly bgPadding: number
-  readonly bgHeight: number
-  canvasBgRelation: number
-  isBossStage: boolean
-  readonly gameOverSound: HTMLAudioElement
-  readonly themeSound: HTMLAudioElement
-  readonly winSound: HTMLAudioElement
-  readonly bossTheme: HTMLAudioElement
-  winGame: boolean
+  private readonly fondo: HTMLImageElement
+  private frames: number
+  public isGameOn: boolean
+  private score: number
+  private x: number
+  private y: number
+  public movement: { left: boolean, right: boolean, isJumping: boolean, down: boolean }
+  public player: Ken
+  private sonicArr: Sonic[]
+  private hadoukenArr: Hadouken[]
+  private bossBulletArr: BossBullet[]
+  private boss: Boss
+  private readonly gravity: number
+  private playerFace: KenFace
+  private bossFace: BossFace
+  private readonly bgPadding: number
+  private readonly bgHeight: number
+  private canvasBgRelation: number
+  private isBossStage: boolean
+  private readonly gameOverSound: HTMLAudioElement
+  private readonly themeSound: HTMLAudioElement
+  private readonly winSound: HTMLAudioElement
+  private readonly bossTheme: HTMLAudioElement
+  private winGame: boolean
 
   constructor() {
     // background
@@ -46,7 +41,6 @@ class Game {
     this.hadoukenArr = []
     this.bossBulletArr = []
     this.frames = 0
-    this.direction = ""
     this.movement = { left: false, right: false, isJumping: false, down: false }
     
     //background adjustment
@@ -112,7 +106,6 @@ class Game {
 
   moveRight = () => {
     this.x = this.x + this.player.walkSpeed
-    this.direction = "right"
     this.player.bgPositionX = this.player.bgPositionX + this.player.walkSpeed
     this.sonicArr.forEach((eachSonic) => {
       eachSonic.positionX = eachSonic.positionX - this.player.walkSpeed
@@ -122,7 +115,6 @@ class Game {
   moveLeft = () => {
     if (this.x > 0) {
       this.x = this.x - this.player.walkSpeed
-      this.direction = "left"
       this.player.bgPositionX = this.player.bgPositionX - this.player.walkSpeed
       this.sonicArr.forEach((eachSonic) => {
         eachSonic.positionX = eachSonic.positionX + this.player.walkSpeed

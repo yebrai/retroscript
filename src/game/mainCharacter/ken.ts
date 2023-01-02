@@ -1,36 +1,35 @@
 
 class Ken {
-  readonly imgWalk: HTMLImageElement
-  readonly walk: Action
-  readonly imgJump: HTMLImageElement
-  readonly jump: ActionXWArr
-  readonly imgHadouken: HTMLImageElement
-  readonly hadouken: ActionXWArr
-  readonly imgFalling: HTMLImageElement
-  readonly falling: ActionXArr
-  readonly imgWinning: HTMLImageElement
-  readonly winning: Action
-  readonly imgLowPunch: HTMLImageElement
-  readonly lowPunch: ActionXArr
-  img: HTMLImageElement
-  action: Action
-  spriteJump: number
-  spriteHadouken: number
-  spriteFalling: number
-  spriteLowPunch: number
-  positionX: number
-  bgPositionX: number
-  bgPositionY: number
-  positionY: number
-  speedY: number
-  readonly jumpPower: number
-  mapRelationfactor: number
-  readonly walkSpeed: number
-  readonly groundFeetDistance: number
-  groundMargin: number
-  health: number
-  hadoukenAnimation: boolean
-  hadoukenCreated: boolean
+  private readonly imgWalk: HTMLImageElement
+  private readonly walk: Action
+  private readonly imgJump: HTMLImageElement
+  private readonly jump: ActionXWArr
+  private readonly imgHadouken: HTMLImageElement
+  private readonly hadouken: ActionXWArr
+  private readonly imgFalling: HTMLImageElement
+  private readonly falling: ActionXArr
+  public readonly imgWinning: HTMLImageElement
+  private readonly winning: Action
+  public readonly imgLowPunch: HTMLImageElement
+  public readonly lowPunch: ActionXArr
+  public img: HTMLImageElement
+  public action: Action
+  private spriteJump: number
+  private spriteHadouken: number
+  private spriteFalling: number
+  private spriteLowPunch: number
+  public positionX: number
+  public positionY: number
+  public bgPositionX: number
+  public bgPositionY: number
+  private speedY: number
+  private readonly jumpPower: number
+  public readonly walkSpeed: number
+  private readonly groundFeetDistance: number
+  private groundMargin: number
+  public health: number
+  public hadoukenAnimation: boolean
+  public hadoukenCreated: boolean
 
   constructor() {
     //Walking animation

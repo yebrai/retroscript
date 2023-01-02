@@ -39,7 +39,6 @@ class Game {
         };
         this.moveRight = () => {
             this.x = this.x + this.player.walkSpeed;
-            this.direction = "right";
             this.player.bgPositionX = this.player.bgPositionX + this.player.walkSpeed;
             this.sonicArr.forEach((eachSonic) => {
                 eachSonic.positionX = eachSonic.positionX - this.player.walkSpeed;
@@ -48,7 +47,6 @@ class Game {
         this.moveLeft = () => {
             if (this.x > 0) {
                 this.x = this.x - this.player.walkSpeed;
-                this.direction = "left";
                 this.player.bgPositionX = this.player.bgPositionX - this.player.walkSpeed;
                 this.sonicArr.forEach((eachSonic) => {
                     eachSonic.positionX = eachSonic.positionX + this.player.walkSpeed;
@@ -324,7 +322,6 @@ class Game {
         this.hadoukenArr = [];
         this.bossBulletArr = [];
         this.frames = 0;
-        this.direction = "";
         this.movement = { left: false, right: false, isJumping: false, down: false };
         //background adjustment
         this.gravity = 0.1;
