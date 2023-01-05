@@ -4,7 +4,7 @@ class Hadouken {
     private readonly speed: number
     constructor(originX: number, originY: number) {
         this.imgHadouken = new Image(),
-            this.imgHadouken.src = "../../../images/player/hadoukenImg.png",
+            this.imgHadouken.src = "./images/player/hadoukenImg.png",
             this.hadouken = {
                 x: originX + 50, 
                 y: originY + 25,

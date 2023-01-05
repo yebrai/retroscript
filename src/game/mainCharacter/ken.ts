@@ -34,7 +34,7 @@ class Ken {
   constructor() {
     //Walking animation
     this.imgWalk = new Image(),
-      this.imgWalk.src = "../../../images/player/kenWalking.png",
+      this.imgWalk.src = "./images/player/kenWalking.png",
       this.walk = {
         x: 0,
         y: 0,
@@ -43,7 +43,7 @@ class Ken {
       }
     //Jumping animation
     this.imgJump = new Image()
-    this.imgJump.src = "../../../images/player/kenJump.png"
+    this.imgJump.src = "./images/player/kenJump.png"
     this.jump = {
       x: [0, 46, 88, 154, 194, 274, 324],
       y: 0,
@@ -52,7 +52,7 @@ class Ken {
     }
     //Hadouken animation
     this.imgHadouken = new Image()
-    this.imgHadouken.src = "../../../images/player/hadoukenSprite.png"
+    this.imgHadouken.src = "./images/player/hadoukenSprite.png"
     this.hadouken = {
       x: [0, 55, 125, 196],
       y: 0,
@@ -61,7 +61,7 @@ class Ken {
     }
     //Falling animation
     this.imgFalling = new Image()
-    this.imgFalling.src = "../../../images/player/kenFalling.png"
+    this.imgFalling.src = "./images/player/kenFalling.png"
     this.falling = {
       x: [0, 56, 132, 208, 284, 366],
       y: 0,
@@ -70,7 +70,7 @@ class Ken {
     }
     //Winning animation
     this.imgWinning = new Image()
-    this.imgWinning.src = "../../../images/player/kenWin.png"
+    this.imgWinning.src = "./images/player/kenWin.png"
     this.winning = {
       x: 0,
       y: 0,
@@ -78,7 +78,7 @@ class Ken {
       h: 114,
     }
     this.imgLowPunch = new Image()
-    this.imgLowPunch.src = "../../../images/player/kenLowPunch.png"
+    this.imgLowPunch.src = "./images/player/kenLowPunch.png"
     this.lowPunch = {
       x: [0, 53, 116],
       y: 0,

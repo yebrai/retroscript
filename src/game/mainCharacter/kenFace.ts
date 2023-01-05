@@ -1,21 +1,21 @@
 class KenFace {
-  img: HTMLImageElement
-  readonly imgInjured: HTMLImageElement
-  x: number
-  y: number
-  readonly imgEmptyLife: HTMLImageElement
-  readonly imgFullLife: HTMLImageElement
-  hpDraw: number[]
+  private img: HTMLImageElement
+  private readonly imgInjured: HTMLImageElement
+  private x: number
+  private y: number
+  private readonly imgEmptyLife: HTMLImageElement
+  private readonly imgFullLife: HTMLImageElement
+  private hpDraw: number[]
 
   constructor() {
     this.img = new Image()
-    this.img.src = "../../../images/player/kenOk.png"
+    this.img.src = "./images/player/kenOk.png"
     this.imgInjured = new Image()
-    this.imgInjured.src = "../../../images/player/kenDmg.png"
+    this.imgInjured.src = "./images/player/kenDmg.png"
     this.imgEmptyLife = new Image()
-    this.imgEmptyLife.src = "../../../images/player/emptyLife.png"
+    this.imgEmptyLife.src = "./images/player/emptyLife.png"
     this.imgFullLife = new Image()
-    this.imgFullLife.src = "../../../images/player/fullLife.png"
+    this.imgFullLife.src = "./images/player/fullLife.png"
     
     this.x = 5
     this.y = 20

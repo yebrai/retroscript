@@ -8,7 +8,7 @@ class Hadouken {
             this.hadouken.x += this.speed;
         };
         this.imgHadouken = new Image(),
-            this.imgHadouken.src = "../../../images/player/hadoukenImg.png",
+            this.imgHadouken.src = "./images/player/hadoukenImg.png",
             this.hadouken = {
                 x: originX + 50,
                 y: originY + 25,

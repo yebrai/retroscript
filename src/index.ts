@@ -9,7 +9,7 @@ const startBtn = document.querySelector("#start-btn") as HTMLButtonElement
 const restartBtn = document.querySelector("#restart-btn") as HTMLButtonElement
 const tryAgainBtn = document.querySelector("#try-again-btn") as HTMLButtonElement
 //Audio
-const hadouken = new Audio('../sounds/hadouken.mp3')
+const hadouken = new Audio('./sounds/hadouken.mp3')
 
 let gameObj: Game | undefined
 //Hide at start

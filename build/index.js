@@ -10,7 +10,7 @@ const startBtn = document.querySelector("#start-btn");
 const restartBtn = document.querySelector("#restart-btn");
 const tryAgainBtn = document.querySelector("#try-again-btn");
 //Audio
-const hadouken = new Audio('../sounds/hadouken.mp3');
+const hadouken = new Audio('./sounds/hadouken.mp3');
 let gameObj;
 //Hide at start
 gameOverScreen.style.display = "none";

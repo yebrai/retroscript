@@ -54,9 +54,9 @@ class BossBullet {
         };
         this.img;
         this.imgBossBullet = new Image(),
-            this.imgBossBullet.src = "../../../../images/enemies/boss/bulletBoss.png",
+            this.imgBossBullet.src = "./images/enemies/boss/bulletBoss.png",
             this.imgBulletImpact = new Image();
-        this.imgBulletImpact.src = "../../../../images/enemies/boss/bulletBossImpact.png";
+        this.imgBulletImpact.src = "./images/enemies/boss/bulletBossImpact.png";
         this.bossBullet = {
             x: [4, 101, 198, 294, 397, 495, 591],
             y: 0,

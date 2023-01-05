@@ -27,7 +27,7 @@ class Game {
   constructor() {
     // background
     this.fondo = new Image()
-    this.fondo.src = "../../images/Canvas-Background.png"
+    this.fondo.src = "./images/Canvas-Background.png"
     this.x = 1
     this.y = 0
     this.score = 0
@@ -55,10 +55,10 @@ class Game {
     this.isBossStage = false
 
     //Sounds
-    this.gameOverSound = new Audio('../../sounds/gameOverSound.mp3')
-    this.themeSound = new Audio('../../sounds/kenTheme.mp3')
-    this.winSound = new Audio('../../sounds/winAudio.mp3')
-    this.bossTheme = new Audio ('../../sounds/bossTheme.mp3')
+    this.gameOverSound = new Audio('./sounds/gameOverSound.mp3')
+    this.themeSound = new Audio('./sounds/kenTheme.mp3')
+    this.winSound = new Audio('./sounds/winAudio.mp3')
+    this.bossTheme = new Audio ('./sounds/BossTheme.mp3')
   }
 
   drawFondo = () => {
