@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Nabla&display=swap");
 
 html {
-  background-image: url("../images/background/background.jpg");
+  background-image: url("./images/background/background.jpg");
 }
 
 #container {
@@ -23,7 +23,7 @@ html {
   justify-content: top;
   margin: 120px auto;
   align-items: center;
-  background-image: url("../images/Canvas-Background.png");
+  background-image: url("./images/Canvas-Background.png");
   background-repeat: no-repeat;
   background-size: 4080px 550px;
   background-position: 0 -184px;
